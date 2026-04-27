@@ -2,6 +2,44 @@ const AUTH_CONFIG = {
   token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", // full token
   clientId: "9a8babb6-f13c-4fe8-8ef8-c2652f6cef38",
 };
+const USE_MOCK = true;
+
+const MOCK_API_RESPONSE = {
+  success: true,
+  response: {
+    borrowerDetails: {
+      name: "Ankit Sharma",
+      mobile: "9123456780",
+      email: "ankit.sharma@gmail.com",
+      customerUrn: "0000000002001",
+      address: "Delhi, India",
+    },
+    guarantorDetails: [
+      {
+        name: "Vikas Gupta",
+        mobile: "9234567810",
+        email: "vikas.gupta@gmail.com",
+        customerUrn: "0000000003001",
+        address: "Noida, Uttar Pradesh",
+      },
+      {
+        name: "Amit Verma",
+        mobile: "9345678120",
+        email: "amit.verma@gmail.com",
+        customerUrn: "0000000003002",
+        address: "Ghaziabad, Uttar Pradesh",
+      },
+      {
+        name: "Rajeev Singh",
+        mobile: "9456781230",
+        email: "rajeev.singh@gmail.com",
+        customerUrn: "0000000003003",
+        address: "Gurgaon, Haryana",
+      },
+    ],
+  },
+  message: "Customer communication details fetched successfully",
+};
 
 function getHeaders() {
   return {
@@ -123,7 +161,36 @@ function renderGuarantorDropdown() {
     .join("");
 }
 
+function applyCustomerData(data) {
+  if (!data.success) {
+    console.error("API returned failure");
+    return;
+  }
+
+  const borrower = data.response.borrowerDetails;
+  guarantorData = data.response.guarantorDetails;
+
+  // Borrower UI
+  document.getElementById("borrower-name").innerText = borrower.name;
+  document.getElementById("mobile").innerText = borrower.mobile;
+  document.getElementById("email").innerText = borrower.email;
+  document.getElementById("address").innerText = borrower.address;
+
+  document.getElementById("avatar").innerText = borrower.name
+    .split(" ")
+    .map((n) => n[0])
+    .join("");
+
+  // Dropdown
+  renderGuarantorDropdown();
+}
+
 async function loadCustomerData() {
+  if (USE_MOCK) {
+    console.log(" Using MOCK data");
+    applyCustomerData(MOCK_API_RESPONSE);
+    return;
+  }
   const res = await fetch(
     "http://localhost:1111/api/customers/customer/details",
     {
