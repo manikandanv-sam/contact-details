@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Contact Details</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="main.css" />
+  </head>
+  <body>
+    <div class="bottom-sheet" id="bottomSheet">
+      <div class="sheet-overlay" id="sheetOverlay"></div>
+
+      <div class="sheet-container">
+        <div class="sheet-header">
+          <h3 id="sheetTitle">Update</h3>
+          <span class="sheet-close" onclick="closeSheet()">✕</span>
+        </div>
+
+        <div class="sheet-body">
+          <div class="sheet-field">
+            <div class="sheet-label" id="currentLabel">Current</div>
+            <div class="sheet-current" id="currentValue"></div>
+          </div>
+
+          <div class="sheet-field">
+            <div class="sheet-label" id="newLabel">New</div>
+            <input
+              type="text"
+              id="sheetInput"
+              placeholder=""
+              class="sheet-input"
+            />
+          </div>
+          <div id="inputError" class="error-text"></div>
+        </div>
+
+        <div class="sheet-footer">
+          <button class="sheet-btn cancel" onclick="closeSheet()">
+            Cancel
+          </button>
+          <button class="sheet-btn primary" onclick="submitSheet()">
+            Continue
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="content-header">
+      <h2>Contact Details</h2>
+      <div class="tabs-container">
+        <button class="tab-btn active" data-tab="borrower">Borrower</button>
+        <button class="tab-btn" data-tab="guarantors">Guarantors</button>
+        <button class="tab-btn" data-tab="audit">Audit Trail</button>
+      </div>
+
+      <div class="tab-content active" id="borrower">
+        <div class="borrower-card">
+          <!-- Borrower Header -->
+          <div class="borrower-header">
+            <div class="borrower-avatar" id="avatar">RK</div>
+            <div class="borrower-info">
+              <h3 id="borrower-name">Rajesh Kumar</h3>
+              <div class="borrower-meta">
+                <span class="lan-text" id="lan">LAN: 0000000000091714</span>
+                <span class="badge">Primary Borrower</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mobile -->
+          <div class="detail-row">
+            <div class="detail-left">
+              <div class="detail-label">Mobile</div>
+              <div class="detail-value" id="mobile">+91 98765 43210</div>
+            </div>
+            <button class="change-btn" onclick="openSheet('mobile')">
+              Change
+            </button>
+          </div>
+
+          <!-- Email -->
+          <div class="detail-row">
+            <div class="detail-left">
+              <div class="detail-label">Email Address</div>
+              <div class="detail-value" id="email">
+                rajesh.kumar@example.com
+              </div>
+            </div>
+            <button class="change-btn" onclick="openSheet('email')">
+              Change
+            </button>
+          </div>
+
+          <!-- Address -->
+          <div class="detail-row">
+            <div class="detail-left">
+              <div class="detail-label">Address</div>
+              <div class="detail-value" id="address">
+                123, Main Street, Bangalore, Karnataka - 560001
+              </div>
+            </div>
+            <button class="change-btn" onclick="openSheet('address')">
+              Change
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="guarantors">
+        <div style="max-width: 800px; margin: 0 auto">
+          <div class="custom-dropdown" id="guarantorDropdownWrapper">
+            <div class="dropdown-selected" id="dropdownSelected">
+              Select Guarantor
+            </div>
+
+            <div class="dropdown-list" id="dropdownList"></div>
+          </div>
+
+          <div class="borrower-card" id="guarantorCard" style="display: none">
+            <div class="borrower-header">
+              <div class="borrower-avatar" id="g-avatar">--</div>
+              <div class="borrower-info">
+                <h3 id="g-name"></h3>
+                <div class="borrower-meta">
+                  <span class="lan-text" id="g-urn"></span>
+                  <span class="badge">Guarantor</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-left">
+                <div class="detail-label">Mobile</div>
+                <div class="detail-value" id="g-mobile"></div>
+              </div>
+              <button
+                class="change-btn"
+                onclick="openSheet('mobile', 'guarantor')"
+              >
+                Change
+              </button>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-left">
+                <div class="detail-label">Email Address</div>
+                <div class="detail-value" id="g-email"></div>
+              </div>
+              <button
+                class="change-btn"
+                onclick="openSheet('email', 'guarantor')"
+              >
+                Change
+              </button>
+            </div>
+
+            <div class="detail-row">
+              <div class="detail-left">
+                <div class="detail-label">Address</div>
+                <div class="detail-value" id="g-address"></div>
+              </div>
+              <button
+                class="change-btn"
+                onclick="openSheet('address', 'guarantor')"
+              >
+                Change
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tab-content" id="audit"></div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
