@@ -44,8 +44,13 @@
           <button class="sheet-btn cancel" onclick="closeSheet()">
             Cancel
           </button>
-          <button class="sheet-btn primary" onclick="submitSheet()">
-            Continue
+
+          <button
+            id="sheetSubmitBtn"
+            class="sheet-btn primary"
+            onclick="submitSheet()"
+          >
+            Send OTP
           </button>
         </div>
       </div>
@@ -177,6 +182,7 @@
 
       <div class="tab-content" id="audit"></div>
     </div>
+    <div id="loader" class="loader hidden">Processing...</div>
     <script src="script.js"></script>
   </body>
 </html>

@@ -1,8 +1,15 @@
 const AUTH_CONFIG = {
-  token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", // full token
+  token:
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3NzczNTI2NTQsImV4cCI6MTc3NzQzOTA1NH0.3imrQIMND3NdbxQVx15q4S_1w60aiNuONtrGmRY4qws", // full token
   clientId: "9a8babb6-f13c-4fe8-8ef8-c2652f6cef38",
 };
+const OTP_CONFIG = {
+  baseUrl: "https://nonprodapi.samunnati.com/unnati-onlending/v1",
+  apiKey: "2970a613ca4a46e4b622c5bebc9c8a89",
+};
 const USE_MOCK = true;
+let pendingUpdate = null;
+let isOtpStep = false;
 
 const MOCK_API_RESPONSE = {
   success: true,
@@ -263,6 +270,7 @@ function changeAddress(type = "borrower") {
 function openSheet(field, type = "borrower") {
   currentField = field;
   currentType = type;
+  isOtpStep = false;
 
   clearError();
   const label = labelMap[field];
@@ -282,9 +290,14 @@ function openSheet(field, type = "borrower") {
 
   document.getElementById("currentValue").innerText = currentValue;
 
-  document.getElementById("sheetInput").value = "";
-  document.getElementById("sheetInput").placeholder =
-    "Enter " + label.toLowerCase();
+  const input = document.getElementById("sheetInput");
+  input.value = "";
+  input.placeholder = "Enter " + label.toLowerCase();
+  input.style.display = "block"; // restore if hidden
+
+  const btn = document.getElementById("sheetSubmitBtn");
+  btn.innerText = "Send OTP";
+  btn.onclick = submitSheet; // reset handler
 
   document.getElementById("bottomSheet").classList.add("active");
 }
@@ -293,13 +306,21 @@ function closeSheet() {
   document.getElementById("bottomSheet").classList.remove("active");
 }
 
-function submitSheet() {
+async function submitSheet() {
   const value = document.getElementById("sheetInput").value.trim();
-  const current = document.getElementById("currentValue").innerText.trim();
 
+  //VERIFY OTP
+  if (isOtpStep) {
+    await handleVerifyOtp(value);
+    return;
+  }
+
+  //VALIDATE INPUT
+  const current = document.getElementById("currentValue").innerText.trim();
   const label = labelMap[currentField];
 
   clearError();
+
   if (!value) {
     showError(`Enter ${label}`);
     return;
@@ -316,16 +337,21 @@ function submitSheet() {
     return;
   }
 
-  if (currentType === "guarantor") {
-    const g = guarantorData[selectedGuarantorIndex];
-    g[currentField] = value;
-    document.getElementById("g-" + currentField).innerText = value;
-  } else {
-    document.getElementById(currentField).innerText = value;
-  }
+  // STEP 3 → STORE PENDING UPDATE
+  const mobile =
+    currentType === "guarantor"
+      ? guarantorData[selectedGuarantorIndex].mobile
+      : document.getElementById("mobile").innerText;
 
-  console.log("Updated Field ", currentField, "Value ", value);
-  closeSheet();
+  pendingUpdate = {
+    field: currentField,
+    type: currentType,
+    value,
+    mobile,
+  };
+
+  // STEP 4 → SEND OTP
+  await handleSendOtp(mobile);
 }
 
 function validateInput(field, value) {
@@ -362,4 +388,212 @@ function clearError() {
   const err = document.getElementById("inputError");
   err.innerText = "";
   err.style.display = "none";
+}
+
+const realOtp = {
+  async sendOtp(mobile) {
+    const res = await fetch(`${OTP_CONFIG.baseUrl}/auth/loginViaOTP`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${AUTH_CONFIG.token}`,
+        "x-api-key": OTP_CONFIG.apiKey,
+      },
+      body: JSON.stringify({
+        app_version: "3.1.273",
+        mobile: mobile,
+      }),
+    });
+    return res.json();
+  },
+
+  async verifyOtp(mobile, otp) {
+    const res = await fetch(`${OTP_CONFIG.baseUrl}/auth/verifyOTP`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${AUTH_CONFIG.token}`,
+        "x-api-key": OTP_CONFIG.apiKey,
+      },
+      body: JSON.stringify({
+        mobile: mobile,
+        otp: Number(otp),
+      }),
+    });
+
+    return res.json();
+  },
+};
+
+async function handleSendOtp(mobile) {
+  try {
+    showLoader();
+    const res = await otpAdapter.sendOtp(mobile);
+    hideLoader();
+
+    if (!res.success) {
+      showError(res.message || "Failed to send OTP");
+      return;
+    }
+
+    console.log("✅ OTP SENT");
+    isOtpStep = true;
+    showOtpUI(mobile);
+  } catch (e) {
+    hideLoader();
+    console.error("FULL ERROR:", e);
+    showError("Network error");
+  }
+}
+function showOtpUI(mobile) {
+  document.getElementById("sheetTitle").innerText = "Verify OTP";
+  document.getElementById("currentLabel").innerText = "OTP sent to";
+  document.getElementById("currentValue").innerText = mobile;
+
+  document.getElementById("newLabel").innerText = "Enter OTP";
+
+  const input = document.getElementById("sheetInput");
+  input.value = "";
+  input.placeholder = "Enter 6-digit OTP";
+  document.getElementById("sheetSubmitBtn").innerText = "Verify OTP";
+  clearError();
+}
+
+async function handleVerifyOtp(otp) {
+  const mobile = pendingUpdate.mobile;
+
+  try {
+    showLoader();
+
+    if (!/^\d{4,6}$/.test(otp)) {
+      showError("Enter valid OTP");
+      return;
+    }
+
+    const res = await otpAdapter.verifyOtp(mobile, otp);
+
+    if (!res.success) {
+      showError("Invalid OTP");
+      return;
+    }
+
+    // SUCCESS
+    clearError();
+    isOtpStep = false;
+    showSuccessScreen();
+    return;
+  } catch (e) {
+    console.error(e);
+    showError("Verification failed");
+  } finally {
+    hideLoader();
+  }
+}
+function applyUpdate() {
+  const { field, type, value } = pendingUpdate;
+
+  if (type === "guarantor") {
+    const g = guarantorData[selectedGuarantorIndex];
+    g[field] = value;
+    document.getElementById("g-" + field).innerText = value;
+  } else {
+    document.getElementById(field).innerText = value;
+  }
+
+  console.log("🎉 Updated after OTP");
+
+  isOtpStep = false;
+  pendingUpdate = null;
+
+  closeSheet();
+}
+
+const mockOtp = {
+  async sendOtp(mobile) {
+    console.log("📦 MOCK OTP SENT to", mobile);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve({ success: true });
+      }, 500);
+    });
+  },
+
+  async verifyOtp(mobile, otp) {
+    console.log("📦 MOCK VERIFY", otp);
+
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        if (otp === "123456") {
+          resolve({ success: true });
+        } else {
+          resolve({ success: false });
+        }
+      }, 500);
+    });
+  },
+};
+
+const otpAdapter = {
+  async sendOtp(mobile) {
+    if (USE_MOCK) {
+      return mockOtp.sendOtp(mobile);
+    } else {
+      return realOtp.sendOtp(mobile);
+    }
+  },
+
+  async verifyOtp(mobile, otp) {
+    if (USE_MOCK) {
+      return mockOtp.verifyOtp(mobile, otp);
+    } else {
+      return realOtp.verifyOtp(mobile, otp);
+    }
+  },
+};
+
+function showLoader() {
+  document.getElementById("loader").classList.remove("hidden");
+}
+
+function hideLoader() {
+  document.getElementById("loader").classList.add("hidden");
+}
+
+function showSuccessScreen() {
+  clearError();
+
+  const title = document.getElementById("sheetTitle");
+  const currentLabel = document.getElementById("currentLabel");
+  const currentValue = document.getElementById("currentValue");
+  const newLabel = document.getElementById("newLabel");
+  const input = document.getElementById("sheetInput");
+  const btn = document.getElementById("sheetSubmitBtn");
+
+  if (!title) console.error("❌ sheetTitle missing");
+  if (!currentLabel) console.error("❌ currentLabel missing");
+  if (!currentValue) console.error("❌ currentValue missing");
+  if (!newLabel) console.error("❌ newLabel missing");
+  if (!input) console.error("❌ sheetInput missing");
+  if (!btn) console.error("❌ sheetSubmitBtn missing");
+
+  if (!title || !currentLabel || !currentValue || !newLabel || !input || !btn) {
+    return;
+  }
+
+  title.innerText = "Success";
+  currentLabel.innerText = "";
+  currentValue.innerText = "Your details have been updated successfully.";
+  newLabel.innerText = "";
+
+  input.style.display = "none";
+
+  btn.innerText = "Done";
+
+  btn.onclick = () => {
+    applyUpdate();
+    input.style.display = "block";
+    btn.innerText = "Continue";
+    btn.onclick = submitSheet;
+  };
 }
