@@ -460,20 +460,22 @@ function showOtpUI(mobile) {
 }
 
 async function handleVerifyOtp(otp) {
+  if (!otp) {
+    showError("Please enter OTP");
+    return;
+  }
   const mobile = pendingUpdate.mobile;
-
   try {
     showLoader();
-
-    if (!/^\d{4,6}$/.test(otp)) {
-      showError("Enter valid OTP");
+    if (!/^\d+$/.test(otp) || otp.length !== 4) {
+      showError("OTP should have 4 digits");
       return;
     }
 
     const res = await otpAdapter.verifyOtp(mobile, otp);
 
     if (!res.success) {
-      showError("Invalid OTP");
+      showError("OTP incorrect. Enter valid OTP");
       return;
     }
 
@@ -520,14 +522,15 @@ const mockOtp = {
   },
 
   async verifyOtp(mobile, otp) {
-    console.log("📦 MOCK VERIFY", otp);
-
     return new Promise((resolve) => {
       setTimeout(() => {
-        if (otp === "123456") {
+        if (otp === "2023") {
           resolve({ success: true });
         } else {
-          resolve({ success: false });
+          resolve({
+            success: false,
+            message: "OTP incorrect",
+          });
         }
       }, 500);
     });
