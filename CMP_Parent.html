@@ -638,11 +638,9 @@
       // Mock customer context — in the real CMP this comes from the active
       // loan / customer record that the agent has open.
       const MOCK_CUSTOMER_CONTEXT = {
-        pan: "ABCDE1234F",
-        customerId: "CUST-001234",
-        lan: "0000000000091714",
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.sample.token",
-        customerUrn: "urn:customer:12345",
+        pan: "",
+        customerId: "0000000000100291",
+        token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3NzkxNjM5NzYsImV4cCI6MTc3OTI1MDM3Nn0.nzDEEJHgf5aiDYIxgFBZMDpFRksCy5txwcXevEkXZgU"
       };
 
       // iframe communication — CMP listens for MFE_READY then sends INIT.
@@ -652,14 +650,7 @@
 
         if (event.data.type === "IFRAME_READY") {
           iframe.contentWindow.postMessage(
-            {
-              type: "INIT",
-              token: MOCK_CUSTOMER_CONTEXT.token,
-              customerUrn: MOCK_CUSTOMER_CONTEXT.customerUrn,
-              lan: MOCK_CUSTOMER_CONTEXT.lan,
-              pan: MOCK_CUSTOMER_CONTEXT.pan,
-              customerId: MOCK_CUSTOMER_CONTEXT.customerId,
-            },
+            { type: "INIT", ...MOCK_CUSTOMER_CONTEXT },
             "*",
           );
           console.log("Sent INIT to iframe:", MOCK_CUSTOMER_CONTEXT);

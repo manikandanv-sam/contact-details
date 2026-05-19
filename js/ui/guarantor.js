@@ -20,9 +20,6 @@ export function onGuarantorChange(index) {
   document.getElementById("g-mobile").innerText = g.mobile;
   document.getElementById("g-email").innerText = g.email;
   document.getElementById("g-address").innerText = g.address;
-  document.getElementById("g-urn").innerText = `URN: ${g.customerUrn}`;
-  document.getElementById("g-avatar").innerText = g.name
-    .split(" ")
-    .map((n) => n[0])
-    .join("");
+  document.getElementById("g-urn").innerText = `Customer ID: ${g.customerId}`;
+  document.getElementById("g-avatar").innerText = g.avatar;
 }

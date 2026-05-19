@@ -33,8 +33,8 @@ window.addEventListener("message", (event) => {
     appContext.pan = pan ?? null;
     appContext.customerId = customerId ?? null;
 
-    const lanEl = document.getElementById("lan");
-    if (lanEl && lan) lanEl.innerText = `LAN: ${lan}`;
+    const customerIdEl = document.getElementById("customer-id");
+    if (customerIdEl && customerId) customerIdEl.innerText = `Customer ID: ${customerId}`;
 
     loadCustomerData();
   }
