@@ -1,6 +1,7 @@
 import { USE_MOCK, OTP_CONFIG } from "../config.js";
 import { appContext } from "../store.js";
 import { showLoader, hideLoader } from "../ui/notifications.js";
+import { MESSAGE_TYPES } from "../constants/message-types.js";
 
 const realOtp = {
   async sendOtp(mobile) {
@@ -41,7 +42,7 @@ const mockOtp = {
   async verifyOtp(_mobile, otp) {
     return new Promise((resolve) =>
       setTimeout(() => {
-        if (otp === "2023") {
+        if (otp === "123456") {
           resolve({ success: true });
         } else {
           resolve({ success: false, message: "OTP incorrect" });
@@ -65,7 +66,7 @@ export async function handleSendOtp(mobile) {
     if (!res.success) {
       return { success: false, message: res.message || "Failed to send OTP" };
     }
-    window.parent.postMessage({ type: "OTP_SENT" }, "*");
+    window.parent.postMessage({ type: MESSAGE_TYPES.OTP_SENT }, "*");
     return { success: true };
   } catch (e) {
     console.error(e);
@@ -76,8 +77,8 @@ export async function handleSendOtp(mobile) {
 }
 
 export async function handleVerifyOtp(mobile, otp) {
-  if (!otp || !/^\d+$/.test(otp) || otp.length !== 4) {
-    return { success: false, message: "OTP should have 4 digits" };
+  if (!otp || !/^\d+$/.test(otp) || otp.length !== 6) {
+    return { success: false, message: "OTP should have 6 digits" };
   }
   try {
     showLoader();

@@ -650,7 +650,7 @@
       window.addEventListener("message", (event) => {
         console.log("Message from Contact Details iframe:", event.data);
 
-        if (event.data.type === "MFE_READY") {
+        if (event.data.type === "IFRAME_READY") {
           iframe.contentWindow.postMessage(
             {
               type: "INIT",
@@ -662,7 +662,11 @@
             },
             "*",
           );
-          console.log("Sent INIT to MFE:", MOCK_CUSTOMER_CONTEXT);
+          console.log("Sent INIT to iframe:", MOCK_CUSTOMER_CONTEXT);
+        }
+
+        if (event.data.type === "IFRAME_DOWN") {
+          console.warn("iframe is down — waiting for IFRAME_READY to recover");
         }
 
         // Dynamic height adjustment

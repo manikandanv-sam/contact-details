@@ -3,22 +3,30 @@ import { renderGuarantorDropdown, onGuarantorChange } from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
 import { clearError } from "./ui/notifications.js";
 import { appContext, uiState } from "./store.js";
+import { MESSAGE_TYPES } from "./constants/message-types.js";
 
 // ── Parent ↔ MFE postMessage contract ────────────────────────────────────────
 //
-//  MFE → CMP : { type: "MFE_READY" }                  fired on load
-//  CMP → MFE : { type: "INIT", token, lan,             CMP must send this
-//                customerUrn, pan, customerId }
-//  MFE → CMP : { type: "OTP_SENT" }                   event notifications
-//  MFE → CMP : { type: "CONTACT_UPDATED" }
-//  MFE → CMP : { type: "ERROR", message }
+//  iframe → CMP : { type: "IFRAME_READY" }             fired on mount
+//  CMP → iframe : { type: "INIT", token, lan,          CMP must send this
+//                   customerUrn, pan, customerId }
+//  iframe → CMP : { type: "IFRAME_DOWN" }              fired on beforeunload
+//  iframe → CMP : { type: "OTP_SENT" }                 event notifications
+//  iframe → CMP : { type: "CONTACT_UPDATED" }
+//  iframe → CMP : { type: "ERROR", message }
 //
 // ─────────────────────────────────────────────────────────────────────────────
+
+let lastInitKey = null;
 
 window.addEventListener("message", (event) => {
   const { type, token, lan, customerUrn, pan, customerId } = event.data ?? {};
 
-  if (type === "INIT") {
+  if (type === MESSAGE_TYPES.INIT) {
+    const initKey = `${pan ?? ""}:${customerId ?? ""}`;
+    if (initKey === lastInitKey) return;
+    lastInitKey = initKey;
+
     appContext.token = token ?? null;
     appContext.lan = lan ?? null;
     appContext.customerUrn = customerUrn ?? null;
@@ -38,7 +46,11 @@ window.addEventListener("message", (event) => {
 if (window.parent === window) {
   loadCustomerData();
 } else {
-  window.parent.postMessage({ type: "MFE_READY" }, "*");
+  window.parent.postMessage({ type: MESSAGE_TYPES.IFRAME_READY }, "*");
+
+  window.addEventListener("beforeunload", () => {
+    window.parent.postMessage({ type: MESSAGE_TYPES.IFRAME_DOWN }, "*");
+  });
 }
 
 // ── DOM wiring (module scripts are deferred — DOM is ready at this point) ────

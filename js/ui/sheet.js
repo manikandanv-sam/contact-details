@@ -2,6 +2,7 @@ import { uiState } from "../store.js";
 import { labelMap, validateInput } from "../utils/validators.js";
 import { handleSendOtp, handleVerifyOtp } from "../services/otp-service.js";
 import { showError, clearError } from "./notifications.js";
+import { MESSAGE_TYPES } from "../constants/message-types.js";
 
 export function openSheet(field, type = "borrower") {
   uiState.currentField = field;
@@ -108,7 +109,7 @@ export function showOtpUI(mobile) {
 
   const input = document.getElementById("sheetInput");
   input.value = "";
-  input.placeholder = "Enter 4-digit OTP";
+  input.placeholder = "Enter 6-digit OTP";
 
   document.getElementById("sheetSubmitBtn").innerText = "Verify OTP";
   clearError();
@@ -144,5 +145,5 @@ function applyUpdate() {
 
   closeSheet();
 
-  window.parent.postMessage({ type: "CONTACT_UPDATED" }, "*");
+  window.parent.postMessage({ type: MESSAGE_TYPES.CONTACT_UPDATED }, "*");
 }
