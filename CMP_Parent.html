@@ -425,13 +425,12 @@
           <span class="sidebar-item-icon">📊</span>
           <span>My Requests</span>
         </a>
-        <a href="#" class="sidebar-item active" data-page="loans">
+        <a href="#" class="sidebar-item" data-page="loans">
           <span class="sidebar-item-icon">💰</span>
           <span>My Loans</span>
         </a>
 
-        <!-- NEW: Contact Details Menu Item -->
-        <a href="#" class="sidebar-item" data-page="contact-details">
+        <a href="#" class="sidebar-item active" data-page="contact-details">
           <span class="sidebar-item-icon">📞</span>
           <span>Contact Details</span>
         </a>
@@ -466,15 +465,14 @@
       <!-- CONTENT AREA -->
       <main class="content-area">
         <div class="page-header">
-          <h1 class="page-title" id="pageTitle">My Loans</h1>
+          <h1 class="page-title" id="pageTitle">Contact Details</h1>
         </div>
 
         <div class="content-wrapper">
-          <!-- CONTACT DETAILS IFRAME (hidden by default) -->
+          <!-- CONTACT DETAILS IFRAME -->
           <div
             id="contactDetailsContainer"
             class="iframe-container"
-            style="display: none"
           >
             <iframe
               id="contactDetailsFrame"
@@ -482,8 +480,8 @@
             ></iframe>
           </div>
 
-          <!-- MY LOANS CONTENT (shown by default) -->
-          <div id="loansContent">
+          <!-- MY LOANS CONTENT -->
+          <div id="loansContent" style="display: none">
             <div class="loans-header">
               <button class="filter-btn">Requests Made</button>
               <button class="filter-btn active">Loans Taken</button>
