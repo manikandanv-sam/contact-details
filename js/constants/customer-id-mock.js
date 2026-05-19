@@ -1,0 +1,2212 @@
+export const CUSTOMER_ID_MOCK_RESPONSE = {
+    "customer": {
+        "id": 110037,
+        "version": 0,
+        "customerId": "0000000000100291",
+        "customerType": "PRIVATE_LIMITED",
+        "customerName": {
+            "firstName": "ROHAN KUMAR FARMERS PRODUCER COMPANY",
+            "middleName": null,
+            "lastName": "LIMITED",
+            "displayName": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED"
+        },
+        "fatherName": null,
+        "spouseName": null,
+        "motherName": null,
+        "salutation": null,
+        "gender": null,
+        "dateOfBirth": "1998-08-03",
+        "contact": {
+            "address1": "9 OMR Road, Perungudi, Chennai",
+            "address2": "",
+            "address3": null,
+            "cityCode": "East Champaran",
+            "districtCode": "East Champaran",
+            "stateCode": "BI",
+            "countryCode": "IN",
+            "landMark": null,
+            "pinCode": "845432",
+            "phone1": "9X5X0X4X8X",
+            "phone2": null,
+            "email": "rohan.kumar@testenv.in",
+            "address": {
+                "address1": "9 OMR Road, Perungudi, Chennai",
+                "address2": "",
+                "address3": null,
+                "cityCode": "East Champaran",
+                "districtCode": "East Champaran",
+                "stateCode": "BI",
+                "countryCode": "IN",
+                "pinCode": "845432"
+            }
+        },
+        "addressType": "Communication",
+        "altContact1": null,
+        "altAddressType1": null,
+        "altContact2": null,
+        "altAddressType2": null,
+        "identification1": null,
+        "identification2": null,
+        "identification3": null,
+        "demography": {
+            "nationality": null,
+            "caste": null,
+            "religion": null,
+            "occupation": null,
+            "employment": null,
+            "sector": "FPO",
+            "language1": null,
+            "language2": null,
+            "language3": null,
+            "languageProficiency1": null,
+            "languageProficiency2": null,
+            "languageProficiency3": null,
+            "education": null,
+            "annualIncome": null,
+            "residenceType": null,
+            "segment": null,
+            "creditScore": null,
+            "riskCategory": null
+        },
+        "bankAccount1": null,
+        "bankAccount2": null,
+        "bankAccount3": null,
+        "domicileStatus": null,
+        "branchCode": "HO",
+        "pan": "PZXCV2648K",
+        "uidNum": null,
+        "gstin": "",
+        "registrationNo": null,
+        "msmeRegistrationNum": null,
+        "cin": null,
+        "legalEntityIdentifier": null,
+        "legalEntityIdentifierExpiryDate": null,
+        "uin": null,
+        "kycCompletedDate": null,
+        "kycRenewalDate": null,
+        "voterId": null,
+        "drivingLicense": null,
+        "passport": null,
+        "tag": null,
+        "photoFilePath": null,
+        "guardianCustomerId": null,
+        "relationshipWithCustomer": null,
+        "centreName": null,
+        "centreId": null,
+        "nomineeCustomerId": null,
+        "nomineeRelationshipType": null,
+        "maritalStatus": null,
+        "organizationName": null,
+        "referenceCustomerId1": null,
+        "referenceCustomerId2": null,
+        "originalCustomerId": null,
+        "dateOfExpiry": null,
+        "status": "ACTIVE",
+        "referenceName": null,
+        "referencePhone": null,
+        "referencePhone2": null,
+        "referenceRelationshipType": null,
+        "tdsTaxRateCode": null,
+        "gstTaxRateCode": null,
+        "groupAssociateId": null,
+        "makerCheckerStatus": null,
+        "referenceName2": null,
+        "referenceRelationshipType2": null,
+        "geoLocation": {
+            "latitude": 0,
+            "longitude": 0
+        },
+        "exServicemen": false,
+        "personWithDisabilities": false,
+        "manualScavenger": false,
+        "minority": false,
+        "widow": false,
+        "duplicationOverride": false,
+        "duplicationRemarks": null,
+        "duplicationOverrideApplicable": false,
+        "customAttributes": {
+            "aditional_info": {
+                "DIN": null
+            }
+        },
+        "displayName": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED",
+        "displayMotherName": null,
+        "displayFatherName": null,
+        "displaySpouseName": null,
+        "displayContact": "9 OMR Road, Perungudi, Chennai, East Champaran",
+        "displayCustomerType": "Private Limited",
+        "displayCustomerStatus": "Active",
+        "cKycNumber": null,
+        "nRegaCard": null
+    },
+    "accounts": [
+        {
+            "accountId": "100100100243",
+            "productType": "Loans",
+            "productCode": "COBL001",
+            "loanPurposeCode": "OT",
+            "currencyCode": "INR",
+            "accountName": "COBL001",
+            "branchCode": "HO",
+            "branchName": "HO",
+            "purpose": "Others",
+            "glSubHead": "COBL001-COBL001-Principal",
+            "portfolioName": "100100100243",
+            "collateralValueBasis": "NONE",
+            "collateralMarginPercent": null,
+            "holidayHandlingMode": "NEXT",
+            "holidayPattern": null,
+            "repaymentMethod": "EQUATED",
+            "normalInterestRate": {
+                "magnitude": 10,
+                "zero": false,
+                "negative": false,
+                "positive": true,
+                "displayValue": "10%"
+            },
+            "penalInterestRate": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "additionalNormalInterestRate": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "additionalPenalInterestRate": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "postMaturityNormalInterestRate": {
+                "magnitude": 10,
+                "zero": false,
+                "negative": false,
+                "positive": true,
+                "displayValue": "10%"
+            },
+            "effectiveInterestRate": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "xirr": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "irr": null,
+            "apr": {
+                "magnitude": 10.0797,
+                "zero": false,
+                "negative": false,
+                "positive": true,
+                "displayValue": "10.08%"
+            },
+            "irrExcludingFees": null,
+            "xirrExcludingFees": null,
+            "aprExcludingFees": null,
+            "operationalMode": "MANUAL",
+            "operationalStatus": "CLOSED",
+            "displayStatus": "Closed",
+            "demandInterval": {
+                "months": 0,
+                "unit": "DAY",
+                "valid": true,
+                "magnitudeAndUnit": "1 DAY"
+            },
+            "postMaturityDemandInterval": {
+                "months": 0,
+                "unit": "NONE",
+                "valid": true,
+                "magnitudeAndUnit": "0 NONE"
+            },
+            "demandDateMode": "DAY_NUMBER_OF_REFERENCE_DATE",
+            "demandDayPattern": "0",
+            "demandPayByDays": 0,
+            "autoAllocateAdvanceMode": "REPAY_DEMAND_DUE_AS_SCHEDULED",
+            "accountUptoDate": false,
+            "minDaysToPreclosure": 0,
+            "accountEntryPostingApplicable": true,
+            "customerId1": "0000000000100291",
+            "customerName1": {
+                "firstName": "ROHAN KUMAR FARMERS PRODUCER COMPANY",
+                "middleName": null,
+                "lastName": "LIMITED",
+                "displayName": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED"
+            },
+            "contact1": {
+                "address1": "9 OMR Road, Perungudi, Chennai",
+                "address2": "",
+                "address3": null,
+                "cityCode": "East Champaran",
+                "districtCode": "East Champaran",
+                "stateCode": "BI",
+                "countryCode": "IN",
+                "landMark": null,
+                "pinCode": "845432",
+                "phone1": "9952034781",
+                "phone2": null,
+                "email": "rohan.kumar@testenv.in",
+                "address": {
+                    "address1": "9 OMR Road, Perungudi, Chennai",
+                    "address2": "",
+                    "address3": null,
+                    "cityCode": "East Champaran",
+                    "districtCode": "East Champaran",
+                    "stateCode": "BI",
+                    "countryCode": "IN",
+                    "pinCode": "845432"
+                }
+            },
+            "customer1DateOfBirth": "1998-08-03",
+            "customer1Gender": null,
+            "fatherOrSpouseName": null,
+            "occupationType": null,
+            "kycDocumentType": null,
+            "kycDocumentNum": null,
+            "customerId2": "0000000000100292",
+            "customerName2": {
+                "firstName": "Kalyani",
+                "middleName": null,
+                "lastName": "Dasgupta",
+                "displayName": "Kalyani Dasgupta"
+            },
+            "contact2": {
+                "address1": "Test",
+                "address2": "",
+                "address3": null,
+                "cityCode": "Nagpur",
+                "districtCode": null,
+                "stateCode": "MH",
+                "countryCode": "IN",
+                "landMark": null,
+                "pinCode": "440010",
+                "phone1": "9975067133",
+                "phone2": null,
+                "email": null,
+                "address": {
+                    "address1": "Test",
+                    "address2": "",
+                    "address3": null,
+                    "cityCode": "Nagpur",
+                    "districtCode": null,
+                    "stateCode": "MH",
+                    "countryCode": "IN",
+                    "pinCode": "440010"
+                }
+            },
+            "relationshipType2": "Daughter",
+            "customer2Gender": "Female",
+            "customer2DateOfBirth": "1996-07-31",
+            "customerId3": null,
+            "customerName3": null,
+            "contact3": null,
+            "relationshipType3": null,
+            "customer3Gender": null,
+            "customer3DateOfBirth": null,
+            "customerId4": null,
+            "customerName4": null,
+            "contact4": null,
+            "relationshipType4": null,
+            "customer4Gender": null,
+            "customer4DateOfBirth": null,
+            "customerId5": null,
+            "customerName5": null,
+            "contact5": null,
+            "relationshipType5": null,
+            "customer5Gender": null,
+            "customer5DateOfBirth": null,
+            "customerId6": null,
+            "customerName6": null,
+            "contact6": null,
+            "relationshipType6": null,
+            "customer6Gender": null,
+            "customer6DateOfBirth": null,
+            "nomineeCustomerId": null,
+            "nomineeName": null,
+            "nomineeDateOfBirth": null,
+            "nomineeRelationship": null,
+            "amount": {
+                "magnitude": 600000,
+                "currency": "INR",
+                "displayValue": "₹6,00,000.00"
+            },
+            "tenure": {
+                "months": 0,
+                "unit": "DAY",
+                "valid": true,
+                "magnitudeAndUnit": "120 DAY"
+            },
+            "migrated": false,
+            "equatedInstallment": {
+                "magnitude": 5084,
+                "currency": "INR",
+                "displayValue": "₹5,084.00"
+            },
+            "installmentAmount": {
+                "magnitude": 5084,
+                "currency": "INR",
+                "displayValue": "₹5,084.00"
+            },
+            "unconfirmedInstallmentAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "linkedAccountId": null,
+            "residualAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "valueDate": "2026-05-17",
+            "transactionDate": "2026-05-17",
+            "systemDateTime": "2026-05-19T12:51:55.2138392+05:30",
+            "moratoriumPeriod": {
+                "months": 0,
+                "unit": "NONE",
+                "valid": true,
+                "magnitudeAndUnit": "0 NONE"
+            },
+            "moratoriumInterval": {
+                "months": 0,
+                "unit": "NONE",
+                "valid": true,
+                "magnitudeAndUnit": "0 NONE"
+            },
+            "trancheTenure": {
+                "months": 0,
+                "unit": "DAY",
+                "valid": true,
+                "magnitudeAndUnit": "120 DAY"
+            },
+            "moratoriumType": "NONE",
+            "moratoriumNormalInterestRate": {
+                "magnitude": 10,
+                "zero": false,
+                "negative": false,
+                "positive": true,
+                "displayValue": "10%"
+            },
+            "compoundingInterval": {
+                "months": 0,
+                "unit": "NONE",
+                "valid": true,
+                "magnitudeAndUnit": "0 NONE"
+            },
+            "compoundingNotDueNormalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "compoundingNotDuePenalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "normalInterestDemandInterval": {
+                "months": 0,
+                "unit": "DAY",
+                "valid": true,
+                "magnitudeAndUnit": "1 DAY"
+            },
+            "accountBalance": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "accountOpenDate": "2024-09-01",
+            "lastArchiveBalance": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "lastArchiveDate": "2024-09-01",
+            "lastEntryDate": "2024-09-01",
+            "bookedNotDueNormalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedNotDuePenalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedNormalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedPenalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedNotDueAdditionalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedAdditionalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "bookedNotDueInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "demandAdjustment": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "interestAdjustment": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "deferredInterestAdjustment": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "deferredInterestCharged": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "cutOffInterestAdjustment": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "capitalizedInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "normalInterestLimit": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "normalInterestRateBasis": "CONFIGURED_RATE_FIXED",
+            "interestTableCode": null,
+            "interestRateResetFrequency": "NONE",
+            "baseNormalInterestRate": {
+                "magnitude": 10,
+                "zero": false,
+                "negative": false,
+                "positive": true,
+                "displayValue": "10%"
+            },
+            "basePenalInterestRate": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "spread": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "totalSecurityDepositDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "securityDeposit": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "securityDepositInstallment": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "securityDepositAdvanceInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "advanceTds": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "defaultSecurityDeposit": {
+                "magnitude": 5084,
+                "currency": "INR",
+                "displayValue": "₹5,084.00"
+            },
+            "moratoriumInstallment": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "securityDepositAllowed": true,
+            "securityDepositInstallments": 1,
+            "autoRepayInterestTds": false,
+            "totalInterestTdsDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalNetInterestDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalInterestRefund": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalInterestTdsRefund": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalFeeRefund": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "numDisbursements": 0,
+            "numDemands": 0,
+            "numSatisfiedDemands": 0,
+            "numRepayments": 0,
+            "numAdvanceSatisfiedDemands": 0,
+            "numScheduledDemandsRaised": 0,
+            "firstDisbursementDate": null,
+            "lastDisbursementDate": null,
+            "lastDemandRunDate": null,
+            "nextDemandRunDate": null,
+            "nextDemandScheduledDate": null,
+            "lastBookingDate": null,
+            "nextFeeAccrualScheduledDate": null,
+            "lastFeeAccrualDate": null,
+            "lastCompoundingDate": null,
+            "nextCompoundingDate": null,
+            "referenceRepaymentDate": null,
+            "referenceNormalInterestDemandDate": null,
+            "firstRepaymentDate": null,
+            "lastRepaymentDate": null,
+            "maturityDate": "2024-12-30",
+            "closedOnValueDate": "2026-05-15",
+            "lastActivatedDate": "2024-09-01",
+            "lastFreezedDate": null,
+            "brokenPeriodDays": 0,
+            "bpiDemand": true,
+            "compoundingDay": 0,
+            "pendingTenure": {
+                "months": 0,
+                "unit": "DAY",
+                "valid": true,
+                "magnitudeAndUnit": "120 DAY"
+            },
+            "nextPrincipalDemandScheduledDate": null,
+            "nextNormalInterestDemandScheduledDate": null,
+            "firstInterestRateResetDate": null,
+            "lastInterestRateResetDate": null,
+            "nextInterestRateResetDate": null,
+            "linkedAccountDate": null,
+            "totalPrincipalRepaid": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalNormalInterestRepaid": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPenalInterestRepaid": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalAdditionalInterestRepaid": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalFeeRepaid": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalRepaid": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPrincipalDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalNormalInterestDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPenalInterestDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalAdditionalInterestDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalFeeDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalDemandDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPrincipalRaised": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalNormalInterestRaised": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPenalInterestRaised": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalAdditionalInterestRaised": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalDemandRaised": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalDisbursed": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "unconfirmedDisbursement": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "disbursableAmount": {
+                "magnitude": 600000,
+                "currency": "INR",
+                "displayValue": "₹6,00,000.00"
+            },
+            "principalNotDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalCancelled": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffItems": {
+                "valueDate": "2026-05-17",
+                "accountId": "100100100243",
+                "trancheId": null,
+                "payOffAmount": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "payOffAmountWithDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "preclosureFee": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "recoverableInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "principal": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "normalInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "penalInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "bookedNotDueNormalInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "bookedNotDuePenalInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalFee": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "netPayOffAmountWithDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "payOffAmountWithDueAndPreclosureFee": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "netPayOffAmountWithDueAndPreclosureFee": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "bookedNotDueAdditionalInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "bookedNotDueDeltaNormalInterestForBrokenPeriod": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalFeeDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "linkedAccountNormalInterest": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "principalNotDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalDemandDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalPrincipalDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalNormalInterestDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalPenalInterestDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "totalAdditionalInterestDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "preclosureRebate": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "securityDeposit": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "interestTds": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "interestTdsDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "interestTdsNotDue": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "penaltyFeeAmount": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "penaltyFee": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "penaltySurcharge": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "penaltyFeesApplicable": false,
+                "preclosureFeeSurcharge": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "preclosureFeeAmount": {
+                    "magnitude": 0,
+                    "currency": "INR",
+                    "displayValue": "₹0.00"
+                },
+                "tranchePayOffItems": []
+            },
+            "recoverableInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffAndDueAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffAndDueAmountAndPreclosureFee": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "linkedAccountPayOffAndDueAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "linkedAccountNetPayOffAmountWithDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "linkedAccountNetPayOffAmountWithDueAndPreclosureFee": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "netPayOffAmountWithDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "netPayOffAmountWithDueAndPreclosureFee": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffDemandDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffBookedNotDueNormalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffBookedNotDuePenalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffNormalInterestDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffPenalInterestDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffPrincipalDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffPrincipalNotDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffFeeDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "preclosureFee": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "preclosureFeeAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "preclosureFeeSurcharge": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "preclosureRebate": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffSecurityDeposit": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffNormalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffPenalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffPrincipal": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffPenalSurcharge": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffInterestTds": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffInterestTdsDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "payOffInterestTdsNotDue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "daysPastDue": 0,
+            "effectiveDpd": 0,
+            "riskDpd": 0,
+            "customerNpaDpd": 0,
+            "customerNpa": false,
+            "customerNpaAccountId": null,
+            "customerNpaMarkingDate": null,
+            "bucketString": null,
+            "delinquencyString": null,
+            "npaDays": 91,
+            "writeOffDays": 0,
+            "npa": false,
+            "forceNpa": false,
+            "restructured": false,
+            "principalWriteOff": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalNormalInterestWaiver": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPenalInterestWaiver": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalAdditionalInterestWaiver": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalFeeWaiver": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "writeOffDate": null,
+            "normalInterestWriteOff": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "penalInterestWriteOff": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "additionalInterestWriteOff": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "feeWriteOff": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "principalRecovery": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "normalInterestRecovery": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "penalInterestRecovery": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "feeRecovery": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalInterestTds": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalNormalInterestTds": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalPenalInterestTds": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "totalInterestTdsRaised": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "feeAccrual": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "feeAccrued": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "reference": null,
+            "netDisbursementRequired": false,
+            "interestRebateEligibleDate": null,
+            "interestRebateEligible": false,
+            "fee": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "fees": [],
+            "defaultFirstRepaymentDate": "2024-09-02",
+            "minFirstRepaymentDate": "2024-09-02",
+            "maxFirstRepaymentDate": "2024-09-02",
+            "collateralCode": null,
+            "securedValue": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "securableLoanValue": null,
+            "marginBreachDate": null,
+            "customerLimitCode": null,
+            "mandateEntityType": null,
+            "mandateEntityId": null,
+            "guarantorCustomerId1": "0000000000100286",
+            "guarantor1Name": {
+                "firstName": "MAHESH PRASAD FARMERS PRODUCER COMPANY",
+                "middleName": null,
+                "lastName": "LIMITED",
+                "empty": false,
+                "fullName": "MAHESH PRASAD FARMERS PRODUCER COMPANY LIMITED"
+            },
+            "guarantor1Contact": {
+                "address1": "14 Residency Road, Bengaluru",
+                "address2": "",
+                "address3": null,
+                "cityCode": "East Champaran",
+                "districtCode": "East Champaran",
+                "stateCode": "BI",
+                "countryCode": "IN",
+                "landMark": null,
+                "pinCode": "845432",
+                "phone1": "9845123678",
+                "phone2": null,
+                "email": "mahesh.prasad@devmail.in",
+                "address": {
+                    "address1": "14 Residency Road, Bengaluru",
+                    "address2": "",
+                    "address3": null,
+                    "cityCode": "East Champaran",
+                    "districtCode": "East Champaran",
+                    "stateCode": "BI",
+                    "countryCode": "IN",
+                    "pinCode": "845432"
+                }
+            },
+            "guarantor1Gender": null,
+            "guarantor1DateOfBirth": "1998-08-03",
+            "guarantor1LimitCode": null,
+            "guarantorCustomerId2": "0000000000100287",
+            "guarantor2Name": {
+                "firstName": "KAVITHA REDDY FARMERS PRODUCER COMPANY",
+                "middleName": null,
+                "lastName": "LIMITED",
+                "empty": false,
+                "fullName": "KAVITHA REDDY FARMERS PRODUCER COMPANY LIMITED"
+            },
+            "guarantor2Contact": {
+                "address1": "88 Velachery Main Road, Chennai",
+                "address2": "",
+                "address3": null,
+                "cityCode": "East Champaran",
+                "districtCode": "East Champaran",
+                "stateCode": "BI",
+                "countryCode": "IN",
+                "landMark": null,
+                "pinCode": "845432",
+                "phone1": "9786012457",
+                "phone2": null,
+                "email": "kavitha.reddy@uatdemo.in",
+                "address": {
+                    "address1": "88 Velachery Main Road, Chennai",
+                    "address2": "",
+                    "address3": null,
+                    "cityCode": "East Champaran",
+                    "districtCode": "East Champaran",
+                    "stateCode": "BI",
+                    "countryCode": "IN",
+                    "pinCode": "845432"
+                }
+            },
+            "guarantor2Gender": null,
+            "guarantor2DateOfBirth": "1998-08-03",
+            "guarantor2LimitCode": null,
+            "assetCategory": "",
+            "assetCategoryAlt1": null,
+            "provisionedAmount": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "lastProvisioningDate": null,
+            "relationshipManager": null,
+            "relationshipManagerId": null,
+            "relationshipManagerEmail": null,
+            "relationshipManagerPhone": null,
+            "oldestDueDemandNum": 0,
+            "oldestDueDemandDate": null,
+            "oldestUnsatisfiedDemandNum": 0,
+            "oldestUnsatisfiedDemandDate": null,
+            "underSettlement": false,
+            "lastNpaMarkingDate": null,
+            "lastNpaUnmarkingDate": null,
+            "gstin": "",
+            "originalAccountId": "Unnati-a8757f90-c029-6cf4-86i9-oe39ed65oi79",
+            "locationCode": null,
+            "penalInterestDemandMode": "MATURITY",
+            "documents": null,
+            "colendingApplicable": false,
+            "lenderId": null,
+            "lendingRatio": null,
+            "lenderSummaries": [],
+            "customerAccountId": null,
+            "assigneeAccountId": null,
+            "assignedRatio": {
+                "magnitude": 0,
+                "zero": true,
+                "negative": false,
+                "positive": false,
+                "displayValue": "0%"
+            },
+            "adjustedTenure": {
+                "months": 0,
+                "unit": "DAY",
+                "valid": true,
+                "magnitudeAndUnit": "120 DAY"
+            },
+            "udfText1": null,
+            "udfText2": null,
+            "udfText3": null,
+            "udfText4": "NA",
+            "udfText5": null,
+            "udfText6": null,
+            "udfText7": null,
+            "udfText8": null,
+            "udfText9": null,
+            "udfText10": null,
+            "udfText11": null,
+            "udfText12": null,
+            "udfText13": "N",
+            "udfText14": "NA",
+            "udfText15": "0",
+            "udfText16": "0",
+            "udfText17": null,
+            "udfText18": null,
+            "udfText19": null,
+            "udfText20": null,
+            "udfText21": null,
+            "udfText22": null,
+            "udfText23": null,
+            "udfText24": null,
+            "udfText25": null,
+            "udfText26": null,
+            "udfText27": null,
+            "udfText28": null,
+            "udfText29": null,
+            "udfText30": null,
+            "udfText31": null,
+            "udfText32": null,
+            "udfText33": null,
+            "udfText34": null,
+            "udfText35": null,
+            "udfText36": null,
+            "udfText37": null,
+            "udfText38": null,
+            "udfText39": null,
+            "udfText40": null,
+            "udfText41": null,
+            "udfText42": null,
+            "udfText43": null,
+            "udfText44": null,
+            "udfText45": null,
+            "udfText46": null,
+            "udfText47": null,
+            "udfText48": null,
+            "udfText49": null,
+            "udfText50": null,
+            "udfText51": null,
+            "udfText52": null,
+            "udfText53": null,
+            "udfText54": null,
+            "udfText55": null,
+            "udfText56": null,
+            "udfText57": null,
+            "udfText58": null,
+            "udfText59": null,
+            "udfText60": null,
+            "udfText61": null,
+            "udfText62": null,
+            "udfText63": null,
+            "udfText64": null,
+            "udfText65": null,
+            "udfText66": null,
+            "udfText67": null,
+            "udfText68": null,
+            "udfText69": null,
+            "udfText70": null,
+            "udfText71": null,
+            "udfText72": null,
+            "udfText73": null,
+            "udfText74": null,
+            "udfText75": null,
+            "udfText76": null,
+            "udfText77": null,
+            "udfText78": null,
+            "udfText79": null,
+            "udfText80": null,
+            "udfText81": null,
+            "udfText82": null,
+            "udfText83": null,
+            "udfText84": null,
+            "udfText85": null,
+            "udfDate1": null,
+            "udfDate2": null,
+            "udfDate3": null,
+            "udfDate4": null,
+            "udfDate5": null,
+            "udfDate6": null,
+            "udfDate7": null,
+            "udfDate8": null,
+            "udfDate9": null,
+            "udfDate10": null,
+            "udfTextLabel1": null,
+            "udfTextLabel2": null,
+            "udfTextLabel3": null,
+            "udfTextLabel4": null,
+            "udfTextLabel5": null,
+            "udfTextLabel6": null,
+            "udfTextLabel7": null,
+            "udfTextLabel8": null,
+            "udfTextLabel9": null,
+            "udfTextLabel10": null,
+            "udfTextLabel11": null,
+            "udfTextLabel12": null,
+            "udfTextLabel13": null,
+            "udfTextLabel14": null,
+            "udfTextLabel15": null,
+            "udfTextLabel16": null,
+            "udfTextLabel17": null,
+            "udfTextLabel18": null,
+            "udfTextLabel19": null,
+            "udfTextLabel20": null,
+            "udfTextLabel21": null,
+            "udfTextLabel22": null,
+            "udfTextLabel23": null,
+            "udfTextLabel24": null,
+            "udfTextLabel25": null,
+            "udfTextLabel26": null,
+            "udfTextLabel27": null,
+            "udfTextLabel28": null,
+            "udfTextLabel29": null,
+            "udfTextLabel30": null,
+            "udfTextLabel31": null,
+            "udfTextLabel32": null,
+            "udfTextLabel33": null,
+            "udfTextLabel34": null,
+            "udfTextLabel35": null,
+            "udfTextLabel36": null,
+            "udfTextLabel37": null,
+            "udfTextLabel38": null,
+            "udfTextLabel39": null,
+            "udfTextLabel40": null,
+            "udfTextLabel41": null,
+            "udfTextLabel42": null,
+            "udfTextLabel43": null,
+            "udfTextLabel44": null,
+            "udfTextLabel45": null,
+            "udfTextLabel46": null,
+            "udfTextLabel47": null,
+            "udfTextLabel48": null,
+            "udfTextLabel49": null,
+            "udfTextLabel50": null,
+            "udfTextLabel51": null,
+            "udfTextLabel52": null,
+            "udfTextLabel53": null,
+            "udfTextLabel54": null,
+            "udfTextLabel55": null,
+            "udfTextLabel56": null,
+            "udfTextLabel57": null,
+            "udfTextLabel58": null,
+            "udfTextLabel59": null,
+            "udfTextLabel60": null,
+            "udfTextLabel61": null,
+            "udfTextLabel62": null,
+            "udfTextLabel63": null,
+            "udfTextLabel64": null,
+            "udfTextLabel65": null,
+            "udfTextLabel66": null,
+            "udfTextLabel67": null,
+            "udfTextLabel68": null,
+            "udfTextLabel69": null,
+            "udfTextLabel70": null,
+            "udfTextLabel71": null,
+            "udfTextLabel72": null,
+            "udfTextLabel73": null,
+            "udfTextLabel74": null,
+            "udfTextLabel75": null,
+            "udfTextLabel76": null,
+            "udfTextLabel77": null,
+            "udfTextLabel78": null,
+            "udfTextLabel79": null,
+            "udfTextLabel80": null,
+            "udfTextLabel81": null,
+            "udfTextLabel82": null,
+            "udfTextLabel83": null,
+            "udfTextLabel84": null,
+            "udfTextLabel85": null,
+            "udfDateLabel1": null,
+            "udfDateLabel2": null,
+            "udfDateLabel3": null,
+            "udfDateLabel4": null,
+            "udfDateLabel5": null,
+            "udfDateLabel6": null,
+            "udfDateLabel7": null,
+            "udfDateLabel8": null,
+            "udfDateLabel9": null,
+            "udfDateLabel10": null,
+            "tags": [],
+            "transactions": [],
+            "historyTransactions": [],
+            "repaymentSchedule": [],
+            "repaymentScheduleNormalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "repaymentSchedulePenalInterest": {
+                "magnitude": 0,
+                "currency": "INR",
+                "displayValue": "₹0.00"
+            },
+            "accountStatement": [],
+            "compositeStatement": [],
+            "scheduledDisbursements": [],
+            "scheduleDemands": [],
+            "moratoriums": [],
+            "collaterals": [],
+            "accountHolders": [
+                {
+                    "id": 93959,
+                    "version": 0,
+                    "accountId": "100100100243",
+                    "customerId": "0000000000100291",
+                    "gstin": "",
+                    "locationCode": null,
+                    "holderNum": 1,
+                    "customerName": {
+                        "firstName": "ROHAN KUMAR FARMERS PRODUCER COMPANY",
+                        "middleName": null,
+                        "lastName": "LIMITED",
+                        "displayName": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED"
+                    },
+                    "contact": {
+                        "address1": "9 OMR Road, Perungudi, Chennai",
+                        "address2": "",
+                        "address3": null,
+                        "cityCode": "East Champaran",
+                        "districtCode": "East Champaran",
+                        "stateCode": "BI",
+                        "countryCode": "IN",
+                        "landMark": null,
+                        "pinCode": "845432",
+                        "phone1": "9952034781",
+                        "phone2": null,
+                        "email": "rohan.kumar@testenv.in",
+                        "address": {
+                            "address1": "9 OMR Road, Perungudi, Chennai",
+                            "address2": "",
+                            "address3": null,
+                            "cityCode": "East Champaran",
+                            "districtCode": "East Champaran",
+                            "stateCode": "BI",
+                            "countryCode": "IN",
+                            "pinCode": "845432"
+                        }
+                    },
+                    "relationshipType": "Self"
+                },
+                {
+                    "id": 93960,
+                    "version": 0,
+                    "accountId": "100100100243",
+                    "customerId": "0000000000100292",
+                    "gstin": null,
+                    "locationCode": null,
+                    "holderNum": 2,
+                    "customerName": {
+                        "firstName": "Kalyani",
+                        "middleName": null,
+                        "lastName": "Dasgupta",
+                        "displayName": "Kalyani Dasgupta"
+                    },
+                    "contact": {
+                        "address1": "Test",
+                        "address2": "",
+                        "address3": null,
+                        "cityCode": "Nagpur",
+                        "districtCode": null,
+                        "stateCode": "MH",
+                        "countryCode": "IN",
+                        "landMark": null,
+                        "pinCode": "440010",
+                        "phone1": "9975067133",
+                        "phone2": null,
+                        "email": null,
+                        "address": {
+                            "address1": "Test",
+                            "address2": "",
+                            "address3": null,
+                            "cityCode": "Nagpur",
+                            "districtCode": null,
+                            "stateCode": "MH",
+                            "countryCode": "IN",
+                            "pinCode": "440010"
+                        }
+                    },
+                    "relationshipType": "Daughter"
+                }
+            ],
+            "applicants": [
+                {
+                    "id": 110037,
+                    "version": 0,
+                    "customerId": "0000000000100291",
+                    "customerType": "PRIVATE_LIMITED",
+                    "customerName": {
+                        "firstName": "ROHAN KUMAR FARMERS PRODUCER COMPANY",
+                        "middleName": null,
+                        "lastName": "LIMITED",
+                        "displayName": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED"
+                    },
+                    "fatherName": null,
+                    "spouseName": null,
+                    "motherName": null,
+                    "salutation": null,
+                    "gender": null,
+                    "dateOfBirth": "1998-08-03",
+                    "contact": {
+                        "address1": "9 OMR Road, Perungudi, Chennai",
+                        "address2": "",
+                        "address3": null,
+                        "cityCode": "East Champaran",
+                        "districtCode": "East Champaran",
+                        "stateCode": "BI",
+                        "countryCode": "IN",
+                        "landMark": null,
+                        "pinCode": "845432",
+                        "phone1": "9X5X0X4X8X",
+                        "phone2": null,
+                        "email": "rohan.kumar@testenv.in",
+                        "address": {
+                            "address1": "9 OMR Road, Perungudi, Chennai",
+                            "address2": "",
+                            "address3": null,
+                            "cityCode": "East Champaran",
+                            "districtCode": "East Champaran",
+                            "stateCode": "BI",
+                            "countryCode": "IN",
+                            "pinCode": "845432"
+                        }
+                    },
+                    "addressType": "Communication",
+                    "altContact1": null,
+                    "altAddressType1": null,
+                    "altContact2": null,
+                    "altAddressType2": null,
+                    "identification1": null,
+                    "identification2": null,
+                    "identification3": null,
+                    "demography": {
+                        "nationality": null,
+                        "caste": null,
+                        "religion": null,
+                        "occupation": null,
+                        "employment": null,
+                        "sector": "FPO",
+                        "language1": null,
+                        "language2": null,
+                        "language3": null,
+                        "languageProficiency1": null,
+                        "languageProficiency2": null,
+                        "languageProficiency3": null,
+                        "education": null,
+                        "annualIncome": null,
+                        "residenceType": null,
+                        "segment": null,
+                        "creditScore": null,
+                        "riskCategory": null
+                    },
+                    "bankAccount1": null,
+                    "bankAccount2": null,
+                    "bankAccount3": null,
+                    "domicileStatus": null,
+                    "branchCode": "HO",
+                    "pan": "PZXCV2648K",
+                    "uidNum": null,
+                    "gstin": "",
+                    "registrationNo": null,
+                    "msmeRegistrationNum": null,
+                    "cin": null,
+                    "legalEntityIdentifier": null,
+                    "legalEntityIdentifierExpiryDate": null,
+                    "uin": null,
+                    "kycCompletedDate": null,
+                    "kycRenewalDate": null,
+                    "voterId": null,
+                    "drivingLicense": null,
+                    "passport": null,
+                    "tag": null,
+                    "photoFilePath": null,
+                    "guardianCustomerId": null,
+                    "relationshipWithCustomer": null,
+                    "centreName": null,
+                    "centreId": null,
+                    "nomineeCustomerId": null,
+                    "nomineeRelationshipType": null,
+                    "maritalStatus": null,
+                    "organizationName": null,
+                    "referenceCustomerId1": null,
+                    "referenceCustomerId2": null,
+                    "originalCustomerId": null,
+                    "dateOfExpiry": null,
+                    "status": "ACTIVE",
+                    "referenceName": null,
+                    "referencePhone": null,
+                    "referencePhone2": null,
+                    "referenceRelationshipType": null,
+                    "tdsTaxRateCode": null,
+                    "gstTaxRateCode": null,
+                    "groupAssociateId": null,
+                    "makerCheckerStatus": null,
+                    "referenceName2": null,
+                    "referenceRelationshipType2": null,
+                    "geoLocation": {
+                        "latitude": 0,
+                        "longitude": 0
+                    },
+                    "exServicemen": false,
+                    "personWithDisabilities": false,
+                    "manualScavenger": false,
+                    "minority": false,
+                    "widow": false,
+                    "duplicationOverride": false,
+                    "duplicationRemarks": null,
+                    "duplicationOverrideApplicable": false,
+                    "customAttributes": {
+                        "aditional_info": {
+                            "DIN": null
+                        }
+                    },
+                    "displayName": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED",
+                    "displayMotherName": null,
+                    "displayFatherName": null,
+                    "displaySpouseName": null,
+                    "displayContact": "9 OMR Road, Perungudi, Chennai, East Champaran",
+                    "displayCustomerType": "Private Limited",
+                    "displayCustomerStatus": "Active",
+                    "cKycNumber": null,
+                    "nRegaCard": null
+                },
+                {
+                    "id": 110038,
+                    "version": 0,
+                    "customerId": "0000000000100292",
+                    "customerType": "INDIVIDUAL",
+                    "customerName": {
+                        "firstName": "Kalyani",
+                        "middleName": null,
+                        "lastName": "Dasgupta",
+                        "displayName": "Kalyani Dasgupta"
+                    },
+                    "fatherName": null,
+                    "spouseName": null,
+                    "motherName": null,
+                    "salutation": null,
+                    "gender": "Female",
+                    "dateOfBirth": "1996-07-31",
+                    "contact": {
+                        "address1": "Test",
+                        "address2": "",
+                        "address3": null,
+                        "cityCode": "Nagpur",
+                        "districtCode": null,
+                        "stateCode": "MH",
+                        "countryCode": "IN",
+                        "landMark": null,
+                        "pinCode": "440010",
+                        "phone1": "9X7X0X7X3X",
+                        "phone2": null,
+                        "email": null,
+                        "address": {
+                            "address1": "Test",
+                            "address2": "",
+                            "address3": null,
+                            "cityCode": "Nagpur",
+                            "districtCode": null,
+                            "stateCode": "MH",
+                            "countryCode": "IN",
+                            "pinCode": "440010"
+                        }
+                    },
+                    "addressType": null,
+                    "altContact1": null,
+                    "altAddressType1": null,
+                    "altContact2": null,
+                    "altAddressType2": null,
+                    "identification1": null,
+                    "identification2": null,
+                    "identification3": null,
+                    "demography": null,
+                    "bankAccount1": null,
+                    "bankAccount2": null,
+                    "bankAccount3": null,
+                    "domicileStatus": null,
+                    "branchCode": "HO",
+                    "pan": null,
+                    "uidNum": null,
+                    "gstin": null,
+                    "registrationNo": null,
+                    "msmeRegistrationNum": null,
+                    "cin": null,
+                    "legalEntityIdentifier": null,
+                    "legalEntityIdentifierExpiryDate": null,
+                    "uin": null,
+                    "kycCompletedDate": null,
+                    "kycRenewalDate": null,
+                    "voterId": null,
+                    "drivingLicense": null,
+                    "passport": null,
+                    "tag": null,
+                    "photoFilePath": null,
+                    "guardianCustomerId": null,
+                    "relationshipWithCustomer": "Daughter",
+                    "centreName": null,
+                    "centreId": null,
+                    "nomineeCustomerId": null,
+                    "nomineeRelationshipType": null,
+                    "maritalStatus": null,
+                    "organizationName": null,
+                    "referenceCustomerId1": null,
+                    "referenceCustomerId2": null,
+                    "originalCustomerId": null,
+                    "dateOfExpiry": null,
+                    "status": "ACTIVE",
+                    "referenceName": null,
+                    "referencePhone": null,
+                    "referencePhone2": null,
+                    "referenceRelationshipType": null,
+                    "tdsTaxRateCode": null,
+                    "gstTaxRateCode": null,
+                    "groupAssociateId": null,
+                    "makerCheckerStatus": null,
+                    "referenceName2": null,
+                    "referenceRelationshipType2": null,
+                    "geoLocation": null,
+                    "exServicemen": false,
+                    "personWithDisabilities": false,
+                    "manualScavenger": false,
+                    "minority": false,
+                    "widow": false,
+                    "duplicationOverride": false,
+                    "duplicationRemarks": null,
+                    "duplicationOverrideApplicable": false,
+                    "customAttributes": {
+                        "aditional_info": {
+                            "DIN": null
+                        }
+                    },
+                    "displayName": "Kalyani Dasgupta",
+                    "displayMotherName": null,
+                    "displayFatherName": null,
+                    "displaySpouseName": null,
+                    "displayContact": "Test, Nagpur",
+                    "displayCustomerType": "Individual",
+                    "displayCustomerStatus": "Active",
+                    "cKycNumber": null,
+                    "nRegaCard": null
+                }
+            ],
+            "guarantors": [
+                {
+                    "id": 110032,
+                    "version": 0,
+                    "customerId": "0000000000100286",
+                    "customerType": "PRIVATE_LIMITED",
+                    "customerName": {
+                        "firstName": "MAHESH PRASAD FARMERS PRODUCER COMPANY",
+                        "middleName": null,
+                        "lastName": "LIMITED",
+                        "displayName": "MAHESH PRASAD FARMERS PRODUCER COMPANY LIMITED"
+                    },
+                    "fatherName": null,
+                    "spouseName": null,
+                    "motherName": null,
+                    "salutation": null,
+                    "gender": null,
+                    "dateOfBirth": "1998-08-03",
+                    "contact": {
+                        "address1": "14 Residency Road, Bengaluru",
+                        "address2": "",
+                        "address3": null,
+                        "cityCode": "East Champaran",
+                        "districtCode": "East Champaran",
+                        "stateCode": "BI",
+                        "countryCode": "IN",
+                        "landMark": null,
+                        "pinCode": "845432",
+                        "phone1": "9X4X1X3X7X",
+                        "phone2": null,
+                        "email": "mahesh.prasad@devmail.in",
+                        "address": {
+                            "address1": "14 Residency Road, Bengaluru",
+                            "address2": "",
+                            "address3": null,
+                            "cityCode": "East Champaran",
+                            "districtCode": "East Champaran",
+                            "stateCode": "BI",
+                            "countryCode": "IN",
+                            "pinCode": "845432"
+                        }
+                    },
+                    "addressType": "Communication",
+                    "altContact1": null,
+                    "altAddressType1": null,
+                    "altContact2": null,
+                    "altAddressType2": null,
+                    "identification1": null,
+                    "identification2": null,
+                    "identification3": null,
+                    "demography": {
+                        "nationality": null,
+                        "caste": null,
+                        "religion": null,
+                        "occupation": null,
+                        "employment": null,
+                        "sector": "FPO",
+                        "language1": null,
+                        "language2": null,
+                        "language3": null,
+                        "languageProficiency1": null,
+                        "languageProficiency2": null,
+                        "languageProficiency3": null,
+                        "education": null,
+                        "annualIncome": null,
+                        "residenceType": null,
+                        "segment": null,
+                        "creditScore": null,
+                        "riskCategory": null
+                    },
+                    "bankAccount1": null,
+                    "bankAccount2": null,
+                    "bankAccount3": null,
+                    "domicileStatus": null,
+                    "branchCode": "HO",
+                    "pan": "BAFPK7193R",
+                    "uidNum": null,
+                    "gstin": "",
+                    "registrationNo": null,
+                    "msmeRegistrationNum": null,
+                    "cin": null,
+                    "legalEntityIdentifier": null,
+                    "legalEntityIdentifierExpiryDate": null,
+                    "uin": null,
+                    "kycCompletedDate": null,
+                    "kycRenewalDate": null,
+                    "voterId": null,
+                    "drivingLicense": null,
+                    "passport": null,
+                    "tag": null,
+                    "photoFilePath": null,
+                    "guardianCustomerId": null,
+                    "relationshipWithCustomer": null,
+                    "centreName": null,
+                    "centreId": null,
+                    "nomineeCustomerId": null,
+                    "nomineeRelationshipType": null,
+                    "maritalStatus": null,
+                    "organizationName": null,
+                    "referenceCustomerId1": null,
+                    "referenceCustomerId2": null,
+                    "originalCustomerId": null,
+                    "dateOfExpiry": null,
+                    "status": "ACTIVE",
+                    "referenceName": null,
+                    "referencePhone": null,
+                    "referencePhone2": null,
+                    "referenceRelationshipType": null,
+                    "tdsTaxRateCode": null,
+                    "gstTaxRateCode": null,
+                    "groupAssociateId": null,
+                    "makerCheckerStatus": null,
+                    "referenceName2": null,
+                    "referenceRelationshipType2": null,
+                    "geoLocation": {
+                        "latitude": 0,
+                        "longitude": 0
+                    },
+                    "exServicemen": false,
+                    "personWithDisabilities": false,
+                    "manualScavenger": false,
+                    "minority": false,
+                    "widow": false,
+                    "duplicationOverride": false,
+                    "duplicationRemarks": null,
+                    "duplicationOverrideApplicable": false,
+                    "customAttributes": {
+                        "aditional_info": {
+                            "DIN": null
+                        }
+                    },
+                    "displayName": "MAHESH PRASAD FARMERS PRODUCER COMPANY LIMITED",
+                    "displayMotherName": null,
+                    "displayFatherName": null,
+                    "displaySpouseName": null,
+                    "displayContact": "14 Residency Road, Bengaluru, East Champaran",
+                    "displayCustomerType": "Private Limited",
+                    "displayCustomerStatus": "Active",
+                    "cKycNumber": null,
+                    "nRegaCard": null
+                },
+                {
+                    "id": 110033,
+                    "version": 0,
+                    "customerId": "0000000000100287",
+                    "customerType": "PRIVATE_LIMITED",
+                    "customerName": {
+                        "firstName": "KAVITHA REDDY FARMERS PRODUCER COMPANY",
+                        "middleName": null,
+                        "lastName": "LIMITED",
+                        "displayName": "KAVITHA REDDY FARMERS PRODUCER COMPANY LIMITED"
+                    },
+                    "fatherName": null,
+                    "spouseName": null,
+                    "motherName": null,
+                    "salutation": null,
+                    "gender": null,
+                    "dateOfBirth": "1998-08-03",
+                    "contact": {
+                        "address1": "88 Velachery Main Road, Chennai",
+                        "address2": "",
+                        "address3": null,
+                        "cityCode": "East Champaran",
+                        "districtCode": "East Champaran",
+                        "stateCode": "BI",
+                        "countryCode": "IN",
+                        "landMark": null,
+                        "pinCode": "845432",
+                        "phone1": "9X8X0X2X5X",
+                        "phone2": null,
+                        "email": "kavitha.reddy@uatdemo.in",
+                        "address": {
+                            "address1": "88 Velachery Main Road, Chennai",
+                            "address2": "",
+                            "address3": null,
+                            "cityCode": "East Champaran",
+                            "districtCode": "East Champaran",
+                            "stateCode": "BI",
+                            "countryCode": "IN",
+                            "pinCode": "845432"
+                        }
+                    },
+                    "addressType": "Communication",
+                    "altContact1": null,
+                    "altAddressType1": null,
+                    "altContact2": null,
+                    "altAddressType2": null,
+                    "identification1": null,
+                    "identification2": null,
+                    "identification3": null,
+                    "demography": {
+                        "nationality": null,
+                        "caste": null,
+                        "religion": null,
+                        "occupation": null,
+                        "employment": null,
+                        "sector": "FPO",
+                        "language1": null,
+                        "language2": null,
+                        "language3": null,
+                        "languageProficiency1": null,
+                        "languageProficiency2": null,
+                        "languageProficiency3": null,
+                        "education": null,
+                        "annualIncome": null,
+                        "residenceType": null,
+                        "segment": null,
+                        "creditScore": null,
+                        "riskCategory": null
+                    },
+                    "bankAccount1": null,
+                    "bankAccount2": null,
+                    "bankAccount3": null,
+                    "domicileStatus": null,
+                    "branchCode": "HO",
+                    "pan": "CJLRT4821M",
+                    "uidNum": null,
+                    "gstin": "",
+                    "registrationNo": null,
+                    "msmeRegistrationNum": null,
+                    "cin": null,
+                    "legalEntityIdentifier": null,
+                    "legalEntityIdentifierExpiryDate": null,
+                    "uin": null,
+                    "kycCompletedDate": null,
+                    "kycRenewalDate": null,
+                    "voterId": null,
+                    "drivingLicense": null,
+                    "passport": null,
+                    "tag": null,
+                    "photoFilePath": null,
+                    "guardianCustomerId": null,
+                    "relationshipWithCustomer": null,
+                    "centreName": null,
+                    "centreId": null,
+                    "nomineeCustomerId": null,
+                    "nomineeRelationshipType": null,
+                    "maritalStatus": null,
+                    "organizationName": null,
+                    "referenceCustomerId1": null,
+                    "referenceCustomerId2": null,
+                    "originalCustomerId": null,
+                    "dateOfExpiry": null,
+                    "status": "ACTIVE",
+                    "referenceName": null,
+                    "referencePhone": null,
+                    "referencePhone2": null,
+                    "referenceRelationshipType": null,
+                    "tdsTaxRateCode": null,
+                    "gstTaxRateCode": null,
+                    "groupAssociateId": null,
+                    "makerCheckerStatus": null,
+                    "referenceName2": null,
+                    "referenceRelationshipType2": null,
+                    "geoLocation": {
+                        "latitude": 0,
+                        "longitude": 0
+                    },
+                    "exServicemen": false,
+                    "personWithDisabilities": false,
+                    "manualScavenger": false,
+                    "minority": false,
+                    "widow": false,
+                    "duplicationOverride": false,
+                    "duplicationRemarks": null,
+                    "duplicationOverrideApplicable": false,
+                    "customAttributes": {
+                        "aditional_info": {
+                            "DIN": null
+                        }
+                    },
+                    "displayName": "KAVITHA REDDY FARMERS PRODUCER COMPANY LIMITED",
+                    "displayMotherName": null,
+                    "displayFatherName": null,
+                    "displaySpouseName": null,
+                    "displayContact": "88 Velachery Main Road, Chennai, East Champaran",
+                    "displayCustomerType": "Private Limited",
+                    "displayCustomerStatus": "Active",
+                    "cKycNumber": null,
+                    "nRegaCard": null
+                }
+            ],
+            "linkedAccounts": null,
+            "associates": [
+                {
+                    "id": 1528,
+                    "version": 0,
+                    "accountId": "100100100243",
+                    "associateType": "GUARANTOR",
+                    "name": {
+                        "firstName": "MAHESH PRASAD FARMERS PRODUCER COMPANY",
+                        "middleName": null,
+                        "lastName": "LIMITED",
+                        "displayName": "MAHESH PRASAD FARMERS PRODUCER COMPANY LIMITED"
+                    },
+                    "sequenceNum": 1,
+                    "associateId": "0000000000100286",
+                    "limitCode": null,
+                    "reference": null,
+                    "statusMessage": null,
+                    "displayAssociateType": "Guarantor",
+                    "associateCategory": "Customer"
+                },
+                {
+                    "id": 1529,
+                    "version": 0,
+                    "accountId": "100100100243",
+                    "associateType": "GUARANTOR",
+                    "name": {
+                        "firstName": "KAVITHA REDDY FARMERS PRODUCER COMPANY",
+                        "middleName": null,
+                        "lastName": "LIMITED",
+                        "displayName": "KAVITHA REDDY FARMERS PRODUCER COMPANY LIMITED"
+                    },
+                    "sequenceNum": 2,
+                    "associateId": "0000000000100287",
+                    "limitCode": null,
+                    "reference": null,
+                    "statusMessage": null,
+                    "displayAssociateType": "Guarantor",
+                    "associateCategory": "Customer"
+                }
+            ],
+            "customDisplayAttributes": {},
+            "displayMoratoriumType": "None;",
+            "displayMandateEntityType": null,
+            "displayAccountStatus": "Closed",
+            "displayRepaymentMethod": "Equated;",
+            "displayNumSatisfiedDemands": 0,
+            "displayNpa": "false",
+            "displayInterestRebateEligible": "false",
+            "displayAccountOpenDate": "01-Sep-2024",
+            "displayGuarantor1Name": "MAHESH PRASAD FARMERS PRODUCER COMPANY LIMITED",
+            "displayGuarantor2Name": "KAVITHA REDDY FARMERS PRODUCER COMPANY LIMITED",
+            "displayNomineeName": null,
+            "assetCategoryList": "",
+            "displayUnderSettlement": "false",
+            "displayForceNpa": "false",
+            "displayDemandDateMode": "Day number of reference date;",
+            "displayName1": "ROHAN KUMAR FARMERS PRODUCER COMPANY LIMITED",
+            "displayName2": "Kalyani Dasgupta",
+            "displayName3": null,
+            "displayName4": null,
+            "displayName5": null,
+            "displayName6": null
+        }
+    ]
+}

@@ -3,6 +3,23 @@ import { appContext, uiState } from "../store.js";
 import { MOCK_API_RESPONSE } from "../constants/mock-data.js";
 import { applyBorrowerUI } from "../ui/borrower.js";
 import { renderGuarantorDropdown } from "../ui/guarantor.js";
+import { loadByCustomerId } from "./customer-id-api.js";
+
+// ── Flow dispatcher ───────────────────────────────────────────────────────────
+// customerId present → customerId flow (LMS API)
+// pan present       → PAN flow (to be implemented)
+
+export async function loadCustomerData() {
+  if (appContext.customerId) {
+    await loadByCustomerId(appContext.customerId);
+    return;
+  }
+
+  // PAN flow placeholder — will be implemented in pan-api.js
+  await loadByPan();
+}
+
+// ── PAN flow (existing mock / future API) ─────────────────────────────────────
 
 function getHeaders() {
   return {
@@ -18,13 +35,21 @@ function applyCustomerData(data) {
   }
   const { borrowerDetails, guarantorDetails } = data.response;
   uiState.guarantorData = guarantorDetails;
-  applyBorrowerUI(borrowerDetails);
+
+  applyBorrowerUI({
+    name:    borrowerDetails.name,
+    avatar:  borrowerDetails.name.split(" ").map((n) => n[0]).join("").slice(0, 2),
+    mobile:  borrowerDetails.mobile,
+    email:   borrowerDetails.email,
+    address: borrowerDetails.address,
+  });
+
   renderGuarantorDropdown();
 }
 
-export async function loadCustomerData() {
+async function loadByPan() {
   if (USE_MOCK) {
-    console.log("Using MOCK data | PAN:", appContext.pan, "| Customer ID:", appContext.customerId);
+    console.log("Using MOCK data | PAN:", appContext.pan);
     applyCustomerData(MOCK_API_RESPONSE);
     return;
   }
@@ -32,10 +57,7 @@ export async function loadCustomerData() {
   const res = await fetch(`${CUSTOMER_API_BASE}/api/customers/customer/details`, {
     method: "POST",
     headers: getHeaders(),
-    body: JSON.stringify({
-      pan: appContext.pan,
-      customerId: appContext.customerId,
-    }),
+    body: JSON.stringify({ pan: appContext.pan }),
   });
   const data = await res.json();
   applyCustomerData(data);
