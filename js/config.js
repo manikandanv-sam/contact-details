@@ -1,8 +1,8 @@
-export const USE_MOCK = true;
-
-export const CLIENT_ID = "9a8babb6-f13c-4fe8-8ef8-c2652f6cef38";
+export const USE_MOCK          = window.ENV?.USE_MOCK          ?? true;
+export const CLIENT_ID         = window.ENV?.CLIENT_ID         ?? "";
+export const CUSTOMER_API_BASE = window.ENV?.CUSTOMER_API_BASE ?? "";
 
 export const OTP_CONFIG = {
-  baseUrl: "https://nonprodapi.samunnati.com/unnati-onlending/v1",
-  apiKey: "2970a613ca4a46e4b622c5bebc9c8a89",
+  baseUrl: window.ENV?.OTP_API_BASE ?? "",
+  apiKey:  window.ENV?.OTP_API_KEY  ?? "",
 };

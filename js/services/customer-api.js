@@ -1,4 +1,4 @@
-import { USE_MOCK, CLIENT_ID } from "../config.js";
+import { USE_MOCK, CLIENT_ID, CUSTOMER_API_BASE } from "../config.js";
 import { appContext, uiState } from "../store.js";
 import { MOCK_API_RESPONSE } from "../constants/mock-data.js";
 import { applyBorrowerUI } from "../ui/borrower.js";
@@ -29,7 +29,7 @@ export async function loadCustomerData() {
     return;
   }
 
-  const res = await fetch("http://localhost:1111/api/customers/customer/details", {
+  const res = await fetch(`${CUSTOMER_API_BASE}/api/customers/customer/details`, {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify({
