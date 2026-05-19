@@ -474,7 +474,7 @@
           <div
             id="contactDetailsContainer"
             class="iframe-container"
-            style="display: block"
+            style="display: none"
           >
             <iframe
               id="contactDetailsFrame"
@@ -635,27 +635,34 @@
         });
       });
 
-      // 🔹 iframe communication - Listen from Contact Details mini-service
+      // Mock customer context — in the real CMP this comes from the active
+      // loan / customer record that the agent has open.
+      const MOCK_CUSTOMER_CONTEXT = {
+        pan: "ABCDE1234F",
+        customerId: "CUST-001234",
+        lan: "0000000000091714",
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.sample.token",
+        customerUrn: "urn:customer:12345",
+      };
+
+      // iframe communication — CMP listens for MFE_READY then sends INIT.
+      // The real CMP must implement this same listener to pass customer context.
       window.addEventListener("message", (event) => {
-        console.log("📩 Message from Contact Details iframe:", event.data);
+        console.log("Message from Contact Details iframe:", event.data);
 
-        // When iframe is ready, send initialization data
         if (event.data.type === "MFE_READY") {
-          const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.sample.token";
-          const urn = "urn:customer:12345";
-
           iframe.contentWindow.postMessage(
             {
               type: "INIT",
-              token: token,
-              urn: urn,
-              customerUrn: urn,
-              lan: "0000000000091714",
+              token: MOCK_CUSTOMER_CONTEXT.token,
+              customerUrn: MOCK_CUSTOMER_CONTEXT.customerUrn,
+              lan: MOCK_CUSTOMER_CONTEXT.lan,
+              pan: MOCK_CUSTOMER_CONTEXT.pan,
+              customerId: MOCK_CUSTOMER_CONTEXT.customerId,
             },
             "*",
           );
-
-          console.log("✅ Sent INIT data to Contact Details iframe");
+          console.log("Sent INIT to MFE:", MOCK_CUSTOMER_CONTEXT);
         }
 
         // Dynamic height adjustment
