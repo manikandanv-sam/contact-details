@@ -1,7 +1,7 @@
 import { loadCustomerData } from "./services/customer-api.js";
 import { renderGuarantorDropdown, onGuarantorChange } from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
-import { clearError } from "./ui/notifications.js";
+import { clearError, clearGlobalError } from "./ui/notifications.js";
 import { appContext, uiState } from "./store.js";
 import { MESSAGE_TYPES } from "./constants/message-types.js";
 
@@ -36,6 +36,7 @@ window.addEventListener("message", (event) => {
     const customerIdEl = document.getElementById("customer-id");
     if (customerIdEl && customerId) customerIdEl.innerText = `Customer ID: ${customerId}`;
 
+    clearGlobalError();
     loadCustomerData();
   }
 });

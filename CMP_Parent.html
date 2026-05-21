@@ -638,7 +638,7 @@
       const MOCK_CUSTOMER_CONTEXT = {
         pan: "",
         customerId: "0000000000100291",
-        token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3NzkxNjM5NzYsImV4cCI6MTc3OTI1MDM3Nn0.nzDEEJHgf5aiDYIxgFBZMDpFRksCy5txwcXevEkXZgU"
+        token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3NzkzNDA4NTEsImV4cCI6MTc3OTQyNzI1MX0.e-NIa1w9_pYDf1vzsiiPR6Ukoe_fFHCGhO0GbDrcNIA"
       };
 
       // iframe communication — CMP listens for MFE_READY then sends INIT.
@@ -673,9 +673,10 @@
           showNotification("Contact details updated successfully!", "success");
         }
 
-        // Handle errors
+        // Receive error signal from iframe — CMP acts silently (no duplicate toast)
+        // For UNAUTHORIZED: real CMP should refresh token and re-send INIT
         if (event.data.type === "ERROR") {
-          showNotification(event.data.message || "An error occurred", "error");
+          console.warn("iframe error:", event.data.code);
         }
       });
 

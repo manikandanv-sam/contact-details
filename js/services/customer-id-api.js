@@ -1,8 +1,10 @@
 import { USE_MOCK, BASE_URL, API_KEY } from "../config.js";
 import { appContext, uiState } from "../store.js";
 import { CUSTOMER_ID_MOCK_RESPONSE } from "../constants/customer-id-mock.js";
+import { MESSAGE_TYPES } from "../constants/message-types.js";
 import { applyBorrowerUI } from "../ui/borrower.js";
 import { renderGuarantorDropdown } from "../ui/guarantor.js";
+import { showGlobalError } from "../ui/notifications.js";
 
 // ── Response mappers ──────────────────────────────────────────────────────────
 
@@ -80,19 +82,29 @@ async function fetchCustomerById(customerId) {
       },
     },
   );
-  const data = await res.json();
-  console.log(data);
-  return data;
+  if (!res.ok) {
+    const err = new Error(`HTTP ${res.status}`);
+    err.status = res.status;
+    throw err;
+  }
+  return res.json();
 }
 
 // ── Public entry point ────────────────────────────────────────────────────────
 
 export async function loadByCustomerId(customerId) {
-  const data = USE_MOCK
-    ? CUSTOMER_ID_MOCK_RESPONSE
-    : await fetchCustomerById(customerId);
+  try {
+    const data = USE_MOCK
+      ? CUSTOMER_ID_MOCK_RESPONSE
+      : await fetchCustomerById(customerId);
 
-  applyBorrowerUI(mapToBorrower(data));
-  uiState.guarantorData = mapToGuarantors(data);
-  renderGuarantorDropdown();
+    applyBorrowerUI(mapToBorrower(data));
+    uiState.guarantorData = mapToGuarantors(data);
+    renderGuarantorDropdown();
+  } catch (err) {
+    const code = err.status === 401 ? "UNAUTHORIZED" : "API_ERROR";
+
+    showGlobalError("Unable to load contact details. Please refresh the page.");
+    window.parent.postMessage({ type: MESSAGE_TYPES.ERROR, code }, "*");
+  }
 }

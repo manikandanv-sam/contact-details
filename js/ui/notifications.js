@@ -17,3 +17,17 @@ export function clearError() {
   err.innerText = "";
   err.style.display = "none";
 }
+
+export function showGlobalError(message) {
+  const banner = document.getElementById("globalError");
+  if (!banner) return;
+  banner.innerText = message;
+  banner.style.display = "block";
+}
+
+export function clearGlobalError() {
+  const banner = document.getElementById("globalError");
+  if (!banner) return;
+  banner.innerText = "";
+  banner.style.display = "none";
+}

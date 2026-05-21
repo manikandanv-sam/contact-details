@@ -1,4 +1,4 @@
-import { USE_MOCK, CLIENT_ID, CUSTOMER_API_BASE } from "../config.js";
+import { USE_MOCK, CLIENT_ID, CUSTOMER_API_BASE, BASE_URL } from "../config.js";
 import { appContext, uiState } from "../store.js";
 import { MOCK_API_RESPONSE } from "../constants/mock-data.js";
 import { applyBorrowerUI } from "../ui/borrower.js";
@@ -54,7 +54,7 @@ async function loadByPan() {
     return;
   }
 
-  const res = await fetch(`${CUSTOMER_API_BASE}/api/customers/customer/details`, {
+  const res = await fetch(`${BASE_URL}/lms/v1/findCustomerLoanInfo?pan=${appContext.pan}`, {
     method: "POST",
     headers: getHeaders(),
     body: JSON.stringify({ pan: appContext.pan }),
