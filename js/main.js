@@ -1,5 +1,5 @@
 import { loadCustomerData } from "./services/customer-api.js";
-import { renderGuarantorDropdown, onGuarantorChange } from "./ui/guarantor.js";
+import { renderGuarantorCards, onGuarantorChange } from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
 import { clearError, clearGlobalError } from "./ui/notifications.js";
 import { appContext, uiState } from "./store.js";
@@ -57,7 +57,6 @@ if (window.parent === window) {
 // ── DOM wiring (module scripts are deferred — DOM is ready at this point) ────
 
 setupTabs();
-setupGuarantorDropdown();
 setupSheetButtons();
 setupChangeButtons();
 setupSubmitModal();
@@ -77,38 +76,9 @@ function setupTabs() {
       document.getElementById(tab.getAttribute("data-tab")).classList.add("active");
 
       if (tab.getAttribute("data-tab") === "guarantors") {
-        renderGuarantorDropdown();
-        document.getElementById("dropdownSelected").innerText = "Select Guarantor";
-        document.getElementById("guarantorCard").style.display = "none";
-        uiState.selectedGuarantorIndex = null;
+        renderGuarantorCards();
       }
     });
-  });
-}
-
-// ── Guarantor dropdown ────────────────────────────────────────────────────────
-
-function setupGuarantorDropdown() {
-  document.getElementById("dropdownSelected")?.addEventListener("click", () => {
-    const list = document.getElementById("dropdownList");
-    list.style.display = list.style.display === "block" ? "none" : "block";
-  });
-
-  document.getElementById("dropdownList")?.addEventListener("click", (e) => {
-    const item = e.target.closest(".dropdown-item");
-    if (!item) return;
-    const index = item.getAttribute("data-index");
-    document.getElementById("dropdownSelected").innerText =
-      uiState.guarantorData[parseInt(index, 10)].name;
-    document.getElementById("dropdownList").style.display = "none";
-    onGuarantorChange(index);
-  });
-
-  document.addEventListener("click", (e) => {
-    const wrapper = document.getElementById("guarantorDropdownWrapper");
-    if (wrapper && !wrapper.contains(e.target)) {
-      document.getElementById("dropdownList").style.display = "none";
-    }
   });
 }
 
@@ -128,7 +98,6 @@ function setupSheetButtons() {
 function setupSubmitModal() {
   const submitBtn = document.getElementById("submitRequestBtn");
   const modalOverlay = document.getElementById("modalOverlay");
-  const modalCloseBtn = document.getElementById("modalCloseBtn");
   const formError = document.getElementById("form-error");
 
   const inputIds = ["input-contact-number", "input-contact-email", "input-contact-address"];
@@ -179,7 +148,6 @@ function setupSubmitModal() {
   function openModal() {
     if (!validateForm()) return;
     modalOverlay.hidden = false;
-    setTimeout(() => modalCloseBtn.focus(), 50);
   }
 
   function closeModal() {
@@ -188,7 +156,6 @@ function setupSubmitModal() {
   }
 
   submitBtn.addEventListener("click", openModal);
-  modalCloseBtn.addEventListener("click", closeModal);
 
   modalOverlay.addEventListener("click", (e) => {
     if (e.target === modalOverlay) closeModal();

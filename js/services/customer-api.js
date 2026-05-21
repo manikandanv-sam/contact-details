@@ -2,7 +2,7 @@ import { USE_MOCK, BASE_URL, API_KEY } from "../config.js";
 import { appContext, uiState } from "../store.js";
 import { MOCK_PAN_RESPONSE } from "../constants/mock-data.js";
 import { applyBorrowerUI } from "../ui/borrower.js";
-import { renderGuarantorDropdown } from "../ui/guarantor.js";
+import { renderGuarantorCards } from "../ui/guarantor.js";
 import { loadByCustomerId } from "./customer-id-api.js";
 
 // ── Flow dispatcher ───────────────────────────────────────────────────────────
@@ -108,5 +108,5 @@ async function loadByPan(pan) {
     console.log("[PAN] No guarantors in API response — falling back to mock data for visibility");
     uiState.guarantorData = mapPanGuarantors(MOCK_PAN_RESPONSE);
   }
-  renderGuarantorDropdown();
+  renderGuarantorCards();
 }

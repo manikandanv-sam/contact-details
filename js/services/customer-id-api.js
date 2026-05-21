@@ -3,7 +3,7 @@ import { appContext, uiState } from "../store.js";
 import { CUSTOMER_ID_MOCK_RESPONSE } from "../constants/customer-id-mock.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
 import { applyBorrowerUI } from "../ui/borrower.js";
-import { renderGuarantorDropdown } from "../ui/guarantor.js";
+import { renderGuarantorCards } from "../ui/guarantor.js";
 import { showGlobalError } from "../ui/notifications.js";
 
 // ── Response mappers ──────────────────────────────────────────────────────────
@@ -101,7 +101,7 @@ export async function loadByCustomerId(customerId) {
 
     applyBorrowerUI(mapCustomerIdBorrower(data));
     uiState.guarantorData = mapCustomerIdGuarantors(data);
-    renderGuarantorDropdown();
+    renderGuarantorCards();
   } catch (err) {
     const code = err.status === 401 ? "UNAUTHORIZED" : "API_ERROR";
 
