@@ -364,6 +364,411 @@ body {
   display: none;
 }
 
+/* ---------- Customer info bar (borrower tab header) ---------- */
+.customer-info-bar {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding-bottom: 20px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+/* ---------- Contact Details Table (Screen 1) ---------- */
+.table-section {
+  border: 1px solid #e3e3e3;
+  border-radius: 4px;
+  padding: 18px 20px 20px;
+  background: #ffffff;
+}
+
+.section-heading {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  color: #444;
+  margin-bottom: 14px;
+  text-transform: uppercase;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.table-wrapper {
+  border: 1px solid #e3e3e3;
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.contact-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.contact-table thead {
+  background: #f4f4f4;
+}
+
+.contact-table th {
+  text-align: left;
+  padding: 10px 14px;
+  font-weight: 600;
+  color: #333;
+  border-bottom: 1px solid #e3e3e3;
+  font-size: 13px;
+}
+
+.contact-table td {
+  padding: 12px 14px;
+  border-bottom: 1px solid #ececec;
+  vertical-align: middle;
+  color: #333;
+}
+
+.contact-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.particulars-cell {
+  font-weight: 500;
+  color: #222;
+  width: 22%;
+}
+
+.existing-cell {
+  color: #444;
+  width: 28%;
+}
+
+.source-tag {
+  color: #888;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.na-cell {
+  color: #888;
+  font-style: italic;
+  width: 14%;
+}
+
+.input-field {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid #cfcfcf;
+  border-radius: 3px;
+  font-size: 13.5px;
+  color: #222;
+  background: #fff;
+  outline: none;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.input-field::placeholder {
+  color: #aaa;
+}
+
+.input-field:focus {
+  border-color: #056431;
+  box-shadow: 0 0 0 2px rgba(5, 100, 49, 0.12);
+}
+
+.attach-btn {
+  padding: 6px 12px;
+  background: transparent;
+  color: #056431;
+  border: 1px solid #056431;
+  border-radius: 3px;
+  font-size: 12.5px;
+  font-weight: 500;
+  cursor: pointer;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  white-space: nowrap;
+  transition: background 0.15s ease;
+}
+
+.attach-btn:hover {
+  background: #f0fdf4;
+}
+
+.submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+.submit-btn {
+  background: #ffffff;
+  color: #1f1f1f;
+  border: 1px solid #1f1f1f;
+  padding: 8px 18px;
+  font-size: 13.5px;
+  font-weight: 500;
+  border-radius: 3px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.submit-btn:hover {
+  background: #1f1f1f;
+  color: #ffffff;
+}
+
+/* ---------- Submission Confirmation Modal (Screen 2) ---------- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: modalFadeIn 0.18s ease;
+}
+
+.modal-overlay[hidden] {
+  display: none;
+}
+
+.modal-card {
+  position: relative;
+  background: #ffffff;
+  border-radius: 6px;
+  width: 440px;
+  max-width: 92vw;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.18);
+  border: 1px solid #e3e3e3;
+  overflow: hidden;
+  animation: modalPopIn 0.22s ease;
+}
+
+.modal-status-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  border-bottom: 1px solid #e3e3e3;
+  padding-right: 48px;
+}
+
+.modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1f1f1f;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.modal-status-badge {
+  font-size: 12px;
+  font-weight: 600;
+  color: #056431;
+  background: #dcfce7;
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 10px;
+  right: 14px;
+  font-size: 20px;
+  color: #888;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  line-height: 1;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.modal-close:hover {
+  background: #f0f0f0;
+  color: #222;
+}
+
+.modal-body {
+  text-align: center;
+  padding: 28px 28px 32px;
+}
+
+.check-circle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.modal-primary-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #222;
+  margin-bottom: 6px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.modal-secondary-text {
+  font-size: 13.5px;
+  color: #666;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+@keyframes modalFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalPopIn {
+  from { opacity: 0; transform: scale(0.94) translateY(6px); }
+  to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ---------- App Shell — Sidebar + Main Layout ---------- */
+html {
+  height: 100%;
+}
+
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+}
+
+.sidebar {
+  width: 200px;
+  background: #f6f6f6;
+  border-right: 1px solid #e3e3e3;
+  padding: 20px 0;
+  flex-shrink: 0;
+}
+
+.sidebar-nav {
+  display: flex;
+  flex-direction: column;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-size: 13.5px;
+  color: #555;
+  border-left: 3px solid transparent;
+  text-decoration: none;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.nav-item:hover {
+  background: #ececec;
+  color: #222;
+}
+
+.nav-item.active {
+  background: #ffffff;
+  color: #111;
+  font-weight: 600;
+  border-left-color: #056431;
+}
+
+.nav-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #bbb;
+  flex-shrink: 0;
+}
+
+.nav-item.active .nav-dot {
+  background: #056431;
+}
+
+.main-content {
+  flex: 1;
+  padding: 24px 32px;
+  background: #ffffff;
+  overflow-y: auto;
+}
+
+/* ---------- Page Header ---------- */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.page-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #1f1f1f;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cmp-link {
+  font-size: 13px;
+  color: #056431;
+  font-weight: 500;
+  text-decoration: none;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.cmp-link:hover {
+  text-decoration: underline;
+}
+
+/* ---------- Tabs — Underline style (overrides pill) ---------- */
+.tabs-container {
+  display: flex;
+  gap: 28px;
+  border-bottom: 2px solid #e3e3e3;
+  margin-bottom: 24px;
+  margin-top: 0;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  width: auto;
+  justify-content: flex-start;
+}
+
+.tab-btn {
+  padding: 10px 4px;
+  border: none;
+  border-radius: 0;
+  border-bottom: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #777;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: -2px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.tab-btn.active {
+  color: #111;
+  font-weight: 600;
+  background: transparent;
+  border-bottom-color: #1f1f1f;
+}
+
+.tab-btn:hover:not(.active) {
+  color: #333;
+  background: transparent;
+}
+
+/* ---------- Form Validation Error ---------- */
+.form-error-text {
+  color: #b91c1c;
+  font-size: 13px;
+  margin-top: 10px;
+  text-align: right;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .borrower-header {
@@ -384,4 +789,315 @@ body {
   .change-btn {
     width: 100%;
   }
+
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    border-right: none;
+    border-bottom: 1px solid #e3e3e3;
+    padding: 8px 0;
+  }
+
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .nav-item {
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    padding: 8px 16px;
+  }
+
+  .nav-item.active {
+    border-left-color: transparent;
+    border-bottom-color: #056431;
+  }
+
+  .main-content {
+    padding: 16px 18px;
+  }
+
+  .contact-table th,
+  .contact-table td {
+    padding: 10px 8px;
+    font-size: 12.5px;
+  }
+}
+
+/* ============================================================
+   Blue accent theme — overrides all green (#056431) references
+   ============================================================ */
+
+/* Sidebar active state */
+.nav-item.active {
+  border-left-color: #2c6cdf;
+}
+
+.nav-item.active .nav-dot {
+  background: #2c6cdf;
+}
+
+/* Responsive sidebar active (mobile) */
+@media (max-width: 768px) {
+  .nav-item.active {
+    border-bottom-color: #2c6cdf;
+  }
+}
+
+/* CMP portal link */
+.cmp-link {
+  color: #2c6cdf;
+}
+
+/* Input focus ring */
+.input-field:focus {
+  border-color: #2c6cdf;
+  box-shadow: 0 0 0 2px rgba(44, 108, 223, 0.12);
+}
+
+/* Attach document button */
+.attach-btn {
+  color: #2c6cdf;
+  border: 1px solid #2c6cdf;
+}
+
+.attach-btn:hover {
+  background: rgba(44, 108, 223, 0.06);
+}
+
+/* Submit request — blue filled */
+.submit-btn {
+  background: #2c6cdf;
+  color: #ffffff;
+  border: 1px solid #2c6cdf;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: 4px;
+}
+
+.submit-btn:hover {
+  background: #1d5bc4;
+  border-color: #1d5bc4;
+  color: #ffffff;
+}
+
+.submit-btn:active {
+  background: #1750af;
+  border-color: #1750af;
+}
+
+/* ============================================================
+   Tabs — full-width bordered segmented control
+   Overrides the underline-tab style added earlier
+   ============================================================ */
+
+.tabs-container {
+  display: flex;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  margin-bottom: 24px;
+  margin-top: 0;
+  background: transparent;
+  padding: 0;
+  gap: 0;
+  width: 100%;
+  justify-content: flex-start;
+  overflow: hidden;
+}
+
+.tab-btn {
+  flex: 1;
+  padding: 11px 16px;
+  text-align: center;
+  border: none;
+  border-right: 1px solid #d1d5db;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  color: #6b7280;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-bottom: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.tab-btn:last-child {
+  border-right: none;
+}
+
+/* Remove browser default focus ring; keyboard users get a custom one */
+.tab-btn:focus {
+  outline: none;
+}
+
+.tab-btn:focus-visible {
+  outline: 2px solid #2c6cdf;
+  outline-offset: -2px;
+}
+
+.tab-btn.active {
+  color: #111827;
+  font-weight: 600;
+  background: transparent;
+  border-bottom-color: #2c6cdf;
+}
+
+.tab-btn:hover:not(.active) {
+  background: #f9fafb;
+  color: #374151;
+}
+
+/* ============================================================
+   Clean separations — sidebar items, table grid, card rows
+   ============================================================ */
+
+/* Sidebar: subtle divider between each nav item */
+.nav-item {
+  border-bottom: 1px solid #eeeeee;
+}
+
+/* Table: vertical column separators */
+.contact-table th,
+.contact-table td {
+  border-right: 1px solid #e3e3e3;
+}
+
+.contact-table th:last-child,
+.contact-table td:last-child {
+  border-right: none;
+}
+
+/* Table: stronger horizontal row separators */
+.contact-table td {
+  border-bottom: 1px solid #d1d5db;
+}
+
+/* Table: tighten header bottom line */
+.contact-table th {
+  border-bottom: 1.5px solid #d1d5db;
+}
+
+/* Guarantor card detail-row separators more visible */
+.detail-row {
+  border-bottom: 1px solid #e3e3e3;
+}
+
+/* Breathing room between customer info bar and table section */
+.table-section {
+  margin-top: 4px;
+}
+
+/* ============================================================
+   Submit request — blue shaded background with blue font
+   ============================================================ */
+.submit-btn {
+  background: #eff4ff;
+  color: #2c6cdf;
+  border: 1.5px solid #2c6cdf;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.submit-btn:hover {
+  background: #dbeafe;
+  border-color: #1d5bc4;
+  color: #1d5bc4;
+}
+
+.submit-btn:active {
+  background: #bfdbfe;
+  border-color: #1750af;
+  color: #1750af;
+}
+
+/* ============================================================
+   Page title bar — full-width header above sidebar + main
+   ============================================================ */
+.page-title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 24px;
+  border-bottom: 1px solid #e3e3e3;
+  background: #ffffff;
+}
+
+/* Reduce main-content top padding since title bar handles the heading */
+.main-content {
+  padding-top: 20px;
+}
+
+/* ============================================================
+   Table: remove vertical column borders (horizontal-only grid)
+   ============================================================ */
+.contact-table th,
+.contact-table td {
+  border-right: none;
+}
+
+/* ============================================================
+   New details inputs — dashed border matching MOCK UI style
+   ============================================================ */
+.input-field {
+  border: 1px dashed #b0b8c5;
+  border-radius: 3px;
+}
+
+.input-field:focus {
+  border-style: solid;
+  border-color: #2c6cdf;
+  box-shadow: 0 0 0 2px rgba(44, 108, 223, 0.12);
+}
+
+/* ============================================================
+   Symmetric grey zones — title bar, sidebar, inactive tab
+   Mirror the MOCK UI where secondary/nav areas are greyed out
+   and the active content area is white.
+   ============================================================ */
+
+/* Page title bar: grey background */
+.page-title-bar {
+  background: #f5f6f8;
+}
+
+.page-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.page-title-icon {
+  flex-shrink: 0;
+  color: #374151;
+}
+
+/* Sidebar: same grey as title bar for visual symmetry */
+.sidebar {
+  background: #f5f6f8;
+  border-right: 1px solid #e3e3e3;
+}
+
+/* Tabs: grey container, active tab pops white */
+.tabs-container {
+  background: #f0f2f4;
+}
+
+.tab-btn {
+  background: transparent;
+}
+
+.tab-btn.active {
+  background: #ffffff;
 }
