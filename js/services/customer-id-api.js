@@ -34,7 +34,7 @@ function resolveAddress(address) {
     .join(", ");
 }
 
-function mapToBorrower(data) {
+function mapCustomerIdBorrower(data) {
   const { customerName, contact } = data.customer;
   const name = resolveName(customerName);
   return {
@@ -46,7 +46,7 @@ function mapToBorrower(data) {
   };
 }
 
-function mapToGuarantors(data) {
+function mapCustomerIdGuarantors(data) {
   if (!data.accounts?.length) return [];
   const account = data.accounts[0];
   const guarantors = [];
@@ -94,12 +94,13 @@ async function fetchCustomerById(customerId) {
 
 export async function loadByCustomerId(customerId) {
   try {
+    console.log(USE_MOCK ? "[CustomerId] Using mock data" : `[CustomerId] Fetching real API → customerId: ${customerId}`);
     const data = USE_MOCK
       ? CUSTOMER_ID_MOCK_RESPONSE
       : await fetchCustomerById(customerId);
 
-    applyBorrowerUI(mapToBorrower(data));
-    uiState.guarantorData = mapToGuarantors(data);
+    applyBorrowerUI(mapCustomerIdBorrower(data));
+    uiState.guarantorData = mapCustomerIdGuarantors(data);
     renderGuarantorDropdown();
   } catch (err) {
     const code = err.status === 401 ? "UNAUTHORIZED" : "API_ERROR";
