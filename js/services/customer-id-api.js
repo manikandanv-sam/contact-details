@@ -49,6 +49,24 @@ function mapCustomerIdBorrower(data) {
 function mapCustomerIdGuarantors(data) {
   if (!data.accounts?.length) return [];
   const account = data.accounts[0];
+
+  // Use the guarantors array when available — it carries uidNum
+  if (account.guarantors?.length) {
+    return account.guarantors.map((g) => {
+      const name = resolveName(g.customerName);
+      return {
+        customerId: g.customerId,
+        name,
+        avatar:  resolveAvatar(name),
+        mobile:  g.contact?.phone1 ?? "",
+        email:   g.contact?.email  ?? "",
+        address: g.contact ? resolveAddress(g.contact) : "",
+        uidNum:  g.uidNum ?? null,
+      };
+    });
+  }
+
+  // Fallback to flat fields (no uidNum available)
   const guarantors = [];
   for (let i = 1; i <= 6; i++) {
     const id      = account[`guarantorCustomerId${i}`];
@@ -64,6 +82,7 @@ function mapCustomerIdGuarantors(data) {
       mobile:  contact?.phone1 ?? "",
       email:   contact?.email  ?? "",
       address: contact?.address ? resolveAddress(contact.address) : "",
+      uidNum:  null,
     });
   }
   return guarantors;

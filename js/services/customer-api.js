@@ -31,7 +31,7 @@ function getHeaders() {
   };
 }
 
-// ── PAN API mappers (response[0].customer + accounts[0] flat fields) ─────────
+// ── PAN API mappers (data[0].applicants[0] + data[0].guarantors array) ───────
 
 function resolveAvatar(name) {
   const words = (name ?? "").trim().split(/\s+/).filter(Boolean);
@@ -40,7 +40,7 @@ function resolveAvatar(name) {
 }
 
 function mapPanBorrower(data) {
-  const c = data.response[0].customer;
+  const c = data[0].applicants[0];
   const name = [c.firstName, c.middleName, c.lastName].filter(Boolean).join(" ");
   return {
     name,
@@ -54,36 +54,22 @@ function mapPanBorrower(data) {
 }
 
 function mapPanGuarantors(data) {
-  const accounts = data.response[0]?.accounts;
-  if (!accounts?.length) return [];
-  const account = accounts[0];
-  const guarantors = [];
-  let i = 1;
-  while (account[`guarantorCustomerId${i}`] != null) {
-    const id        = account[`guarantorCustomerId${i}`];
-    const firstName = account[`guarantor${i}FirstName`];
-    if (firstName) {
-      const name = [firstName, account[`guarantor${i}MiddleName`], account[`guarantor${i}LastName`]]
-        .filter(Boolean).join(" ");
-      guarantors.push({
-        customerId: id,
-        name,
-        avatar:  resolveAvatar(name),
-        mobile:  account[`guarantor${i}Phone1`] ?? "",
-        email:   account[`guarantor${i}Email`]  ?? "",
-        address: [
-          account[`guarantor${i}Address1`],
-          account[`guarantor${i}Address2`],
-          account[`guarantor${i}Address3`],
-          account[`guarantor${i}CityCode`],
-          account[`guarantor${i}StateCode`],
-          account[`guarantor${i}PinCode`],
-        ].filter((v) => v && v.trim()).join(", "),
-      });
-    }
-    i++;
-  }
-  return guarantors;
+  const guarantors = data[0]?.guarantors;
+  if (!guarantors?.length) return [];
+  return guarantors.map((g) => {
+    const name = [g.firstName, g.middleName, g.lastName].filter(Boolean).join(" ");
+    return {
+      customerId: g.customerId,
+      name,
+      avatar:  resolveAvatar(name),
+      mobile:  g.phone1 ?? "",
+      email:   g.email  ?? "",
+      address: [g.address1, g.address2, g.address3, g.cityCode, g.stateCode, g.pinCode]
+        .filter((v) => v && v.trim())
+        .join(", "),
+      uidNum: g.uidNum ?? null,
+    };
+  });
 }
 
 async function loadByPan(pan) {
@@ -92,7 +78,7 @@ async function loadByPan(pan) {
     console.log("[PAN] Using mock data");
     data = MOCK_PAN_RESPONSE;
   } else {
-    const res = await fetch(`${BASE_URL}/lms/v1/findCustomerLoanInfo?pan=${pan}`, {
+    const res = await fetch(`${BASE_URL}/lms/v1/findLoanAccountsForCustomerSpecification?pan=${pan}`, {
       headers: getHeaders(),
     });
     if (!res.ok) {
@@ -102,6 +88,7 @@ async function loadByPan(pan) {
     }
     data = await res.json();
   }
+  uiState.borrowerMobile = data[0]?.customer1Phone1 ?? data[0]?.applicants?.[0]?.phone1 ?? null;
   applyBorrowerUI(mapPanBorrower(data));
   uiState.guarantorData = mapPanGuarantors(data);
   if (uiState.guarantorData.length === 0) {

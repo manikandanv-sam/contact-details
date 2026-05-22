@@ -1,11 +1,11 @@
 import { loadCustomerData } from "./services/customer-api.js";
-import { renderGuarantorCards, onGuarantorChange } from "./ui/guarantor.js";
+import { renderGuarantorCards, onGuarantorChange, setupAadhaarScreen } from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
 import { clearError, clearGlobalError } from "./ui/notifications.js";
 import { appContext, uiState } from "./store.js";
 import { MESSAGE_TYPES } from "./constants/message-types.js";
 
-// ── Parent ↔ MFE postMessage contract ────────────────────────────────────────
+// ── Parent ↔ IFRAME postMessage contract ────────────────────────────────────────
 //
 //  iframe → CMP : { type: "IFRAME_READY" }             fired on mount
 //  CMP → iframe : { type: "INIT", token, lan,          CMP must send this
@@ -60,6 +60,7 @@ setupTabs();
 setupSheetButtons();
 setupChangeButtons();
 setupSubmitModal();
+setupAadhaarScreen();
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 

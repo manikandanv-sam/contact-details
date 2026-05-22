@@ -15,4 +15,6 @@ export const uiState = {
   isOtpStep: false,
   currentField: null,
   currentType: null,
+  aadhaarVerified: false,
+  borrowerMobile: null,
 };
