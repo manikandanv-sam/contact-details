@@ -54,22 +54,24 @@ function mapPanBorrower(data) {
 }
 
 function mapPanGuarantors(data) {
-  const guarantors = data[0]?.guarantors;
-  if (!guarantors?.length) return [];
-  return guarantors.map((g) => {
-    const name = [g.firstName, g.middleName, g.lastName].filter(Boolean).join(" ");
-    return {
-      customerId: g.customerId,
-      name,
-      avatar:  resolveAvatar(name),
-      mobile:  g.phone1 ?? "",
-      email:   g.email  ?? "",
-      address: [g.address1, g.address2, g.address3, g.cityCode, g.stateCode, g.pinCode]
-        .filter((v) => v && v.trim())
-        .join(", "),
-      uidNum: g.uidNum ?? null,
-    };
-  });
+  if (!data?.length) return [];
+  return data.flatMap((acc) =>
+    (acc.guarantors ?? []).map((g, i) => {
+      const n    = i + 1;
+      const name = [g.firstName, g.middleName, g.lastName].filter(Boolean).join(" ");
+      return {
+        customerId: g.customerId ?? null,
+        name,
+        avatar:  resolveAvatar(name),
+        mobile:  acc[`guarantor${n}Phone1`] ?? "",
+        email:   g.email  ?? "",
+        address: [g.address1, g.address2, g.address3, g.cityCode, g.stateCode, g.pinCode]
+          .filter((v) => v && v.trim())
+          .join(", "),
+        uidNum: g.uidNum ?? null,
+      };
+    })
+  );
 }
 
 async function loadByPan(pan) {

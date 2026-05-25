@@ -1,13 +1,13 @@
 import { BASE_URL, API_KEY, USE_MOCK } from "../config.js";
 import { appContext, uiState } from "../store.js";
 
-export async function callAadhaarMobileLink(aadhaar12) {
+export async function callAadhaarMobileLink(aadhaar12, guarantorMobile) {
   if (USE_MOCK) {
     console.log("[Aadhaar] Mock mode — simulating successful verification");
     return { success: true, response: { isMobileLinked: "Yes" } };
   }
 
-  const mobile = (uiState.borrowerMobile ?? "").replace(/\D/g, "");
+  const mobile = (guarantorMobile ?? uiState.borrowerMobile ?? "").replace(/\D/g, "");
   const res = await fetch(`${BASE_URL}/aadhaar/v1/aadhaar-mobile-link`, {
     method: "POST",
     headers: {

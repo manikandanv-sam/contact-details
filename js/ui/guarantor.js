@@ -92,7 +92,7 @@ async function verifyAadhaar() {
   clearAadhaarError();
 
   try {
-    const result = await callAadhaarMobileLink(entered);
+    const result = await callAadhaarMobileLink(entered, g.mobile);
     if (result?.response?.isMobileLinked === "Yes") {
       uiState.aadhaarVerified = true;
       document.getElementById("aadhaarSuccess").style.display = "flex";
