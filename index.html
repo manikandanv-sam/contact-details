@@ -248,43 +248,139 @@
             </div>
           </div>
 
-          <!-- Screen 7: Guarantor detail card (shown after Aadhaar verified) -->
-          <div class="borrower-card" id="guarantorCard" style="display: none">
-            <div class="borrower-header">
-              <div class="borrower-avatar" id="g-avatar">--</div>
-              <div class="borrower-info">
-                <h3 id="g-name"></h3>
-                <div class="borrower-meta">
-                  <span class="lan-text" id="g-urn"></span>
-                  <span class="badge">Guarantor</span>
+          <!-- Screen 7: Guarantor update contact details (shown after Aadhaar verified) -->
+          <div class="g-update-card" id="guarantorCard" style="display: none">
+
+            <!-- Card header -->
+            <div class="g-update-header">
+              <h3 class="g-update-title" id="g-update-title">Guarantor 1 — update contact details</h3>
+              <span class="g-aadhaar-badge">
+                <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+                Aadhaar verified
+              </span>
+            </div>
+
+            <!-- Contact details table -->
+            <div class="g-table-section">
+              <p class="g-table-heading">CONTACT DETAILS TABLE</p>
+
+              <div class="g-table" role="table" aria-label="Contact details">
+
+                <!-- Table header -->
+                <div class="g-table-head" role="row">
+                  <div class="g-th g-col-particular" role="columnheader">Particulars</div>
+                  <div class="g-th g-col-existing"   role="columnheader">Existing details</div>
+                  <div class="g-th g-col-new"        role="columnheader">New details</div>
+                  <div class="g-th g-col-action"     role="columnheader">Action</div>
                 </div>
+
+                <!-- Mobile row -->
+                <div class="g-table-row" role="row">
+                  <div class="g-td g-col-particular" role="cell">Contact number</div>
+                  <div class="g-td g-col-existing"   role="cell" id="g-existing-mobile"></div>
+                  <div class="g-td g-col-new"        role="cell">
+                    <div id="g-new-idle-mobile">
+                      <input type="text" id="g-input-mobile" class="g-field-input"
+                        placeholder="Enter new number" inputmode="numeric" maxlength="10" autocomplete="off" />
+                    </div>
+                    <div id="g-new-otp-mobile" style="display:none">
+                      <div class="g-locked-value" id="g-locked-mobile"></div>
+                      <div class="g-otp-hint">OTP sent to registered mobile</div>
+                      <input type="text" id="g-otp-mobile" class="g-field-input g-otp-input"
+                        placeholder="Enter 6-digit OTP" maxlength="6" inputmode="numeric" autocomplete="one-time-code" />
+                      <div class="g-resend-row">
+                        <button class="g-resend-btn" id="g-resend-mobile" disabled>Resend OTP</button>
+                        <span class="g-resend-countdown" id="g-countdown-mobile"></span>
+                      </div>
+                    </div>
+                    <div class="g-verified-display" id="g-new-verified-mobile" style="display:none">
+                      <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                      <span id="g-confirmed-mobile"></span>
+                    </div>
+                    <div class="g-field-error" id="g-error-mobile"></div>
+                  </div>
+                  <div class="g-td g-col-action" role="cell">
+                    <button class="g-action-btn g-otp-btn" id="g-btn-mobile">Send OTP</button>
+                  </div>
+                </div>
+
+                <!-- Email row -->
+                <div class="g-table-row" role="row">
+                  <div class="g-td g-col-particular" role="cell">Contact email</div>
+                  <div class="g-td g-col-existing"   role="cell" id="g-existing-email"></div>
+                  <div class="g-td g-col-new"        role="cell">
+                    <div id="g-new-idle-email">
+                      <input type="text" id="g-input-email" class="g-field-input"
+                        placeholder="Enter new email" inputmode="email" autocomplete="off" />
+                    </div>
+                    <div id="g-new-otp-email" style="display:none">
+                      <div class="g-locked-value" id="g-locked-email"></div>
+                      <div class="g-otp-hint">OTP sent to registered mobile</div>
+                      <input type="text" id="g-otp-email" class="g-field-input g-otp-input"
+                        placeholder="Enter 6-digit OTP" maxlength="6" inputmode="numeric" autocomplete="one-time-code" />
+                      <div class="g-resend-row">
+                        <button class="g-resend-btn" id="g-resend-email" disabled>Resend OTP</button>
+                        <span class="g-resend-countdown" id="g-countdown-email"></span>
+                      </div>
+                    </div>
+                    <div class="g-verified-display" id="g-new-verified-email" style="display:none">
+                      <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
+                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                      </svg>
+                      <span id="g-confirmed-email"></span>
+                    </div>
+                    <div class="g-field-error" id="g-error-email"></div>
+                  </div>
+                  <div class="g-td g-col-action" role="cell">
+                    <button class="g-action-btn g-otp-btn" id="g-btn-email">Send OTP</button>
+                  </div>
+                </div>
+
+                <!-- Address row -->
+                <div class="g-table-row" role="row">
+                  <div class="g-td g-col-particular" role="cell">Contact address</div>
+                  <div class="g-td g-col-existing"   role="cell" id="g-existing-address"></div>
+                  <div class="g-td g-col-new"        role="cell">
+                    <span class="g-auto-text" id="g-address-auto-text">Auto-populated from Aadhaar</span>
+                    <div class="g-verified-display g-address-new" id="g-new-verified-address" style="display:none">
+                      <span id="g-confirmed-address"></span>
+                    </div>
+                  </div>
+                  <div class="g-td g-col-action" role="cell">
+                    <button class="g-action-btn g-upload-btn" id="g-btn-address">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true">
+                        <polyline points="16 16 12 12 8 16"/>
+                        <line x1="12" y1="12" x2="12" y2="21"/>
+                        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+                      </svg>
+                      Upload Aadhaar
+                    </button>
+                    <input type="file" id="g-address-file" accept="image/*,.pdf" style="display:none" />
+                  </div>
+                </div>
+
+              </div><!-- /.g-table -->
+
+              <!-- Submit -->
+              <div class="g-submit-row">
+                <button class="g-submit-btn" id="g-submit-btn">Submit</button>
               </div>
+            </div><!-- /.g-table-section -->
+
+            <!-- Success banner -->
+            <div class="g-success-banner" id="g-success-banner" style="display:none">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+              </svg>
+              Contact details updated successfully. No VRM action required.
             </div>
 
-            <div class="detail-row">
-              <div class="detail-left">
-                <div class="detail-label">Mobile</div>
-                <div class="detail-value" id="g-mobile"></div>
-              </div>
-              <button class="change-btn" data-field="mobile" data-type="guarantor">Change</button>
-            </div>
-
-            <div class="detail-row">
-              <div class="detail-left">
-                <div class="detail-label">Email Address</div>
-                <div class="detail-value" id="g-email"></div>
-              </div>
-              <button class="change-btn" data-field="email" data-type="guarantor">Change</button>
-            </div>
-
-            <div class="detail-row">
-              <div class="detail-left">
-                <div class="detail-label">Address</div>
-                <div class="detail-value" id="g-address"></div>
-              </div>
-              <button class="change-btn" data-field="address" data-type="guarantor">Change</button>
-            </div>
-          </div>
+          </div><!-- /#guarantorCard -->
         </div>
 
 

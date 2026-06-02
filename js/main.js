@@ -1,8 +1,8 @@
 import { loadCustomerData } from "./services/customer-api.js";
-import { renderGuarantorCards, onGuarantorChange, setupAadhaarScreen } from "./ui/guarantor.js";
+import { renderGuarantorCards, onGuarantorChange, setupAadhaarScreen, setupGuarantorUpdateTable } from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
 import { clearError, clearGlobalError } from "./ui/notifications.js";
-import { appContext, uiState } from "./store.js";
+import { appContext } from "./store.js";
 import { MESSAGE_TYPES } from "./constants/message-types.js";
 
 // ── Parent ↔ IFRAME postMessage contract ────────────────────────────────────────
@@ -61,6 +61,7 @@ setupSheetButtons();
 setupChangeButtons();
 setupSubmitModal();
 setupAadhaarScreen();
+setupGuarantorUpdateTable();
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 
@@ -167,20 +168,10 @@ function setupSubmitModal() {
   });
 }
 
-// ── Change buttons (data-field + data-type drive which sheet opens) ───────────
+// ── Change buttons (borrower only — guarantor uses the inline table) ─────────
 
 function setupChangeButtons() {
   document.querySelectorAll(".change-btn[data-type='borrower']").forEach((btn) => {
     btn.addEventListener("click", () => openSheet(btn.dataset.field, "borrower"));
-  });
-
-  document.querySelectorAll(".change-btn[data-type='guarantor']").forEach((btn) => {
-    btn.addEventListener("click", () => {
-      if (uiState.selectedGuarantorIndex === null) {
-        alert("Select guarantor first");
-        return;
-      }
-      openSheet(btn.dataset.field, "guarantor");
-    });
   });
 }

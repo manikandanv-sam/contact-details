@@ -14,5 +14,6 @@ window.ENV = {
   CUSTOMER_API_BASE: "__CUSTOMER_API_BASE__",
   OTP_API_KEY: "__OTP_API_KEY__",
   API_KEY: "__API_KEY__",
+  COMM_API_KEY: "__COMM_API_KEY__",         // x-api-key for communication-details OTP endpoints
   CLIENT_ID: "__CLIENT_ID__",
 };

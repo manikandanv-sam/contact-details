@@ -1299,3 +1299,373 @@ html {
   border: 1px solid #fecaca;
   border-radius: 6px;
 }
+
+/* ── Screen 7: Guarantor update contact details table ────────────────────── */
+
+.g-update-card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  width: 100%;
+}
+
+.g-update-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 24px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.g-update-title {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 15px;
+  font-weight: 600;
+  color: #111827;
+  margin: 0;
+}
+
+.g-aadhaar-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 12px;
+  background: #dcfce7;
+  border: 1px solid #86efac;
+  border-radius: 20px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #16a34a;
+  white-space: nowrap;
+}
+
+.g-table-section {
+  padding: 20px 24px 24px;
+}
+
+.g-table-heading {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: rgba(0, 0, 0, 0.45);
+  text-transform: uppercase;
+  margin: 0 0 12px;
+}
+
+/* Table grid */
+.g-table {
+  width: 100%;
+  border: 1px solid #e3e3e3;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.g-table-head,
+.g-table-row {
+  display: grid;
+  grid-template-columns: 160px 1fr 1fr 160px;
+}
+
+.g-table-head {
+  background: #ffffff;
+  border-bottom: 1px solid #e3e3e3;
+}
+
+.g-table-row {
+  border-bottom: 1px solid #f0f0f0;
+  align-items: start;
+}
+
+.g-table-row:last-child {
+  border-bottom: none;
+}
+
+.g-th {
+  padding: 11px 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.55);
+}
+
+.g-td {
+  padding: 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: 13px;
+  color: #374151;
+}
+
+.g-col-particular {
+  font-weight: 500;
+}
+
+.g-col-existing {
+  color: rgba(0, 0, 0, 0.75);
+  word-break: break-word;
+}
+
+.g-col-action {
+  display: flex;
+  align-items: flex-start;
+  padding-top: 14px;
+}
+
+/* Field inputs */
+.g-field-input {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 7px 10px;
+  border: 1px dashed #d1d5db;
+  border-radius: 4px;
+  font-size: 13px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #111827;
+  background: #fafafa;
+  outline: none;
+  transition: border 0.15s, box-shadow 0.15s;
+}
+
+.g-field-input:focus {
+  border-color: #2c6cdf;
+  border-style: solid;
+  background: #fff;
+  box-shadow: 0 0 0 2px rgba(44, 108, 223, 0.1);
+}
+
+.g-field-input::placeholder {
+  color: #9ca3af;
+}
+
+.g-otp-input {
+  margin-top: 6px;
+}
+
+/* Locked value shown while entering OTP */
+.g-locked-value {
+  font-size: 13px;
+  font-weight: 500;
+  color: #111827;
+  margin-bottom: 2px;
+}
+
+.g-otp-hint {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.4);
+  margin-bottom: 4px;
+}
+
+/* Verified / confirmed display */
+.g-verified-display {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #16a34a;
+}
+
+.g-address-new {
+  color: #374151;
+  font-weight: 400;
+  word-break: break-word;
+}
+
+/* Auto-populated placeholder */
+.g-auto-text {
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(0, 0, 0, 0.38);
+}
+
+/* Resend row */
+.g-resend-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 6px;
+}
+
+.g-resend-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 12px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-weight: 500;
+  color: #2c6cdf;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.g-resend-btn:disabled {
+  color: #9ca3af;
+  cursor: not-allowed;
+  text-decoration: none;
+}
+
+.g-resend-countdown {
+  font-size: 11px;
+  color: rgba(0, 0, 0, 0.4);
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+/* Inline field error */
+.g-field-error {
+  font-size: 11px;
+  color: #dc2626;
+  margin-top: 4px;
+  display: none;
+}
+
+/* Action buttons */
+.g-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-weight: 500;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+
+.g-otp-btn {
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.g-otp-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+.g-otp-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.g-otp-btn.g-verified {
+  color: #16a34a;
+  border-color: #86efac;
+  background: #f0fdf4;
+  cursor: default;
+  opacity: 1;
+}
+
+.g-upload-btn {
+  background: #ffffff;
+  color: #374151;
+  border: 1px solid #d1d5db;
+}
+
+.g-upload-btn:hover:not(:disabled) {
+  background: #f3f4f6;
+  border-color: #9ca3af;
+}
+
+/* Submit row */
+.g-submit-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 18px;
+}
+
+/* Matches .submit-btn exactly */
+.g-submit-btn {
+  background: #eff4ff;
+  color: #2c6cdf;
+  border: 1.5px solid #2c6cdf;
+  padding: 10px 22px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 4px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.g-submit-btn:hover:not(:disabled) {
+  background: #dbeafe;
+  border-color: #1d5bc4;
+  color: #1d5bc4;
+}
+
+.g-submit-btn:active:not(:disabled) {
+  background: #bfdbfe;
+  border-color: #1750af;
+  color: #1750af;
+}
+
+.g-submit-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* Success banner — slides up and fades in when shown */
+@keyframes g-banner-in {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.g-success-banner {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 16px 24px 24px;
+  padding: 12px 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  color: #15803d;
+  animation: g-banner-in 0.35s ease forwards;
+}
+
+/* Responsive: stack columns on narrow screens */
+@media (max-width: 600px) {
+  .g-table-head {
+    display: none;
+  }
+
+  .g-table-head,
+  .g-table-row {
+    grid-template-columns: 1fr;
+  }
+
+  .g-td.g-col-particular {
+    font-weight: 600;
+    padding-bottom: 2px;
+    padding-top: 14px;
+  }
+
+  .g-td.g-col-existing::before {
+    content: "Existing: ";
+    font-size: 11px;
+    color: rgba(0, 0, 0, 0.45);
+    display: block;
+  }
+
+  .g-td.g-col-new {
+    padding-top: 4px;
+  }
+
+  .g-td.g-col-action {
+    padding-top: 8px;
+    padding-bottom: 14px;
+  }
+
+  .g-action-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}

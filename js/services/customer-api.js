@@ -45,8 +45,8 @@ function mapPanBorrower(data) {
   return {
     name,
     avatar:  resolveAvatar(name),
-    mobile:  c.phone1  ?? "",
-    email:   c.email   ?? "",
+    mobile:  data[0].customer1Phone1  ?? "",
+    email:   data[0].customer1Email   ?? "",
     address: [c.address1, c.address2, c.address3, c.cityCode, c.stateCode, c.pinCode]
       .filter((v) => v && v.trim())
       .join(", "),

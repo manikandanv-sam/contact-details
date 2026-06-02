@@ -47,7 +47,7 @@ export async function submitSheet() {
       showError("Please enter OTP");
       return;
     }
-    const result = await handleVerifyOtp(uiState.pendingUpdate.mobile, value);
+    const result = await handleVerifyOtp(uiState.pendingUpdate.otpReferenceId, value);
     if (!result.success) {
       showError(result.message);
       return;
@@ -89,13 +89,16 @@ export async function submitSheet() {
     type: uiState.currentType,
     value,
     mobile,
+    otpReferenceId: null,
   };
 
-  const result = await handleSendOtp(mobile);
+  const result = await handleSendOtp(mobile, { journeyType: "BORROWER" });
   if (!result.success) {
     showError(result.message);
     return;
   }
+
+  uiState.pendingUpdate.otpReferenceId = result.otpReferenceId;
 
   uiState.isOtpStep = true;
   showOtpUI(mobile);

@@ -9,3 +9,10 @@ export const OTP_CONFIG = {
   baseUrl: `${BASE_URL}/unnati-onlending/v1`,
   apiKey:  window.ENV?.OTP_API_KEY ?? "",
 };
+
+// Communication-details OTP API (generate / verify / resend)
+export const COMM_API_BASE =
+  window.ENV?.COMM_API_BASE ?? `${BASE_URL}/ascend/v1/communication-details`;
+
+export const COMM_API_KEY =
+  window.ENV?.COMM_API_KEY ?? window.ENV?.API_KEY ?? "";
