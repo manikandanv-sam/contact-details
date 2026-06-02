@@ -1,6 +1,6 @@
 import { uiState } from "../store.js";
 import { callAadhaarMobileLink } from "../services/aadhaar-api.js";
-import { handleSendOtp, handleVerifyOtp, handleResendOtp } from "../services/otp-service.js";
+import { handleSendOtp, handleVerifyOtp, handleResendOtp, sendEmailVerificationLink } from "../services/otp-service.js";
 import { validateInput } from "../utils/validators.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
 
@@ -137,14 +137,14 @@ function clearAadhaarError() {
 // Module-level state for the inline table (reset on each entry into Screen 7)
 const tableState = {
   mobile:  "idle",   // idle | otp-sent | verified
-  email:   "idle",   // idle | otp-sent | verified
+  email:   "idle",   // idle | link-sent
   address: "idle",   // idle | uploaded
 };
 
 // Stores new value + otpReferenceId per field
 const pendingValues = {
   mobile:  { value: null, otpReferenceId: null },
-  email:   { value: null, otpReferenceId: null },
+  email:   { value: null },
   address: null,
 };
 
@@ -154,11 +154,10 @@ const MAX_RESENDS = 3;
 
 const resendState = {
   mobile: { count: 0, timerId: null },
-  email:  { count: 0, timerId: null },
 };
 
-// otpType per field
-const OTP_TYPE = { mobile: "VERIFY_MOBILE", email: "VERIFY_EMAIL" };
+// otpType per field (email uses verification link, not OTP)
+const OTP_TYPE = { mobile: "VERIFY_MOBILE" };
 
 function proceedToGuarantorCard() {
   const i = uiState.selectedGuarantorIndex;
@@ -172,7 +171,7 @@ function proceedToGuarantorCard() {
   document.getElementById("g-existing-address").textContent = g.address;
 
   resetOtpField("mobile");
-  resetOtpField("email");
+  resetEmailField();
   resetAddressField();
 
   document.getElementById("g-success-banner").style.display = "none";
@@ -197,6 +196,23 @@ function resetOtpField(field) {
 
   const btn = document.getElementById(`g-btn-${field}`);
   btn.textContent = "Send OTP";
+  btn.className   = "g-action-btn g-otp-btn";
+  btn.disabled    = false;
+}
+
+function resetEmailField() {
+  tableState.email    = "idle";
+  pendingValues.email = { value: null };
+
+  document.getElementById("g-new-idle-email").style.display     = "block";
+  document.getElementById("g-new-verified-email").style.display = "none";
+  document.getElementById("g-input-email").value                = "";
+  document.getElementById("g-input-email").disabled             = false;
+
+  setFieldError("email", "");
+
+  const btn = document.getElementById("g-btn-email");
+  btn.textContent = "Send Link";
   btn.className   = "g-action-btn g-otp-btn";
   btn.disabled    = false;
 }
@@ -258,7 +274,7 @@ async function sendOtpForField(field) {
   btn.disabled = true;
   btn.textContent = "Sending…";
 
-  const result = await handleSendOtp(g.mobile, {
+  const result = await handleSendOtp(newValue, {
     otpType:     OTP_TYPE[field],
     journeyType: "GUARANTOR",
   });
@@ -319,6 +335,53 @@ async function verifyOtpForField(field) {
   document.getElementById(`g-new-verified-${field}`).style.display = "flex";
 
   btn.textContent = "✓ Verified";
+  btn.className   = "g-action-btn g-otp-btn g-verified";
+  btn.disabled    = true;
+}
+
+// ── Email verification link ───────────────────────────────────────────────────
+
+async function handleEmailVerificationBtn() {
+  if (tableState.email !== "idle") return;
+
+  const newEmail = document.getElementById("g-input-email").value.trim();
+  const g        = uiState.guarantorData[uiState.selectedGuarantorIndex];
+
+  setFieldError("email", "");
+
+  if (!newEmail) {
+    setFieldError("email", "Enter new email");
+    return;
+  }
+  if (newEmail === g.email) {
+    setFieldError("email", "New email must differ from existing");
+    return;
+  }
+  const validationError = validateInput("email", newEmail);
+  if (validationError) {
+    setFieldError("email", validationError);
+    return;
+  }
+
+  const btn    = document.getElementById("g-btn-email");
+  btn.disabled = true;
+  btn.textContent = "Sending…";
+
+  const result = await sendEmailVerificationLink(newEmail);
+
+  if (!result.success) {
+    btn.disabled    = false;
+    btn.textContent = "Send Link";
+    setFieldError("email", result.message);
+    return;
+  }
+
+  pendingValues.email  = { value: newEmail };
+  tableState.email     = "link-sent";
+
+  document.getElementById("g-input-email").disabled = true;
+
+  btn.textContent = "✓ Link Sent";
   btn.className   = "g-action-btn g-otp-btn g-verified";
   btn.disabled    = true;
 }
@@ -401,7 +464,7 @@ function onAddressFileSelected(e) {
 async function submitGuarantorUpdates() {
   const hasChange =
     tableState.mobile  === "verified" ||
-    tableState.email   === "verified" ||
+    tableState.email   === "link-sent" ||
     tableState.address === "uploaded";
 
   if (!hasChange) {
@@ -428,9 +491,8 @@ export function onGuarantorChange(index) {
 
 export function setupGuarantorUpdateTable() {
   document.getElementById("g-btn-mobile").addEventListener("click",    () => handleOtpFieldBtn("mobile"));
-  document.getElementById("g-btn-email").addEventListener("click",     () => handleOtpFieldBtn("email"));
+  document.getElementById("g-btn-email").addEventListener("click",     handleEmailVerificationBtn);
   document.getElementById("g-resend-mobile").addEventListener("click", () => handleResendForField("mobile"));
-  document.getElementById("g-resend-email").addEventListener("click",  () => handleResendForField("email"));
   document.getElementById("g-btn-address").addEventListener("click",   handleAddressUpload);
   document.getElementById("g-address-file").addEventListener("change", onAddressFileSelected);
   document.getElementById("g-submit-btn").addEventListener("click",    submitGuarantorUpdates);

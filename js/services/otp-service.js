@@ -26,7 +26,7 @@ const realOtp = {
       body: JSON.stringify({
         communicationChannel: communicationChannel ?? "mobile",
         otpType,
-        mobileNumber: String(mobileNumber),
+        mobileNumber: Number(mobileNumber),
         journeyType,
       }),
     });
@@ -98,7 +98,7 @@ function isSuccess(res) {
  * @returns {{ success: boolean, otpReferenceId?: string, message?: string }}
  */
 export async function handleSendOtp(mobileNumber, options = {}) {
-  const { otpType = "VERIFY_MOBILE", journeyType = "BORROWER" } = options;
+  const { otpType = "VERIFY_MOBILE", journeyType = "GUARANTOR" } = options;
   try {
     showLoader();
     const res = await adapter.generateOtp({
@@ -108,12 +108,13 @@ export async function handleSendOtp(mobileNumber, options = {}) {
       communicationChannel: "mobile",
     });
 
-    if (!res.otpReferenceId) {
+    const otpReferenceId = res.response?.otpReferenceId ?? res.otpReferenceId;
+    if (!otpReferenceId) {
       return { success: false, message: res.message || "Failed to send OTP. Please try again." };
     }
 
     window.parent.postMessage({ type: MESSAGE_TYPES.OTP_SENT }, "*");
-    return { success: true, otpReferenceId: res.otpReferenceId };
+    return { success: true, otpReferenceId };
   } catch (e) {
     console.error("[OTP] generate error", e);
     return { success: false, message: "Network error. Please try again." };
@@ -148,6 +149,37 @@ export async function handleVerifyOtp(otpReferenceId, otp) {
 }
 
 /**
+ * Send an email verification link to the given address.
+ * The backend updates the email once the user clicks the link.
+ * @param {string} email
+ * @returns {{ success: boolean, message?: string }}
+ */
+export async function sendEmailVerificationLink(email) {
+  try {
+    showLoader();
+    if (USE_MOCK) {
+      await new Promise((r) => setTimeout(r, 500));
+      return { success: true };
+    }
+    const res = await fetch(`${COMM_API_BASE}/email-verification-link`, {
+      method: "POST",
+      headers: authHeaders(),
+      body: JSON.stringify({ email }),
+    });
+    const data = await res.json();
+    if (!res.ok || data.status === "FAILURE") {
+      return { success: false, message: data.message || "Failed to send verification link." };
+    }
+    return { success: true };
+  } catch (e) {
+    console.error("[EMAIL] verification link error", e);
+    return { success: false, message: "Network error. Please try again." };
+  } finally {
+    hideLoader();
+  }
+}
+
+/**
  * Resend OTP using the existing reference ID.
  * @param {string} otpReferenceId
  * @returns {{ success: boolean, otpReferenceId?: string, message?: string }}
@@ -157,12 +189,13 @@ export async function handleResendOtp(otpReferenceId) {
     showLoader();
     const res = await adapter.resendOtp({ otpReferenceId });
 
-    if (!isSuccess(res) && !res.otpReferenceId) {
+    const newRef = res.response?.otpReferenceId ?? res.otpReferenceId;
+    if (!isSuccess(res) && !newRef) {
       return { success: false, message: res.message || "Failed to resend OTP. Please try again." };
     }
 
     window.parent.postMessage({ type: MESSAGE_TYPES.OTP_SENT }, "*");
-    return { success: true, otpReferenceId: res.otpReferenceId ?? otpReferenceId };
+    return { success: true, otpReferenceId: newRef ?? otpReferenceId };
   } catch (e) {
     console.error("[OTP] resend error", e);
     return { success: false, message: "Network error. Please try again." };
