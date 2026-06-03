@@ -1440,6 +1440,11 @@ html {
   color: #9ca3af;
 }
 
+.g-field-input.input-error {
+  border-color: #dc2626;
+  outline-color: #dc2626;
+}
+
 .g-otp-input {
   margin-top: 6px;
 }
@@ -1449,7 +1454,7 @@ html {
   font-size: 13px;
   font-weight: 500;
   color: #111827;
-  margin-bottom: 2px;
+  margin-bottom: 5px;
 }
 
 .g-otp-hint {
@@ -1484,9 +1489,16 @@ html {
 /* Resend row */
 .g-resend-row {
   display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-top: 6px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.g-resend-meta{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .g-resend-btn {
@@ -1498,8 +1510,6 @@ html {
   font-weight: 500;
   color: #2c6cdf;
   cursor: pointer;
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 .g-resend-btn:disabled {
@@ -1518,7 +1528,7 @@ html {
 .g-field-error {
   font-size: 11px;
   color: #dc2626;
-  margin-top: 4px;
+  margin-top: 10px;
   display: none;
 }
 

@@ -137,7 +137,7 @@ export async function handleVerifyOtp(otpReferenceId, otp) {
     const res = await adapter.verifyOtp({ otpReferenceId, otp });
 
     if (!isSuccess(res)) {
-      return { success: false, message: res.message || "Incorrect OTP. Please try again." };
+      return { success: false, message: res.response || "Failed to Verify OTP. Please try again." };
     }
     return { success: true };
   } catch (e) {
@@ -191,7 +191,7 @@ export async function handleResendOtp(otpReferenceId) {
 
     const newRef = res.response?.otpReferenceId ?? res.otpReferenceId;
     if (!isSuccess(res) && !newRef) {
-      return { success: false, message: res.message || "Failed to resend OTP. Please try again." };
+      return { success: false, message: res.response ? res.response : "Failed to resend OTP. Please try again." };
     }
 
     window.parent.postMessage({ type: MESSAGE_TYPES.OTP_SENT }, "*");

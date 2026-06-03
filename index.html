@@ -291,8 +291,12 @@
                       <input type="text" id="g-otp-mobile" class="g-field-input g-otp-input"
                         placeholder="Enter 6-digit OTP" maxlength="6" inputmode="numeric" autocomplete="one-time-code" />
                       <div class="g-resend-row">
-                        <button class="g-resend-btn" id="g-resend-mobile" disabled>Resend OTP</button>
-                        <span class="g-resend-countdown" id="g-countdown-mobile"></span>
+
+                        <div class="g-resend-meta">
+                          <button class="g-resend-btn" id="g-resend-mobile" disabled>Resend OTP</button>
+                          <span id="g-resends-left-mobile"></span>
+                        </div>
+                        <span class="g-resend-countdown" id="g-countdown-mobile"></span>          
                       </div>
                     </div>
                     <div class="g-verified-display" id="g-new-verified-mobile" style="display:none">

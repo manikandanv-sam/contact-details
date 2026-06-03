@@ -34,3 +34,43 @@ export async function callAadhaarMobileLink(aadhaar12, guarantorMobile) {
   console.log("[Aadhaar] mobile sent:", mobile, "| aadhaar sent:", aadhaar12);
   return data;
 }
+
+export async function callAadhaarOcr(fileB64) {
+  if(USE_MOCK){
+    console.log("[Aadhaar OCR] Mock mode");
+    return {
+      success : true,
+      response : [{
+        type : "Aadhaar Back",
+        details : {
+          address : {
+            value : "No 15,Gandhi street,Hamirpur, Uttar Pradesh 210432"
+          }
+        }
+      }]
+    }
+  }
+  const res = await fetch(`${BASE_URL}/ocr/v1/details`,{
+    method : "POST",
+    headers: {
+      "x-api-key": API_KEY,
+      Authorization: `Bearer ${appContext.token}`,
+      "Content-Type": "application/json",
+    },
+    body : JSON.stringify({
+      apiPayload : {
+        fileB64 : fileB64,
+        maskAadhaar : false,
+        consent: "Y",
+      }
+    })
+  })
+
+  if(!res.ok){
+    const err = new Error(`HTTP ${res.status}`);
+    err.status = res.status;
+    throw err;
+  }
+  const data = await res.json();
+  return data;
+}

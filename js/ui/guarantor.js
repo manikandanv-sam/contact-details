@@ -1,5 +1,5 @@
 import { uiState } from "../store.js";
-import { callAadhaarMobileLink } from "../services/aadhaar-api.js";
+import { callAadhaarMobileLink, callAadhaarOcr } from "../services/aadhaar-api.js";
 import { handleSendOtp, handleVerifyOtp, handleResendOtp, sendEmailVerificationLink } from "../services/otp-service.js";
 import { validateInput } from "../utils/validators.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
@@ -191,6 +191,7 @@ function resetOtpField(field) {
   document.getElementById(`g-new-otp-${field}`).style.display      = "none";
   document.getElementById(`g-new-verified-${field}`).style.display = "none";
   document.getElementById(`g-input-${field}`).value                = "";
+  document.getElementById(`g-resends-left-${field}`).textContent = ""
 
   setFieldError(field, "");
 
@@ -239,9 +240,16 @@ function uploadIcon() {
 }
 
 function setFieldError(field, msg) {
-  const el = document.getElementById(`g-error-${field}`);
-  el.textContent    = msg;
-  el.style.display  = msg ? "block" : "none";
+  const el    = document.getElementById(`g-error-${field}`);
+  const input = document.getElementById(`g-input-${field}`);
+
+  el.textContent   = msg;
+  el.style.display = msg ? "block" : "none";
+
+  if (input) {
+    if (msg) input.classList.add("input-error");
+    else     input.classList.remove("input-error");
+  }
 }
 
 // Dispatches to send or verify based on current field state
@@ -387,9 +395,21 @@ async function handleEmailVerificationBtn() {
 }
 
 // ── Resend OTP — cooldown timer ───────────────────────────────────────────────
+function updateResendsLeft(field){
+  const resendLeft = document.getElementById(`g-resends-left-${field}`);
+  const remaining = MAX_RESENDS - resendState[field].count;
+  if(remaining > 0){
+    resendLeft.textContent = `${remaining} ${remaining === 1 ? "Attempt" : "Attempts"} Remaining`;
+  }
+  else{
+    resendLeft.textContent = "";
+  }
+}
+
 
 function startResendCooldown(field) {
   const rs  = resendState[field];
+  updateResendsLeft(field);
   const btn = document.getElementById(`g-resend-${field}`);
   const cd  = document.getElementById(`g-countdown-${field}`);
 
@@ -428,7 +448,7 @@ async function handleResendForField(field) {
 
   const result = await handleResendOtp(pendingValues[field].otpReferenceId);
   if (!result.success) {
-    document.getElementById(`g-countdown-${field}`).textContent = result.message;
+    setFieldError(field, result.message);
     btn.disabled = false;
     return;
   }
@@ -442,21 +462,44 @@ function handleAddressUpload() {
   document.getElementById("g-address-file").click();
 }
 
-function onAddressFileSelected(e) {
+async function onAddressFileSelected(e) {
   if (!e.target.files?.length) return;
+  const file = e.target.files[0];
 
-  const g          = uiState.guarantorData[uiState.selectedGuarantorIndex];
-  const newAddress = g.address;
-
-  tableState.address   = "uploaded";
-  pendingValues.address = newAddress;
-
-  document.getElementById("g-address-auto-text").style.display    = "none";
-  document.getElementById("g-confirmed-address").textContent      = newAddress;
-  document.getElementById("g-new-verified-address").style.display = "flex";
-
+  //convert file to base64
+  const fileB64 = await new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result.split(",")[1]);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
   const btn     = document.getElementById("g-btn-address");
+  btn.disabled    = true;
+  btn.textContent = "Processing…";
+
+  const data = await callAadhaarOcr(fileB64);
+  if(!data.success){
+    setFieldError("address", data.message || "Failed to process Aadhaar.");
+    btn.disabled = false;
+    btn.innerHTML = uploadIcon() + " Upload Aadhaar";
+    return;
+  }
+
+  const back = data.response.find(item =>item.type === "Aadhaar Back");
+  const address = back?.details?.address?.value;
+  if(!address){
+    setFieldError("address", "Address not Found. Please upload back side of Aadhaar.");
+    btn.disabled = false;
+    btn.innerHTML = uploadIcon() + " Upload Aadhaar";
+    return;
+  }
+  tableState.address    = "uploaded";
+  pendingValues.address = address;
+  document.getElementById("g-address-auto-text").style.display    = "none";
+  document.getElementById("g-confirmed-address").textContent      = address;
+  document.getElementById("g-new-verified-address").style.display = "flex";
   btn.innerHTML = uploadIcon() + " Re-upload";
+  btn.disabled  = false;
 
   e.target.value = "";
 }
