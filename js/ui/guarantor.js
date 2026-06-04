@@ -517,13 +517,17 @@ async function onAddressFileSelected(e) {
 }
 
 async function submitGuarantorUpdates() {
+  const formErr = document.getElementById("g-form-error");
+  formErr.hidden = true;
+
   const hasChange =
     tableState.mobile  === "verified" ||
     tableState.email   === "link-sent" ||
     tableState.address === "uploaded";
 
   if (!hasChange) {
-    setFieldError("mobile", "Please verify at least one field before submitting.");
+    formErr.textContent = "Please verify at least one field before submitting.";
+    formErr.hidden = false;
     return;
   }
 
@@ -558,7 +562,7 @@ async function submitGuarantorUpdates() {
     customerId : appContext.customerId,
     journeyType: appContext.journeyType,
     customerType : "GUARANTOR",
-    requestorRole : "SELF", // Should be passed by CMP
+    requestorRole : appContext.requestorRole, // Should be passed by CMP
     changes,
     lastActiveChanges,
     requestId,

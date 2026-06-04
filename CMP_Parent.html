@@ -638,10 +638,12 @@
       const MOCK_CUSTOMER_CONTEXT = {
         pan: "NILPS5066N",
         customerId: "0000000000100291",
-        token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3ODA0NjEzNzEsImV4cCI6MTc4MDU0Nzc3MX0.t0udPjGwf0ueOgzIKs8_PdzY5bHXTXWe3pnwJK9TA3c"
+        journeyType: "SOLO",
+        requestorRole: "SELF",
+        token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3ODA1NDk1NzUsImV4cCI6MTc4MDYzNTk3NX0.q-WhNPROyJmqa8AhWbAp57hrCZ_6JylmikTml57-e6c"
       };
 
-      // iframe communication — CMP listens for MFE_READY then sends INIT.
+      // iframe communication — CMP listens for IFRAME_READY then sends INIT.
       // The real CMP must implement this same listener to pass customer context.
       window.addEventListener("message", (event) => {
         console.log("Message from Contact Details iframe:", event.data);
@@ -654,30 +656,22 @@
           console.log("Sent INIT to iframe:", MOCK_CUSTOMER_CONTEXT);
         }
 
-        if (event.data.type === "IFRAME_DOWN") {
-          console.warn("iframe is down — waiting for IFRAME_READY to recover");
+        //CMP Event Listeners
+
+        if (event.data.type === "COMM_CHANGE_SUCCESS") {
+          const { entityId , updatedFields, requestId } = event.data.payload;
+          showNotification(`Changes saved — ${updatedFields.join(", ")} updated (${requestId})`, "success");
         }
 
-        // Dynamic height adjustment
-        if (event.data.type === "HEIGHT_CHANGE") {
-          iframe.style.height = event.data.height + "px";
+        if (event.data.type === "COMM_CHANGE_ERROR") {
+          const { code, message } = event.data.payload;
+          showNotification(`Error [${code}]: ${message}`, "error");
         }
 
-        // Handle OTP sent notification
-        if (event.data.type === "OTP_SENT") {
-          showNotification("OTP sent successfully!", "success");
+        if (event.data.type === "COMM_CHANGE_CANCEL") {
+          showNotification("Change request cancelled.", "info");
         }
 
-        // Handle contact update success
-        if (event.data.type === "CONTACT_UPDATED") {
-          showNotification("Contact details updated successfully!", "success");
-        }
-
-        // Receive error signal from iframe — CMP acts silently (no duplicate toast)
-        // For UNAUTHORIZED: real CMP should refresh token and re-send INIT
-        if (event.data.type === "ERROR") {
-          console.warn("iframe error:", event.data.code);
-        }
       });
 
       // Simple notification system
