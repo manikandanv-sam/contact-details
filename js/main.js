@@ -20,7 +20,7 @@ import { MESSAGE_TYPES } from "./constants/message-types.js";
 let lastInitKey = null;
 
 window.addEventListener("message", (event) => {
-  const { type, token, lan, customerUrn, pan, customerId } = event.data ?? {};
+  const { type, token, lan, customerUrn, pan, customerId, journeyType } = event.data ?? {};
 
   if (type === MESSAGE_TYPES.INIT) {
     const initKey = `${pan ?? ""}:${customerId ?? ""}`;
@@ -32,6 +32,7 @@ window.addEventListener("message", (event) => {
     appContext.customerUrn = customerUrn ?? null;
     appContext.pan = pan ?? null;
     appContext.customerId = customerId ?? null;
+    appContext.journeyType = journeyType ?? null;
 
     const customerIdEl = document.getElementById("customer-id");
     if (customerIdEl && customerId) customerIdEl.innerText = `Customer ID: ${customerId}`;
@@ -48,10 +49,6 @@ if (window.parent === window) {
   loadCustomerData();
 } else {
   window.parent.postMessage({ type: MESSAGE_TYPES.IFRAME_READY }, "*");
-
-  window.addEventListener("beforeunload", () => {
-    window.parent.postMessage({ type: MESSAGE_TYPES.IFRAME_DOWN }, "*");
-  });
 }
 
 // ── DOM wiring (module scripts are deferred — DOM is ready at this point) ────

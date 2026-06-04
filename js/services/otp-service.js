@@ -1,7 +1,6 @@
 import { USE_MOCK, COMM_API_BASE, COMM_API_KEY } from "../config.js";
 import { appContext } from "../store.js";
 import { showLoader, hideLoader } from "../ui/notifications.js";
-import { MESSAGE_TYPES } from "../constants/message-types.js";
 
 // ── OTP spec ────────────────────────────────────────────────────────────────
 // Type: 6-digit TOTP  |  TTL: 300s  |  Max attempts: 3
@@ -112,8 +111,6 @@ export async function handleSendOtp(mobileNumber, options = {}) {
     if (!otpReferenceId) {
       return { success: false, message: res.message || "Failed to send OTP. Please try again." };
     }
-
-    window.parent.postMessage({ type: MESSAGE_TYPES.OTP_SENT }, "*");
     return { success: true, otpReferenceId };
   } catch (e) {
     console.error("[OTP] generate error", e);
@@ -193,8 +190,6 @@ export async function handleResendOtp(otpReferenceId) {
     if (!isSuccess(res) && !newRef) {
       return { success: false, message: res.response ? res.response : "Failed to resend OTP. Please try again." };
     }
-
-    window.parent.postMessage({ type: MESSAGE_TYPES.OTP_SENT }, "*");
     return { success: true, otpReferenceId: newRef ?? otpReferenceId };
   } catch (e) {
     console.error("[OTP] resend error", e);

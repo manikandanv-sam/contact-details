@@ -5,6 +5,7 @@ export const appContext = {
   token: null,
   lan: null,
   customerUrn: null,
+  journeyType : null,
 };
 
 // Runtime UI state shared across modules

@@ -1,8 +1,9 @@
-import { uiState } from "../store.js";
+import { appContext, uiState } from "../store.js";
 import { callAadhaarMobileLink, callAadhaarOcr } from "../services/aadhaar-api.js";
 import { handleSendOtp, handleVerifyOtp, handleResendOtp, sendEmailVerificationLink } from "../services/otp-service.js";
 import { validateInput } from "../utils/validators.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
+import { submitChangeRequest } from "../services/change-request-api.js"
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -148,6 +149,12 @@ const pendingValues = {
   address: null,
 };
 
+const originalValues = {
+  mobile : null,
+  email : null,
+  address : null,
+}
+
 // OTP spec: 60s first resend cooldown, 600s (10 min) subsequent, max 3 resends
 const RESEND_COOLDOWNS = [60, 600];
 const MAX_RESENDS = 3;
@@ -162,6 +169,11 @@ const OTP_TYPE = { mobile: "VERIFY_MOBILE" };
 function proceedToGuarantorCard() {
   const i = uiState.selectedGuarantorIndex;
   const g = uiState.guarantorData[i];
+
+  //snapshot thr original values 
+  originalValues.mobile = g.mobile;
+  originalValues.email = g.email;
+  originalValues.address = g.address;
 
   document.getElementById("g-update-title").textContent =
     `Guarantor ${i + 1} — update contact details`;
@@ -519,7 +531,66 @@ async function submitGuarantorUpdates() {
   btn.disabled = true;
   btn.textContent = "Submitting…";
 
-  window.parent.postMessage({ type: MESSAGE_TYPES.CONTACT_UPDATED }, "*");
+  const requestId = `REQ_${crypto.randomUUID()}`;
+  const g = uiState.guarantorData[uiState.selectedGuarantorIndex];
+
+  const changes = {};
+  const lastActiveChanges = {};
+  const updatedFields = [];
+
+  if(tableState.mobile === "verified"){
+    changes.mobile = Number(pendingValues.mobile.value);
+    lastActiveChanges.mobile = Number(originalValues.mobile);
+    updatedFields.push("mobile");
+  }
+  if(tableState.email === "link-sent"){
+    changes.email = pendingValues.email.value;
+    lastActiveChanges.email = originalValues.email;
+    updatedFields.push("email");
+  }
+  if(tableState.address === "uploaded") {
+    changes.address = pendingValues.address;
+    lastActiveChanges.address = originalValues.address;
+    updatedFields.push("address");
+  }
+
+  const payload = {
+    customerId : appContext.customerId,
+    journeyType: appContext.journeyType,
+    customerType : "GUARANTOR",
+    requestorRole : "SELF", // Should be passed by CMP
+    changes,
+    lastActiveChanges,
+    requestId,
+  };
+
+  if (tableState.mobile === "verified"){
+    payload.otpReferenceId = pendingValues.mobile.otpReferenceId;
+  }
+  if(g.uidNum) {
+    payload.aadharNumber = g.uidNum;
+  }
+
+  const result = await submitChangeRequest(payload);
+  if(!result.success){
+    btn.disabled = false;
+    btn.textContent = "Submit";
+    window.parent.postMessage({
+      type : MESSAGE_TYPES.COMM_CHANGE_ERROR,
+      payload : {
+        code : "SUBMIT_FAILED",
+        message: result.message
+      }
+    }, "*");
+    return;
+  }
+  window.parent.postMessage({ type: MESSAGE_TYPES.COMM_CHANGE_SUCCESS,
+    payload: {
+      entityId : appContext.customerId,
+      updatedFields,
+      requestId: result.requestId
+      }
+    }, "*");
 
   document.getElementById("g-success-banner").style.display = "flex";
   btn.textContent = "Submitted";

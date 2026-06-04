@@ -1,10 +1,9 @@
 export const MESSAGE_TYPES = Object.freeze({
   // iframe → CMP
   IFRAME_READY:     "IFRAME_READY",
-  IFRAME_DOWN:      "IFRAME_DOWN",
-  OTP_SENT:         "OTP_SENT",
-  CONTACT_UPDATED:  "CONTACT_UPDATED",
-  ERROR:            "ERROR",
+  COMM_CHANGE_SUCCESS : "COMM_CHANGE_SUCCESS",
+  COMM_CHANGE_ERROR : "COMM_CHANGE_ERROR",
+  COMM_CHANGE_CANCEL : "COMM_CHANGE_CANCEL",
 
   // CMP → iframe
   INIT:             "INIT",
