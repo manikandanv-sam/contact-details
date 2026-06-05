@@ -67,7 +67,8 @@ export async function callAadhaarOcr(fileB64) {
   })
 
   if(!res.ok){
-    const err = new Error(`HTTP ${res.status}`);
+    const body = await res.json().catch(() => ({}));
+    const err = new Error(body.message || `HTTP ${res.status}`);
     err.status = res.status;
     throw err;
   }

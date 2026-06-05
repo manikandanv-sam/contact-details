@@ -4,6 +4,7 @@ import { openSheet, closeSheet } from "./ui/sheet.js";
 import { clearError, clearGlobalError } from "./ui/notifications.js";
 import { appContext } from "./store.js";
 import { MESSAGE_TYPES } from "./constants/message-types.js";
+import { validateInput, setFieldError } from "./utils/validators.js";
 
 // ── Parent ↔ IFRAME postMessage contract ────────────────────────────────────────
 //
@@ -100,49 +101,50 @@ function setupSubmitModal() {
   const modalOverlay = document.getElementById("modalOverlay");
   const formError = document.getElementById("form-error");
 
-  const inputIds = ["input-contact-number", "input-contact-email", "input-contact-address"];
+  const fields = [
+    { inputId: "input-contact-number", errorId: "b-error-mobile", field: "mobile" },
+    { inputId: "input-contact-email",  errorId: "b-error-email",  field: "email"  },
+    { inputId: "input-contact-address",errorId: "b-error-address",field: "address"},
+  ];
 
-  function showFormError(msg) {
-    formError.textContent = msg;
-    formError.hidden = false;
-  }
-
-  function clearFormError() {
+  function clearAllFieldErrors() {
+    fields.forEach(({ inputId, errorId }) =>
+      setFieldError(document.getElementById(inputId), document.getElementById(errorId), "")
+    );
     formError.hidden = true;
     formError.textContent = "";
   }
 
   function validateForm() {
-    const mobile = document.getElementById("input-contact-number").value.trim();
-    const email = document.getElementById("input-contact-email").value.trim();
+    clearAllFieldErrors();
+
+    const mobile  = document.getElementById("input-contact-number").value.trim();
+    const email   = document.getElementById("input-contact-email").value.trim();
     const address = document.getElementById("input-contact-address").value.trim();
 
     if (!mobile && !email && !address) {
-      showFormError("Please fill in at least one contact detail to update.");
+      formError.textContent = "Please fill in at least one contact detail to update.";
+      formError.hidden = false;
       return false;
     }
 
-    if (mobile && !/^[6-9]\d{9}$/.test(mobile)) {
-      showFormError("Contact number must be a valid 10-digit Indian mobile number.");
-      return false;
-    }
-
-    if (email && !/^\S+@\S+\.\S+$/.test(email)) {
-      showFormError("Please enter a valid email address.");
-      return false;
-    }
-
-    if (address && address.length < 5) {
-      showFormError("Address must be at least 5 characters.");
-      return false;
-    }
-
-    clearFormError();
-    return true;
+    let valid = true;
+    fields.forEach(({ inputId, errorId, field }) => {
+      const value = document.getElementById(inputId).value.trim();
+      if (!value) return;
+      const err = validateInput(field, value);
+      if (err) {
+        setFieldError(document.getElementById(inputId), document.getElementById(errorId), err);
+        valid = false;
+      }
+    });
+    return valid;
   }
 
-  inputIds.forEach((id) => {
-    document.getElementById(id)?.addEventListener("input", clearFormError);
+  fields.forEach(({ inputId, errorId, field }) => {
+    document.getElementById(inputId)?.addEventListener("input", () =>
+      setFieldError(document.getElementById(inputId), document.getElementById(errorId), "")
+    );
   });
 
   function openModal() {

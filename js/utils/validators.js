@@ -4,6 +4,15 @@ export const labelMap = {
   address: "Address",
 };
 
+export function setFieldError(inputEl, errorEl, msg) {
+  errorEl.textContent   = msg;
+  errorEl.style.display = msg ? "block" : "none";
+  if (inputEl) {
+    if (msg) inputEl.classList.add("input-error");
+    else     inputEl.classList.remove("input-error");
+  }
+}
+
 export function validateInput(field, value) {
   if (!value) return "This field is required";
 

@@ -475,45 +475,58 @@ function handleAddressUpload() {
 }
 
 async function onAddressFileSelected(e) {
-  if (!e.target.files?.length) return;
-  const file = e.target.files[0];
+  const btn = document.getElementById("g-btn-address");
+  if(!e.target.files?.length) return;
+  btn.disabled = true;
+  btn.textContent = "Processing...";
+  let uploadSuccess = false;
+  try{
+    const file = e.target.files[0];
 
-  //convert file to base64
-  const fileB64 = await new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = () => resolve(reader.result.split(",")[1]);
-    reader.onerror = reject;
-    reader.readAsDataURL(file);
-  });
-  const btn     = document.getElementById("g-btn-address");
-  btn.disabled    = true;
-  btn.textContent = "Processing…";
+    const fileB64 = await new Promise((resolve,reject) => {
+      const reader = new FileReader();
+      reader.onload = () => resolve(reader.result.split(",")[1]);
+      reader.onerror = reject;
+      reader.readAsDataURL(file);
+    });
 
-  const data = await callAadhaarOcr(fileB64);
-  if(!data.success){
-    setFieldError("address", data.message || "Failed to process Aadhaar.");
+    const data = await callAadhaarOcr(fileB64);
+    if(!data.success){
+      setFieldError("address" , data.message || "Failed to process Aadhaar.");
+      return;
+    }
+    if(!Array.isArray(data.response)) {
+      setFieldError("address" , "Could not read document.Please upload back side of yout Aadhaar card.");
+      return;
+    }
+
+    const back = data.response.find(item => item.type === "Aadhaar Back");
+    const address = back?.details?.address?.value;
+    if(!address){
+      setFieldError("address" , "Address not found. Please upload back side of Aadhaar.");
+      return;
+    }
+
+    tableState.address = "uploaded";
+    pendingValues.address = address;
+    document.getElementById("g-address-auto-text").style.display = "none";
+    document.getElementById("g-confirmed-address").textContent = address;
+    document.getElementById("g-new-verified-address").style.display = "flex";
+    uploadSuccess = true;
+    btn.innerHTML = uploadIcon() + "Re-upload";
     btn.disabled = false;
-    btn.innerHTML = uploadIcon() + " Upload Aadhaar";
-    return;
+    e.target.value = "";
   }
-
-  const back = data.response.find(item =>item.type === "Aadhaar Back");
-  const address = back?.details?.address?.value;
-  if(!address){
-    setFieldError("address", "Address not Found. Please upload back side of Aadhaar.");
-    btn.disabled = false;
-    btn.innerHTML = uploadIcon() + " Upload Aadhaar";
-    return;
+  catch(err){
+    console.error("[Aadhaar OCR] error:" , err);
+    setFieldError("address","Something went wrong. Please try again.");
   }
-  tableState.address    = "uploaded";
-  pendingValues.address = address;
-  document.getElementById("g-address-auto-text").style.display    = "none";
-  document.getElementById("g-confirmed-address").textContent      = address;
-  document.getElementById("g-new-verified-address").style.display = "flex";
-  btn.innerHTML = uploadIcon() + " Re-upload";
-  btn.disabled  = false;
-
-  e.target.value = "";
+  finally{
+    if(!uploadSuccess){
+      btn.disabled = false;
+      btn.innerHTML = uploadIcon() + " Upload Aadhaar";
+    }
+  }
 }
 
 async function submitGuarantorUpdates() {
