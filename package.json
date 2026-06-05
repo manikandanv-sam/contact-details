@@ -1,0 +1,8 @@
+{
+  "name": "contact-details",
+  "version": "1.0.0",
+  "private": true,
+  "devDependencies": {
+    "prettier": "3.8.3"
+  }
+}
