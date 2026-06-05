@@ -462,7 +462,9 @@ body {
   background: #fff;
   outline: none;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .input-field::placeholder {
@@ -507,7 +509,10 @@ body {
   font-weight: 600;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .submit-btn:hover {
@@ -588,7 +593,9 @@ body {
   justify-content: center;
   border-radius: 50%;
   line-height: 1;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .modal-close:hover {
@@ -622,13 +629,23 @@ body {
 }
 
 @keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes modalPopIn {
-  from { opacity: 0; transform: scale(0.94) translateY(6px); }
-  to { opacity: 1; transform: scale(1) translateY(0); }
+  from {
+    opacity: 0;
+    transform: scale(0.94) translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
 /* ---------- App Shell — Sidebar + Main Layout ---------- */
@@ -664,7 +681,9 @@ html {
   border-left: 3px solid transparent;
   text-decoration: none;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .nav-item:hover {
@@ -752,7 +771,9 @@ html {
   line-height: 1.5;
   margin-bottom: -2px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  transition: color 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .tab-btn.active {
@@ -877,7 +898,6 @@ html {
   background: rgba(44, 108, 223, 0.06);
 }
 
-
 /* ============================================================
    Tabs — full-width bordered segmented control
    Overrides the underline-tab style added earlier
@@ -913,7 +933,10 @@ html {
   line-height: 1.5;
   margin-bottom: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
-  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+  transition:
+    color 0.15s ease,
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .tab-btn:last-child {
@@ -981,7 +1004,6 @@ html {
 .table-section {
   margin-top: 4px;
 }
-
 
 /* ============================================================
    Page title bar — full-width header above sidebar + main
@@ -1102,7 +1124,9 @@ html {
   border: 1px solid #d1d5db;
   border-radius: 4px;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease;
 }
 
 .guarantor-select-btn:hover {
@@ -1180,7 +1204,9 @@ html {
   color: #6b7280;
   cursor: pointer;
   flex-shrink: 0;
-  transition: background 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
 }
 
 .aadhaar-close-btn:hover {
@@ -1262,7 +1288,10 @@ html {
   border-radius: 4px;
   cursor: pointer;
   width: fit-content;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .verify-aadhaar-btn:hover:not(:disabled) {
@@ -1426,7 +1455,9 @@ html {
   color: #111827;
   background: #fafafa;
   outline: none;
-  transition: border 0.15s, box-shadow 0.15s;
+  transition:
+    border 0.15s,
+    box-shadow 0.15s;
 }
 
 .g-field-input:focus {
@@ -1496,7 +1527,7 @@ html {
   margin-top: 12px;
 }
 
-.g-resend-meta{
+.g-resend-meta {
   display: flex;
   justify-content: space-between;
   width: 100%;
@@ -1545,7 +1576,10 @@ html {
   border-radius: 4px;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 0.15s, border-color 0.15s, color 0.15s;
+  transition:
+    background 0.15s,
+    border-color 0.15s,
+    color 0.15s;
 }
 
 .g-otp-btn {
@@ -1601,7 +1635,10 @@ html {
   border-radius: 4px;
   font-family: Roboto, "Helvetica Neue", sans-serif;
   cursor: pointer;
-  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease;
 }
 
 .g-submit-btn:hover:not(:disabled) {
@@ -1623,8 +1660,14 @@ html {
 
 /* Success banner — slides up and fades in when shown */
 @keyframes g-banner-in {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .g-success-banner {

@@ -1,9 +1,14 @@
 import { appContext, uiState } from "../store.js";
 import { callAadhaarMobileLink, callAadhaarOcr } from "../services/aadhaar-api.js";
-import { handleSendOtp, handleVerifyOtp, handleResendOtp, sendEmailVerificationLink } from "../services/otp-service.js";
+import {
+  handleSendOtp,
+  handleVerifyOtp,
+  handleResendOtp,
+  sendEmailVerificationLink,
+} from "../services/otp-service.js";
 import { validateInput } from "../utils/validators.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
-import { submitChangeRequest } from "../services/change-request-api.js"
+import { submitChangeRequest } from "../services/change-request-api.js";
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 
@@ -45,7 +50,7 @@ export function renderGuarantorCards() {
             </div>
           </div>
           <button class="guarantor-select-btn" data-index="${i}" data-testid="select-guarantor-${i}">Select</button>
-        </div>`,
+        </div>`
     )
     .join("");
 
@@ -137,23 +142,23 @@ function clearAadhaarError() {
 
 // Module-level state for the inline table (reset on each entry into Screen 7)
 const tableState = {
-  mobile:  "idle",   // idle | otp-sent | verified
-  email:   "idle",   // idle | link-sent
-  address: "idle",   // idle | uploaded
+  mobile: "idle", // idle | otp-sent | verified
+  email: "idle", // idle | link-sent
+  address: "idle", // idle | uploaded
 };
 
 // Stores new value + otpReferenceId per field
 const pendingValues = {
-  mobile:  { value: null, otpReferenceId: null },
-  email:   { value: null },
+  mobile: { value: null, otpReferenceId: null },
+  email: { value: null },
   address: null,
 };
 
 const originalValues = {
-  mobile : null,
-  email : null,
-  address : null,
-}
+  mobile: null,
+  email: null,
+  address: null,
+};
 
 // OTP spec: 60s first resend cooldown, 600s (10 min) subsequent, max 3 resends
 const RESEND_COOLDOWNS = [60, 600];
@@ -170,7 +175,7 @@ function proceedToGuarantorCard() {
   const i = uiState.selectedGuarantorIndex;
   const g = uiState.guarantorData[i];
 
-  //snapshot thr original values 
+  //snapshot thr original values
   originalValues.mobile = g.mobile;
   originalValues.email = g.email;
   originalValues.address = g.address;
@@ -178,8 +183,8 @@ function proceedToGuarantorCard() {
   document.getElementById("g-update-title").textContent =
     `Guarantor ${i + 1} — update contact details`;
 
-  document.getElementById("g-existing-mobile").textContent  = g.mobile;
-  document.getElementById("g-existing-email").textContent   = g.email;
+  document.getElementById("g-existing-mobile").textContent = g.mobile;
+  document.getElementById("g-existing-email").textContent = g.email;
   document.getElementById("g-existing-address").textContent = g.address;
 
   resetOtpField("mobile");
@@ -193,53 +198,53 @@ function proceedToGuarantorCard() {
 }
 
 function resetOtpField(field) {
-  tableState[field]    = "idle";
+  tableState[field] = "idle";
   pendingValues[field] = { value: null, otpReferenceId: null };
 
   if (resendState[field].timerId) clearInterval(resendState[field].timerId);
   resendState[field] = { count: 0, timerId: null };
 
-  document.getElementById(`g-new-idle-${field}`).style.display     = "block";
-  document.getElementById(`g-new-otp-${field}`).style.display      = "none";
+  document.getElementById(`g-new-idle-${field}`).style.display = "block";
+  document.getElementById(`g-new-otp-${field}`).style.display = "none";
   document.getElementById(`g-new-verified-${field}`).style.display = "none";
-  document.getElementById(`g-input-${field}`).value                = "";
-  document.getElementById(`g-resends-left-${field}`).textContent = ""
+  document.getElementById(`g-input-${field}`).value = "";
+  document.getElementById(`g-resends-left-${field}`).textContent = "";
 
   setFieldError(field, "");
 
   const btn = document.getElementById(`g-btn-${field}`);
   btn.textContent = "Send OTP";
-  btn.className   = "g-action-btn g-otp-btn";
-  btn.disabled    = false;
+  btn.className = "g-action-btn g-otp-btn";
+  btn.disabled = false;
 }
 
 function resetEmailField() {
-  tableState.email    = "idle";
+  tableState.email = "idle";
   pendingValues.email = { value: null };
 
-  document.getElementById("g-new-idle-email").style.display     = "block";
+  document.getElementById("g-new-idle-email").style.display = "block";
   document.getElementById("g-new-verified-email").style.display = "none";
-  document.getElementById("g-input-email").value                = "";
-  document.getElementById("g-input-email").disabled             = false;
+  document.getElementById("g-input-email").value = "";
+  document.getElementById("g-input-email").disabled = false;
 
   setFieldError("email", "");
 
   const btn = document.getElementById("g-btn-email");
   btn.textContent = "Send Link";
-  btn.className   = "g-action-btn g-otp-btn";
-  btn.disabled    = false;
+  btn.className = "g-action-btn g-otp-btn";
+  btn.disabled = false;
 }
 
 function resetAddressField() {
-  tableState.address   = "idle";
+  tableState.address = "idle";
   pendingValues.address = null;
 
-  document.getElementById("g-address-auto-text").style.display      = "inline";
-  document.getElementById("g-new-verified-address").style.display   = "none";
+  document.getElementById("g-address-auto-text").style.display = "inline";
+  document.getElementById("g-new-verified-address").style.display = "none";
 
   const btn = document.getElementById("g-btn-address");
   btn.innerHTML = uploadIcon() + " Upload Aadhaar";
-  btn.disabled  = false;
+  btn.disabled = false;
 }
 
 function uploadIcon() {
@@ -252,27 +257,27 @@ function uploadIcon() {
 }
 
 function setFieldError(field, msg) {
-  const el    = document.getElementById(`g-error-${field}`);
+  const el = document.getElementById(`g-error-${field}`);
   const input = document.getElementById(`g-input-${field}`);
 
-  el.textContent   = msg;
+  el.textContent = msg;
   el.style.display = msg ? "block" : "none";
 
   if (input) {
     if (msg) input.classList.add("input-error");
-    else     input.classList.remove("input-error");
+    else input.classList.remove("input-error");
   }
 }
 
 // Dispatches to send or verify based on current field state
 function handleOtpFieldBtn(field) {
-  if (tableState[field] === "idle")     sendOtpForField(field);
+  if (tableState[field] === "idle") sendOtpForField(field);
   else if (tableState[field] === "otp-sent") verifyOtpForField(field);
 }
 
 async function sendOtpForField(field) {
   const newValue = document.getElementById(`g-input-${field}`).value.trim();
-  const g        = uiState.guarantorData[uiState.selectedGuarantorIndex];
+  const g = uiState.guarantorData[uiState.selectedGuarantorIndex];
 
   setFieldError(field, "");
 
@@ -290,39 +295,39 @@ async function sendOtpForField(field) {
     return;
   }
 
-  const btn    = document.getElementById(`g-btn-${field}`);
+  const btn = document.getElementById(`g-btn-${field}`);
   btn.disabled = true;
   btn.textContent = "Sending…";
 
   const result = await handleSendOtp(newValue, {
-    otpType:     OTP_TYPE[field],
+    otpType: OTP_TYPE[field],
     journeyType: "GUARANTOR",
   });
 
   if (!result.success) {
-    btn.disabled    = false;
+    btn.disabled = false;
     btn.textContent = "Send OTP";
     setFieldError(field, result.message);
     return;
   }
 
   pendingValues[field] = { value: newValue, otpReferenceId: result.otpReferenceId };
-  tableState[field]    = "otp-sent";
+  tableState[field] = "otp-sent";
 
-  document.getElementById(`g-locked-${field}`).textContent         = newValue;
-  document.getElementById(`g-new-idle-${field}`).style.display     = "none";
-  document.getElementById(`g-new-otp-${field}`).style.display      = "block";
-  document.getElementById(`g-otp-${field}`).value                  = "";
+  document.getElementById(`g-locked-${field}`).textContent = newValue;
+  document.getElementById(`g-new-idle-${field}`).style.display = "none";
+  document.getElementById(`g-new-otp-${field}`).style.display = "block";
+  document.getElementById(`g-otp-${field}`).value = "";
 
   btn.textContent = "Verify OTP";
-  btn.disabled    = false;
+  btn.disabled = false;
 
   startResendCooldown(field);
 }
 
 async function verifyOtpForField(field) {
   const otp = document.getElementById(`g-otp-${field}`).value.trim();
-  const g   = uiState.guarantorData[uiState.selectedGuarantorIndex];
+  const g = uiState.guarantorData[uiState.selectedGuarantorIndex];
 
   setFieldError(field, "");
 
@@ -331,14 +336,14 @@ async function verifyOtpForField(field) {
     return;
   }
 
-  const btn    = document.getElementById(`g-btn-${field}`);
+  const btn = document.getElementById(`g-btn-${field}`);
   btn.disabled = true;
   btn.textContent = "Verifying…";
 
   const { otpReferenceId } = pendingValues[field];
   const result = await handleVerifyOtp(otpReferenceId, otp);
   if (!result.success) {
-    btn.disabled    = false;
+    btn.disabled = false;
     btn.textContent = "Verify OTP";
     setFieldError(field, result.message);
     return;
@@ -350,13 +355,13 @@ async function verifyOtpForField(field) {
   tableState[field] = "verified";
   uiState.guarantorData[uiState.selectedGuarantorIndex][field] = pendingValues[field].value;
 
-  document.getElementById(`g-new-otp-${field}`).style.display      = "none";
-  document.getElementById(`g-confirmed-${field}`).textContent      = pendingValues[field].value;
+  document.getElementById(`g-new-otp-${field}`).style.display = "none";
+  document.getElementById(`g-confirmed-${field}`).textContent = pendingValues[field].value;
   document.getElementById(`g-new-verified-${field}`).style.display = "flex";
 
   btn.textContent = "✓ Verified";
-  btn.className   = "g-action-btn g-otp-btn g-verified";
-  btn.disabled    = true;
+  btn.className = "g-action-btn g-otp-btn g-verified";
+  btn.disabled = true;
 }
 
 // ── Email verification link ───────────────────────────────────────────────────
@@ -365,7 +370,7 @@ async function handleEmailVerificationBtn() {
   if (tableState.email !== "idle") return;
 
   const newEmail = document.getElementById("g-input-email").value.trim();
-  const g        = uiState.guarantorData[uiState.selectedGuarantorIndex];
+  const g = uiState.guarantorData[uiState.selectedGuarantorIndex];
 
   setFieldError("email", "");
 
@@ -383,47 +388,45 @@ async function handleEmailVerificationBtn() {
     return;
   }
 
-  const btn    = document.getElementById("g-btn-email");
+  const btn = document.getElementById("g-btn-email");
   btn.disabled = true;
   btn.textContent = "Sending…";
 
   const result = await sendEmailVerificationLink(newEmail);
 
   if (!result.success) {
-    btn.disabled    = false;
+    btn.disabled = false;
     btn.textContent = "Send Link";
     setFieldError("email", result.message);
     return;
   }
 
-  pendingValues.email  = { value: newEmail };
-  tableState.email     = "link-sent";
+  pendingValues.email = { value: newEmail };
+  tableState.email = "link-sent";
 
   document.getElementById("g-input-email").disabled = true;
 
   btn.textContent = "✓ Link Sent";
-  btn.className   = "g-action-btn g-otp-btn g-verified";
-  btn.disabled    = true;
+  btn.className = "g-action-btn g-otp-btn g-verified";
+  btn.disabled = true;
 }
 
 // ── Resend OTP — cooldown timer ───────────────────────────────────────────────
-function updateResendsLeft(field){
+function updateResendsLeft(field) {
   const resendLeft = document.getElementById(`g-resends-left-${field}`);
   const remaining = MAX_RESENDS - resendState[field].count;
-  if(remaining > 0){
+  if (remaining > 0) {
     resendLeft.textContent = `${remaining} ${remaining === 1 ? "Attempt" : "Attempts"} Remaining`;
-  }
-  else{
+  } else {
     resendLeft.textContent = "";
   }
 }
 
-
 function startResendCooldown(field) {
-  const rs  = resendState[field];
+  const rs = resendState[field];
   updateResendsLeft(field);
   const btn = document.getElementById(`g-resend-${field}`);
-  const cd  = document.getElementById(`g-countdown-${field}`);
+  const cd = document.getElementById(`g-countdown-${field}`);
 
   if (!btn || !cd) return;
 
@@ -440,9 +443,8 @@ function startResendCooldown(field) {
       if (rs.count < MAX_RESENDS) btn.disabled = false;
       else cd.textContent = "Max resends reached";
     } else {
-      cd.textContent = remaining > 60
-        ? `Resend in ${Math.ceil(remaining / 60)}m`
-        : `Resend in ${remaining}s`;
+      cd.textContent =
+        remaining > 60 ? `Resend in ${Math.ceil(remaining / 60)}m` : `Resend in ${remaining}s`;
     }
   };
 
@@ -476,14 +478,14 @@ function handleAddressUpload() {
 
 async function onAddressFileSelected(e) {
   const btn = document.getElementById("g-btn-address");
-  if(!e.target.files?.length) return;
+  if (!e.target.files?.length) return;
   btn.disabled = true;
   btn.textContent = "Processing...";
   let uploadSuccess = false;
-  try{
+  try {
     const file = e.target.files[0];
 
-    const fileB64 = await new Promise((resolve,reject) => {
+    const fileB64 = await new Promise((resolve, reject) => {
       const reader = new FileReader();
       reader.onload = () => resolve(reader.result.split(",")[1]);
       reader.onerror = reject;
@@ -491,19 +493,22 @@ async function onAddressFileSelected(e) {
     });
 
     const data = await callAadhaarOcr(fileB64);
-    if(!data.success){
-      setFieldError("address" , data.message || "Failed to process Aadhaar.");
+    if (!data.success) {
+      setFieldError("address", data.message || "Failed to process Aadhaar.");
       return;
     }
-    if(!Array.isArray(data.response)) {
-      setFieldError("address" , "Could not read document.Please upload back side of yout Aadhaar card.");
+    if (!Array.isArray(data.response)) {
+      setFieldError(
+        "address",
+        "Could not read document.Please upload back side of yout Aadhaar card."
+      );
       return;
     }
 
-    const back = data.response.find(item => item.type === "Aadhaar Back");
+    const back = data.response.find((item) => item.type === "Aadhaar Back");
     const address = back?.details?.address?.value;
-    if(!address){
-      setFieldError("address" , "Address not found. Please upload back side of Aadhaar.");
+    if (!address) {
+      setFieldError("address", "Address not found. Please upload back side of Aadhaar.");
       return;
     }
 
@@ -516,13 +521,11 @@ async function onAddressFileSelected(e) {
     btn.innerHTML = uploadIcon() + "Re-upload";
     btn.disabled = false;
     e.target.value = "";
-  }
-  catch(err){
-    console.error("[Aadhaar OCR] error:" , err);
-    setFieldError("address","Something went wrong. Please try again.");
-  }
-  finally{
-    if(!uploadSuccess){
+  } catch (err) {
+    console.error("[Aadhaar OCR] error:", err);
+    setFieldError("address", "Something went wrong. Please try again.");
+  } finally {
+    if (!uploadSuccess) {
       btn.disabled = false;
       btn.innerHTML = uploadIcon() + " Upload Aadhaar";
     }
@@ -534,8 +537,8 @@ async function submitGuarantorUpdates() {
   formErr.hidden = true;
 
   const hasChange =
-    tableState.mobile  === "verified" ||
-    tableState.email   === "link-sent" ||
+    tableState.mobile === "verified" ||
+    tableState.email === "link-sent" ||
     tableState.address === "uploaded";
 
   if (!hasChange) {
@@ -555,59 +558,66 @@ async function submitGuarantorUpdates() {
   const lastActiveChanges = {};
   const updatedFields = [];
 
-  if(tableState.mobile === "verified"){
+  if (tableState.mobile === "verified") {
     changes.mobile = Number(pendingValues.mobile.value);
     lastActiveChanges.mobile = Number(originalValues.mobile);
     updatedFields.push("mobile");
   }
-  if(tableState.email === "link-sent"){
+  if (tableState.email === "link-sent") {
     changes.email = pendingValues.email.value;
     lastActiveChanges.email = originalValues.email;
     updatedFields.push("email");
   }
-  if(tableState.address === "uploaded") {
+  if (tableState.address === "uploaded") {
     changes.address = pendingValues.address;
     lastActiveChanges.address = originalValues.address;
     updatedFields.push("address");
   }
 
   const payload = {
-    customerId : appContext.customerId,
+    customerId: appContext.customerId,
     journeyType: appContext.journeyType,
-    customerType : "GUARANTOR",
-    requestorRole : appContext.requestorRole, // Should be passed by CMP
+    customerType: "GUARANTOR",
+    requestorRole: appContext.requestorRole, // Should be passed by CMP
     changes,
     lastActiveChanges,
     requestId,
   };
 
-  if (tableState.mobile === "verified"){
+  if (tableState.mobile === "verified") {
     payload.otpReferenceId = pendingValues.mobile.otpReferenceId;
   }
-  if(g.uidNum) {
+  if (g.uidNum) {
     payload.aadharNumber = g.uidNum;
   }
 
   const result = await submitChangeRequest(payload);
-  if(!result.success){
+  if (!result.success) {
     btn.disabled = false;
     btn.textContent = "Submit";
-    window.parent.postMessage({
-      type : MESSAGE_TYPES.COMM_CHANGE_ERROR,
-      payload : {
-        code : "SUBMIT_FAILED",
-        message: result.message
-      }
-    }, "*");
+    window.parent.postMessage(
+      {
+        type: MESSAGE_TYPES.COMM_CHANGE_ERROR,
+        payload: {
+          code: "SUBMIT_FAILED",
+          message: result.message,
+        },
+      },
+      "*"
+    );
     return;
   }
-  window.parent.postMessage({ type: MESSAGE_TYPES.COMM_CHANGE_SUCCESS,
-    payload: {
-      entityId : appContext.customerId,
-      updatedFields,
-      requestId: result.requestId
-      }
-    }, "*");
+  window.parent.postMessage(
+    {
+      type: MESSAGE_TYPES.COMM_CHANGE_SUCCESS,
+      payload: {
+        entityId: appContext.customerId,
+        updatedFields,
+        requestId: result.requestId,
+      },
+    },
+    "*"
+  );
 
   document.getElementById("g-success-banner").style.display = "flex";
   btn.textContent = "Submitted";
@@ -621,12 +631,16 @@ export function onGuarantorChange(index) {
 // ── Event wiring (called once from main.js) ───────────────────────────────────
 
 export function setupGuarantorUpdateTable() {
-  document.getElementById("g-btn-mobile").addEventListener("click",    () => handleOtpFieldBtn("mobile"));
-  document.getElementById("g-btn-email").addEventListener("click",     handleEmailVerificationBtn);
-  document.getElementById("g-resend-mobile").addEventListener("click", () => handleResendForField("mobile"));
-  document.getElementById("g-btn-address").addEventListener("click",   handleAddressUpload);
+  document
+    .getElementById("g-btn-mobile")
+    .addEventListener("click", () => handleOtpFieldBtn("mobile"));
+  document.getElementById("g-btn-email").addEventListener("click", handleEmailVerificationBtn);
+  document
+    .getElementById("g-resend-mobile")
+    .addEventListener("click", () => handleResendForField("mobile"));
+  document.getElementById("g-btn-address").addEventListener("click", handleAddressUpload);
   document.getElementById("g-address-file").addEventListener("change", onAddressFileSelected);
-  document.getElementById("g-submit-btn").addEventListener("click",    submitGuarantorUpdates);
+  document.getElementById("g-submit-btn").addEventListener("click", submitGuarantorUpdates);
 }
 
 export function setupAadhaarScreen() {
@@ -644,5 +658,5 @@ export function setupAadhaarScreen() {
   });
 
   document.getElementById("verifyAadhaarBtn").addEventListener("click", verifyAadhaar);
-  document.getElementById("aadhaarCloseBtn").addEventListener("click",  renderGuarantorCards);
+  document.getElementById("aadhaarCloseBtn").addEventListener("click", renderGuarantorCards);
 }

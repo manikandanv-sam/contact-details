@@ -44,9 +44,9 @@ function mapPanBorrower(data) {
   const name = [c.firstName, c.middleName, c.lastName].filter(Boolean).join(" ");
   return {
     name,
-    avatar:  resolveAvatar(name),
-    mobile:  data[0].customer1Phone1  ?? "",
-    email:   data[0].customer1Email   ?? "",
+    avatar: resolveAvatar(name),
+    mobile: data[0].customer1Phone1 ?? "",
+    email: data[0].customer1Email ?? "",
     address: [c.address1, c.address2, c.address3, c.cityCode, c.stateCode, c.pinCode]
       .filter((v) => v && v.trim())
       .join(", "),
@@ -57,14 +57,14 @@ function mapPanGuarantors(data) {
   if (!data?.length) return [];
   return data.flatMap((acc) =>
     (acc.guarantors ?? []).map((g, i) => {
-      const n    = i + 1;
+      const n = i + 1;
       const name = [g.firstName, g.middleName, g.lastName].filter(Boolean).join(" ");
       return {
         customerId: g.customerId ?? null,
         name,
-        avatar:  resolveAvatar(name),
-        mobile:  acc[`guarantor${n}Phone1`] ?? "",
-        email:   g.email  ?? "",
+        avatar: resolveAvatar(name),
+        mobile: acc[`guarantor${n}Phone1`] ?? "",
+        email: g.email ?? "",
         address: [g.address1, g.address2, g.address3, g.cityCode, g.stateCode, g.pinCode]
           .filter((v) => v && v.trim())
           .join(", "),
@@ -80,9 +80,12 @@ async function loadByPan(pan) {
     console.log("[PAN] Using mock data");
     data = MOCK_PAN_RESPONSE;
   } else {
-    const res = await fetch(`${BASE_URL}/lms/v1/findLoanAccountsForCustomerSpecification?pan=${pan}`, {
-      headers: getHeaders(),
-    });
+    const res = await fetch(
+      `${BASE_URL}/lms/v1/findLoanAccountsForCustomerSpecification?pan=${pan}`,
+      {
+        headers: getHeaders(),
+      }
+    );
     if (!res.ok) {
       const err = new Error(`HTTP ${res.status}`);
       err.status = res.status;

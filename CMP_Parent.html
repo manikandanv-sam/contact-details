@@ -13,8 +13,7 @@
 
       body {
         font-family:
-          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-          "Helvetica Neue", Arial, sans-serif;
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
         background: #f4f6f9;
         color: #2d3748;
         display: flex;
@@ -470,14 +469,8 @@
 
         <div class="content-wrapper">
           <!-- CONTACT DETAILS IFRAME -->
-          <div
-            id="contactDetailsContainer"
-            class="iframe-container"
-          >
-            <iframe
-              id="contactDetailsFrame"
-              src="http://127.0.0.1:5500/index.html"
-            ></iframe>
+          <div id="contactDetailsContainer" class="iframe-container">
+            <iframe id="contactDetailsFrame" src="http://127.0.0.1:5500/index.html"></iframe>
           </div>
 
           <!-- MY LOANS CONTENT -->
@@ -539,11 +532,7 @@
           </div>
 
           <!-- PLACEHOLDER FOR OTHER PAGES -->
-          <div
-            id="placeholderContent"
-            class="placeholder-content"
-            style="display: none"
-          >
+          <div id="placeholderContent" class="placeholder-content" style="display: none">
             <div class="icon">📄</div>
             <h3>This section is under development</h3>
             <p>Content will be available soon</p>
@@ -556,9 +545,7 @@
       const iframe = document.getElementById("contactDetailsFrame");
       const sidebarItems = document.querySelectorAll(".sidebar-item");
       const pageTitle = document.getElementById("pageTitle");
-      const contactDetailsContainer = document.getElementById(
-        "contactDetailsContainer",
-      );
+      const contactDetailsContainer = document.getElementById("contactDetailsContainer");
       const placeholderContent = document.getElementById("placeholderContent");
       const loansContent = document.getElementById("loansContent");
 
@@ -640,7 +627,8 @@
         customerId: "0000000000100291",
         journeyType: "SOLO",
         requestorRole: "SELF",
-        token : "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3ODA2MzUzMjgsImV4cCI6MTc4MDcyMTcyOH0.TiC_F5VOxcQ1G0l4EbEJ5zICwGIGJHjs8LIl9dpAhgE"
+        token:
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjM1MiwicGFydG5lckNvZGUiOiIwMDAwMDAwMDAwMDgwNjMzIiwidXNlcm5hbWUiOiJhc2NlbmRAc2FtdW5uYXRpLmNvbSIsInBhcnRuZXJJZCI6MTc1LCJpYXQiOjE3ODA2MzUzMjgsImV4cCI6MTc4MDcyMTcyOH0.TiC_F5VOxcQ1G0l4EbEJ5zICwGIGJHjs8LIl9dpAhgE",
       };
 
       // iframe communication — CMP listens for IFRAME_READY then sends INIT.
@@ -649,18 +637,18 @@
         console.log("Message from Contact Details iframe:", event.data);
 
         if (event.data.type === "IFRAME_READY") {
-          iframe.contentWindow.postMessage(
-            { type: "INIT", ...MOCK_CUSTOMER_CONTEXT },
-            "*",
-          );
+          iframe.contentWindow.postMessage({ type: "INIT", ...MOCK_CUSTOMER_CONTEXT }, "*");
           console.log("Sent INIT to iframe:", MOCK_CUSTOMER_CONTEXT);
         }
 
         //CMP Event Listeners
 
         if (event.data.type === "COMM_CHANGE_SUCCESS") {
-          const { entityId , updatedFields, requestId } = event.data.payload;
-          showNotification(`Changes saved — ${updatedFields.join(", ")} updated (${requestId})`, "success");
+          const { entityId, updatedFields, requestId } = event.data.payload;
+          showNotification(
+            `Changes saved — ${updatedFields.join(", ")} updated (${requestId})`,
+            "success"
+          );
         }
 
         if (event.data.type === "COMM_CHANGE_ERROR") {
@@ -671,7 +659,6 @@
         if (event.data.type === "COMM_CHANGE_CANCEL") {
           showNotification("Change request cancelled.", "info");
         }
-
       });
 
       // Simple notification system

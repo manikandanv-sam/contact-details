@@ -39,9 +39,9 @@ function mapCustomerIdBorrower(data) {
   const name = resolveName(customerName);
   return {
     name,
-    avatar:  resolveAvatar(name),
-    mobile:  contact.phone1 ?? "",
-    email:   contact.email  ?? "",
+    avatar: resolveAvatar(name),
+    mobile: contact.phone1 ?? "",
+    email: contact.email ?? "",
     address: resolveAddress(contact.address),
   };
 }
@@ -57,11 +57,11 @@ function mapCustomerIdGuarantors(data) {
       return {
         customerId: g.customerId,
         name,
-        avatar:  resolveAvatar(name),
-        mobile:  g.contact?.phone1 ?? "",
-        email:   g.contact?.email  ?? "",
+        avatar: resolveAvatar(name),
+        mobile: g.contact?.phone1 ?? "",
+        email: g.contact?.email ?? "",
         address: g.contact ? resolveAddress(g.contact) : "",
-        uidNum:  g.uidNum ?? null,
+        uidNum: g.uidNum ?? null,
       };
     });
   }
@@ -69,20 +69,22 @@ function mapCustomerIdGuarantors(data) {
   // Fallback to flat fields (no uidNum available)
   const guarantors = [];
   for (let i = 1; i <= 6; i++) {
-    const id      = account[`guarantorCustomerId${i}`];
+    const id = account[`guarantorCustomerId${i}`];
     const nameObj = account[`guarantor${i}Name`];
     const contact = account[`guarantor${i}Contact`];
     if (!id || !nameObj) continue;
-    const name = nameObj.fullName ?? nameObj.displayName
-      ?? [nameObj.firstName, nameObj.middleName, nameObj.lastName].filter(Boolean).join(" ");
+    const name =
+      nameObj.fullName ??
+      nameObj.displayName ??
+      [nameObj.firstName, nameObj.middleName, nameObj.lastName].filter(Boolean).join(" ");
     guarantors.push({
       customerId: id,
       name,
-      avatar:  resolveAvatar(name),
-      mobile:  contact?.phone1 ?? "",
-      email:   contact?.email  ?? "",
+      avatar: resolveAvatar(name),
+      mobile: contact?.phone1 ?? "",
+      email: contact?.email ?? "",
       address: contact?.address ? resolveAddress(contact.address) : "",
-      uidNum:  null,
+      uidNum: null,
     });
   }
   return guarantors;
@@ -91,16 +93,13 @@ function mapCustomerIdGuarantors(data) {
 // ── API fetch ─────────────────────────────────────────────────────────────────
 
 async function fetchCustomerById(customerId) {
-  const res = await fetch(
-    `${BASE_URL}/lms/v1/findCustomerLoanAccounts?customerId=${customerId}`,
-    {
-      headers: {
-        "Cache-Control": "no-cache",
-        "x-api-key": API_KEY,
-        Authorization: `Bearer ${appContext.token}`,
-      },
+  const res = await fetch(`${BASE_URL}/lms/v1/findCustomerLoanAccounts?customerId=${customerId}`, {
+    headers: {
+      "Cache-Control": "no-cache",
+      "x-api-key": API_KEY,
+      Authorization: `Bearer ${appContext.token}`,
     },
-  );
+  });
   if (!res.ok) {
     const err = new Error(`HTTP ${res.status}`);
     err.status = res.status;
@@ -113,10 +112,12 @@ async function fetchCustomerById(customerId) {
 
 export async function loadByCustomerId(customerId) {
   try {
-    console.log(USE_MOCK ? "[CustomerId] Using mock data" : `[CustomerId] Fetching real API → customerId: ${customerId}`);
-    const data = USE_MOCK
-      ? CUSTOMER_ID_MOCK_RESPONSE
-      : await fetchCustomerById(customerId);
+    console.log(
+      USE_MOCK
+        ? "[CustomerId] Using mock data"
+        : `[CustomerId] Fetching real API → customerId: ${customerId}`
+    );
+    const data = USE_MOCK ? CUSTOMER_ID_MOCK_RESPONSE : await fetchCustomerById(customerId);
 
     applyBorrowerUI(mapCustomerIdBorrower(data));
     uiState.guarantorData = mapCustomerIdGuarantors(data);

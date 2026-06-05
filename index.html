@@ -46,15 +46,34 @@
     <!-- Global error banner -->
     <div
       id="globalError"
-      style="display:none; padding:12px 20px; background:#fee2e2; color:#b91c1c; font-size:14px; border-bottom:1px solid #fca5a5;"
+      style="
+        display: none;
+        padding: 12px 20px;
+        background: #fee2e2;
+        color: #b91c1c;
+        font-size: 14px;
+        border-bottom: 1px solid #fca5a5;
+      "
     ></div>
 
     <!-- Page title bar: spans full width above sidebar + main -->
     <div class="page-title-bar" data-testid="page-title-bar">
       <h1 class="page-title">
-        <svg class="page-title-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/>
-          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/>
+        <svg
+          class="page-title-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7" />
+          <path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z" />
         </svg>
         Update contact details
       </h1>
@@ -63,7 +82,6 @@
 
     <!-- App shell: sidebar + main -->
     <div class="app-shell" id="appShell">
-
       <!-- Left sidebar -->
       <aside class="sidebar" data-testid="sidebar">
         <nav class="sidebar-nav">
@@ -84,7 +102,6 @@
 
       <!-- Main content -->
       <main class="main-content" data-testid="main-content">
-
         <!-- Tabs -->
         <div class="tabs-container" role="tablist" data-testid="tabs">
           <button class="tab-btn active" role="tab" data-tab="borrower" data-testid="tab-borrower">
@@ -97,7 +114,6 @@
 
         <!-- Borrower tab -->
         <div class="tab-content active" id="borrower" data-testid="tab-content-borrower">
-
           <!--
             Customer info bar — scope deferred (same as Dashboard / Loan details / Documents).
             Uncomment when borrower header UI scope is active.
@@ -206,7 +222,6 @@
 
         <!-- Guarantors tab -->
         <div class="tab-content" id="guarantors" data-testid="tab-content-guarantors">
-
           <!-- Screen 5: Guarantor selection card list -->
           <div id="guarantorSelectScreen">
             <p class="select-guarantor-heading">SELECT GUARANTOR</p>
@@ -216,17 +231,47 @@
           <!-- Screen 6: Aadhaar verification -->
           <div class="aadhaar-card" id="aadhaarScreen" style="display: none">
             <div class="aadhaar-header">
-              <h3 class="aadhaar-title" id="aadhaar-screen-title">Guarantor 1 — Aadhaar verification</h3>
-              <button class="aadhaar-close-btn" id="aadhaarCloseBtn" aria-label="Back to guarantor selection" title="Back">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
-                  <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+              <h3 class="aadhaar-title" id="aadhaar-screen-title">
+                Guarantor 1 — Aadhaar verification
+              </h3>
+              <button
+                class="aadhaar-close-btn"
+                id="aadhaarCloseBtn"
+                aria-label="Back to guarantor selection"
+                title="Back"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <line x1="18" y1="6" x2="6" y2="18" />
+                  <line x1="6" y1="6" x2="18" y2="18" />
                 </svg>
               </button>
             </div>
             <div class="aadhaar-body">
               <div class="aadhaar-masked-row">
-                <svg class="aadhaar-file-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" width="18" height="18" aria-hidden="true">
-                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/>
+                <svg
+                  class="aadhaar-file-icon"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  width="18"
+                  height="18"
+                  aria-hidden="true"
+                >
+                  <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                  <polyline points="14 2 14 8 20 8" />
                 </svg>
                 <span id="aadhaar-masked-display">Masked Aadhaar on file: XXXX XXXX XXXX</span>
               </div>
@@ -244,7 +289,19 @@
               </div>
               <button id="verifyAadhaarBtn" class="verify-aadhaar-btn">Verify Aadhaar</button>
               <div id="aadhaarSuccess" class="aadhaar-success" style="display: none">
-                <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
+                </svg>
                 Aadhaar verified
               </div>
               <div id="aadhaarError" class="aadhaar-error" style="display: none"></div>
@@ -253,13 +310,24 @@
 
           <!-- Screen 7: Guarantor update contact details (shown after Aadhaar verified) -->
           <div class="g-update-card" id="guarantorCard" style="display: none">
-
             <!-- Card header -->
             <div class="g-update-header">
-              <h3 class="g-update-title" id="g-update-title">Guarantor 1 — update contact details</h3>
+              <h3 class="g-update-title" id="g-update-title">
+                Guarantor 1 — update contact details
+              </h3>
               <span class="g-aadhaar-badge">
-                <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
-                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                <svg
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                  width="13"
+                  height="13"
+                  aria-hidden="true"
+                >
+                  <path
+                    fill-rule="evenodd"
+                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                    clip-rule="evenodd"
+                  />
                 </svg>
                 Aadhaar verified
               </span>
@@ -270,41 +338,69 @@
               <p class="g-table-heading">CONTACT DETAILS TABLE</p>
 
               <div class="g-table" role="table" aria-label="Contact details">
-
                 <!-- Table header -->
                 <div class="g-table-head" role="row">
                   <div class="g-th g-col-particular" role="columnheader">Particulars</div>
-                  <div class="g-th g-col-existing"   role="columnheader">Existing details</div>
-                  <div class="g-th g-col-new"        role="columnheader">New details</div>
-                  <div class="g-th g-col-action"     role="columnheader">Action</div>
+                  <div class="g-th g-col-existing" role="columnheader">Existing details</div>
+                  <div class="g-th g-col-new" role="columnheader">New details</div>
+                  <div class="g-th g-col-action" role="columnheader">Action</div>
                 </div>
 
                 <!-- Mobile row -->
                 <div class="g-table-row" role="row">
                   <div class="g-td g-col-particular" role="cell">Contact number</div>
-                  <div class="g-td g-col-existing"   role="cell" id="g-existing-mobile"></div>
-                  <div class="g-td g-col-new"        role="cell">
+                  <div class="g-td g-col-existing" role="cell" id="g-existing-mobile"></div>
+                  <div class="g-td g-col-new" role="cell">
                     <div id="g-new-idle-mobile">
-                      <input type="text" id="g-input-mobile" class="g-field-input"
-                        placeholder="Enter new number" inputmode="numeric" maxlength="10" autocomplete="off" />
+                      <input
+                        type="text"
+                        id="g-input-mobile"
+                        class="g-field-input"
+                        placeholder="Enter new number"
+                        inputmode="numeric"
+                        maxlength="10"
+                        autocomplete="off"
+                      />
                     </div>
-                    <div id="g-new-otp-mobile" style="display:none">
+                    <div id="g-new-otp-mobile" style="display: none">
                       <div class="g-locked-value" id="g-locked-mobile"></div>
                       <div class="g-otp-hint">OTP sent to registered mobile</div>
-                      <input type="text" id="g-otp-mobile" class="g-field-input g-otp-input"
-                        placeholder="Enter 6-digit OTP" maxlength="6" inputmode="numeric" autocomplete="one-time-code" />
+                      <input
+                        type="text"
+                        id="g-otp-mobile"
+                        class="g-field-input g-otp-input"
+                        placeholder="Enter 6-digit OTP"
+                        maxlength="6"
+                        inputmode="numeric"
+                        autocomplete="one-time-code"
+                      />
                       <div class="g-resend-row">
-
                         <div class="g-resend-meta">
-                          <button class="g-resend-btn" id="g-resend-mobile" disabled>Resend OTP</button>
+                          <button class="g-resend-btn" id="g-resend-mobile" disabled>
+                            Resend OTP
+                          </button>
                           <span id="g-resends-left-mobile"></span>
                         </div>
-                        <span class="g-resend-countdown" id="g-countdown-mobile"></span>          
+                        <span class="g-resend-countdown" id="g-countdown-mobile"></span>
                       </div>
                     </div>
-                    <div class="g-verified-display" id="g-new-verified-mobile" style="display:none">
-                      <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    <div
+                      class="g-verified-display"
+                      id="g-new-verified-mobile"
+                      style="display: none"
+                    >
+                      <svg
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        width="13"
+                        height="13"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        />
                       </svg>
                       <span id="g-confirmed-mobile"></span>
                     </div>
@@ -318,15 +414,31 @@
                 <!-- Email row -->
                 <div class="g-table-row" role="row">
                   <div class="g-td g-col-particular" role="cell">Contact email</div>
-                  <div class="g-td g-col-existing"   role="cell" id="g-existing-email"></div>
-                  <div class="g-td g-col-new"        role="cell">
+                  <div class="g-td g-col-existing" role="cell" id="g-existing-email"></div>
+                  <div class="g-td g-col-new" role="cell">
                     <div id="g-new-idle-email">
-                      <input type="text" id="g-input-email" class="g-field-input"
-                        placeholder="Enter new email" inputmode="email" autocomplete="off" />
+                      <input
+                        type="text"
+                        id="g-input-email"
+                        class="g-field-input"
+                        placeholder="Enter new email"
+                        inputmode="email"
+                        autocomplete="off"
+                      />
                     </div>
-                    <div class="g-verified-display" id="g-new-verified-email" style="display:none">
-                      <svg viewBox="0 0 20 20" fill="currentColor" width="13" height="13" aria-hidden="true">
-                        <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                    <div class="g-verified-display" id="g-new-verified-email" style="display: none">
+                      <svg
+                        viewBox="0 0 20 20"
+                        fill="currentColor"
+                        width="13"
+                        height="13"
+                        aria-hidden="true"
+                      >
+                        <path
+                          fill-rule="evenodd"
+                          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                          clip-rule="evenodd"
+                        />
                       </svg>
                       <span id="g-confirmed-email"></span>
                     </div>
@@ -340,48 +452,77 @@
                 <!-- Address row -->
                 <div class="g-table-row" role="row">
                   <div class="g-td g-col-particular" role="cell">Contact address</div>
-                  <div class="g-td g-col-existing"   role="cell" id="g-existing-address"></div>
-                  <div class="g-td g-col-new"        role="cell">
-                    <span class="g-auto-text" id="g-address-auto-text">Auto-populated from Aadhaar</span>
-                    <div class="g-verified-display g-address-new" id="g-new-verified-address" style="display:none">
+                  <div class="g-td g-col-existing" role="cell" id="g-existing-address"></div>
+                  <div class="g-td g-col-new" role="cell">
+                    <span class="g-auto-text" id="g-address-auto-text"
+                      >Auto-populated from Aadhaar</span
+                    >
+                    <div
+                      class="g-verified-display g-address-new"
+                      id="g-new-verified-address"
+                      style="display: none"
+                    >
                       <span id="g-confirmed-address"></span>
                     </div>
                   </div>
                   <div class="g-td g-col-action" role="cell">
                     <button class="g-action-btn g-upload-btn" id="g-btn-address">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round" width="13" height="13" aria-hidden="true">
-                        <polyline points="16 16 12 12 8 16"/>
-                        <line x1="12" y1="12" x2="12" y2="21"/>
-                        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3"/>
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        width="13"
+                        height="13"
+                        aria-hidden="true"
+                      >
+                        <polyline points="16 16 12 12 8 16" />
+                        <line x1="12" y1="12" x2="12" y2="21" />
+                        <path d="M20.39 18.39A5 5 0 0 0 18 9h-1.26A8 8 0 1 0 3 16.3" />
                       </svg>
                       Upload Aadhaar
                     </button>
-                    <input type="file" id="g-address-file" accept="image/*,.pdf" style="display:none" />
+                    <input
+                      type="file"
+                      id="g-address-file"
+                      accept="image/*,.pdf"
+                      style="display: none"
+                    />
                   </div>
                 </div>
-
-              </div><!-- /.g-table -->
+              </div>
+              <!-- /.g-table -->
 
               <!-- Submit -->
               <div class="g-submit-row">
                 <p id="g-form-error" class="form-error-text" hidden></p>
                 <button class="g-submit-btn" id="g-submit-btn">Submit</button>
               </div>
-            </div><!-- /.g-table-section -->
+            </div>
+            <!-- /.g-table-section -->
 
             <!-- Success banner -->
-            <div class="g-success-banner" id="g-success-banner" style="display:none">
-              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
-                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+            <div class="g-success-banner" id="g-success-banner" style="display: none">
+              <svg
+                viewBox="0 0 20 20"
+                fill="currentColor"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path
+                  fill-rule="evenodd"
+                  d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                  clip-rule="evenodd"
+                />
               </svg>
               Contact details updated successfully. No VRM action required.
             </div>
-
-          </div><!-- /#guarantorCard -->
+          </div>
+          <!-- /#guarantorCard -->
         </div>
-
-
       </main>
     </div>
 

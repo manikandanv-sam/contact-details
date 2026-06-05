@@ -1,5 +1,10 @@
 import { loadCustomerData } from "./services/customer-api.js";
-import { renderGuarantorCards, onGuarantorChange, setupAadhaarScreen, setupGuarantorUpdateTable } from "./ui/guarantor.js";
+import {
+  renderGuarantorCards,
+  onGuarantorChange,
+  setupAadhaarScreen,
+  setupGuarantorUpdateTable,
+} from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
 import { clearError, clearGlobalError } from "./ui/notifications.js";
 import { appContext } from "./store.js";
@@ -21,7 +26,8 @@ import { validateInput, setFieldError } from "./utils/validators.js";
 let lastInitKey = null;
 
 window.addEventListener("message", (event) => {
-  const { type, token, lan, customerUrn, pan, customerId, journeyType, requestorRole } = event.data ?? {};
+  const { type, token, lan, customerUrn, pan, customerId, journeyType, requestorRole } =
+    event.data ?? {};
 
   if (type === MESSAGE_TYPES.INIT) {
     const initKey = `${pan ?? ""}:${customerId ?? ""}`;
@@ -103,8 +109,8 @@ function setupSubmitModal() {
 
   const fields = [
     { inputId: "input-contact-number", errorId: "b-error-mobile", field: "mobile" },
-    { inputId: "input-contact-email",  errorId: "b-error-email",  field: "email"  },
-    { inputId: "input-contact-address",errorId: "b-error-address",field: "address"},
+    { inputId: "input-contact-email", errorId: "b-error-email", field: "email" },
+    { inputId: "input-contact-address", errorId: "b-error-address", field: "address" },
   ];
 
   function clearAllFieldErrors() {
@@ -118,8 +124,8 @@ function setupSubmitModal() {
   function validateForm() {
     clearAllFieldErrors();
 
-    const mobile  = document.getElementById("input-contact-number").value.trim();
-    const email   = document.getElementById("input-contact-email").value.trim();
+    const mobile = document.getElementById("input-contact-number").value.trim();
+    const email = document.getElementById("input-contact-email").value.trim();
     const address = document.getElementById("input-contact-address").value.trim();
 
     if (!mobile && !email && !address) {
@@ -142,9 +148,11 @@ function setupSubmitModal() {
   }
 
   fields.forEach(({ inputId, errorId, field }) => {
-    document.getElementById(inputId)?.addEventListener("input", () =>
-      setFieldError(document.getElementById(inputId), document.getElementById(errorId), "")
-    );
+    document
+      .getElementById(inputId)
+      ?.addEventListener("input", () =>
+        setFieldError(document.getElementById(inputId), document.getElementById(errorId), "")
+      );
   });
 
   function openModal() {

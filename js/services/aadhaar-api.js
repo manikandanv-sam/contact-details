@@ -36,37 +36,39 @@ export async function callAadhaarMobileLink(aadhaar12, guarantorMobile) {
 }
 
 export async function callAadhaarOcr(fileB64) {
-  if(USE_MOCK){
+  if (USE_MOCK) {
     console.log("[Aadhaar OCR] Mock mode");
     return {
-      success : true,
-      response : [{
-        type : "Aadhaar Back",
-        details : {
-          address : {
-            value : "No 15,Gandhi street,Hamirpur, Uttar Pradesh 210432"
-          }
-        }
-      }]
-    }
+      success: true,
+      response: [
+        {
+          type: "Aadhaar Back",
+          details: {
+            address: {
+              value: "No 15,Gandhi street,Hamirpur, Uttar Pradesh 210432",
+            },
+          },
+        },
+      ],
+    };
   }
-  const res = await fetch(`${BASE_URL}/ocr/v1/details`,{
-    method : "POST",
+  const res = await fetch(`${BASE_URL}/ocr/v1/details`, {
+    method: "POST",
     headers: {
       "x-api-key": API_KEY,
       Authorization: `Bearer ${appContext.token}`,
       "Content-Type": "application/json",
     },
-    body : JSON.stringify({
-      apiPayload : {
-        fileB64 : fileB64,
-        maskAadhaar : false,
+    body: JSON.stringify({
+      apiPayload: {
+        fileB64: fileB64,
+        maskAadhaar: false,
         consent: "Y",
-      }
-    })
-  })
+      },
+    }),
+  });
 
-  if(!res.ok){
+  if (!res.ok) {
     const body = await res.json().catch(() => ({}));
     const err = new Error(body.message || `HTTP ${res.status}`);
     err.status = res.status;

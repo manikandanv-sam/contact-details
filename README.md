@@ -56,6 +56,7 @@ Open `CMP_Parent.html` to simulate the full IFRAME flow — it sends `INIT` on l
 ## Environment Setup
 
 1. Copy the template:
+
    ```bash
    cp env.example.js env.js
    ```
@@ -63,8 +64,8 @@ Open `CMP_Parent.html` to simulate the full IFRAME flow — it sends `INIT` on l
 2. Fill in `env.js` with real values:
    ```js
    window.ENV = {
-     USE_MOCK: false,                              // true → uses local mock data
-     BASE_URL: "https://api.samunnati.com",        // changes per environment
+     USE_MOCK: false, // true → uses local mock data
+     BASE_URL: "https://api.samunnati.com", // changes per environment
      CUSTOMER_API_BASE: "http://localhost:1111",
      OTP_API_KEY: "<your-otp-api-key>",
      LMS_API_KEY: "<your-lms-api-key>",
@@ -78,10 +79,10 @@ Open `CMP_Parent.html` to simulate the full IFRAME flow — it sends `INIT` on l
 
 Flip `USE_MOCK` in `env.js` to switch globally across all IFRAME services:
 
-| `USE_MOCK` | Behaviour |
-|---|---|
-| `true` | Returns local mock data, no network calls |
-| `false` | Calls real APIs using keys from `env.js` |
+| `USE_MOCK` | Behaviour                                 |
+| ---------- | ----------------------------------------- |
+| `true`     | Returns local mock data, no network calls |
+| `false`    | Calls real APIs using keys from `env.js`  |
 
 Mock OTP code: **`123456`**
 
@@ -93,18 +94,18 @@ The IFRAME communicates with the host CMP using `window.postMessage`. Both sides
 
 ### Signals sent by IFRAME → CMP
 
-| Type | When |
-|---|---|
-| `IFRAME_READY` | On load, IFRAME is ready to receive `INIT` |
-| `IFRAME_DOWN` | On `beforeunload`, best-effort teardown notification |
-| `CONTACT_UPDATED` | After a successful contact field update |
-| `OTP_SENT` | After OTP is dispatched |
-| `ERROR` | On unrecoverable error |
+| Type              | When                                                 |
+| ----------------- | ---------------------------------------------------- |
+| `IFRAME_READY`    | On load, IFRAME is ready to receive `INIT`           |
+| `IFRAME_DOWN`     | On `beforeunload`, best-effort teardown notification |
+| `CONTACT_UPDATED` | After a successful contact field update              |
+| `OTP_SENT`        | After OTP is dispatched                              |
+| `ERROR`           | On unrecoverable error                               |
 
 ### Signal sent by CMP → IFRAME
 
-| Type | Payload | When |
-|---|---|---|
+| Type   | Payload                                        | When                           |
+| ------ | ---------------------------------------------- | ------------------------------ |
 | `INIT` | `{ pan, customerId, lan, token, customerUrn }` | After receiving `IFRAME_READY` |
 
 ### Sequence

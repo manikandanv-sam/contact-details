@@ -57,7 +57,7 @@ const mockOtp = {
   async generateOtp({ mobileNumber }) {
     console.log("[MOCK] generate-otp for", mobileNumber);
     return new Promise((resolve) =>
-      setTimeout(() => resolve({ otpReferenceId: "mock-ref-001", status: "SUCCESS" }), 500),
+      setTimeout(() => resolve({ otpReferenceId: "mock-ref-001", status: "SUCCESS" }), 500)
     );
   },
 
@@ -69,13 +69,13 @@ const mockOtp = {
         } else {
           resolve({ status: "FAILURE", message: "OTP incorrect" });
         }
-      }, 500),
+      }, 500)
     );
   },
 
   async resendOtp() {
     return new Promise((resolve) =>
-      setTimeout(() => resolve({ otpReferenceId: "mock-ref-002", status: "SUCCESS" }), 500),
+      setTimeout(() => resolve({ otpReferenceId: "mock-ref-002", status: "SUCCESS" }), 500)
     );
   },
 };
@@ -188,7 +188,10 @@ export async function handleResendOtp(otpReferenceId) {
 
     const newRef = res.response?.otpReferenceId ?? res.otpReferenceId;
     if (!isSuccess(res) && !newRef) {
-      return { success: false, message: res.response ? res.response : "Failed to resend OTP. Please try again." };
+      return {
+        success: false,
+        message: res.response ? res.response : "Failed to resend OTP. Please try again.",
+      };
     }
     return { success: true, otpReferenceId: newRef ?? otpReferenceId };
   } catch (e) {

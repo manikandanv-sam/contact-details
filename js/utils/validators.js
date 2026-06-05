@@ -5,11 +5,11 @@ export const labelMap = {
 };
 
 export function setFieldError(inputEl, errorEl, msg) {
-  errorEl.textContent   = msg;
+  errorEl.textContent = msg;
   errorEl.style.display = msg ? "block" : "none";
   if (inputEl) {
     if (msg) inputEl.classList.add("input-error");
-    else     inputEl.classList.remove("input-error");
+    else inputEl.classList.remove("input-error");
   }
 }
 

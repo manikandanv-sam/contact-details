@@ -2,7 +2,7 @@ import { labelMap, validateInput } from "../utils/validators.js";
 import { handleSendOtp, handleVerifyOtp } from "../services/otp-service.js";
 import { showError, clearError } from "./notifications.js";
 import { MESSAGE_TYPES } from "../constants/message-types.js";
-import { uiState,appContext } from "../store.js";
+import { uiState, appContext } from "../store.js";
 import { submitChangeRequest } from "../services/change-request-api.js";
 
 export function openSheet(field, type = "borrower") {
@@ -141,29 +141,33 @@ async function applyUpdate() {
   const requestId = `REQ_${crypto.randomUUID()}`;
 
   const payload = {
-    customerId : appContext.customerId,
-    journeyType : appContext.journeyType,
-    customerType : type === "guarantor" ? "GUARANTOR" : "BORROWER",
-    requestorRole : appContext.requestorRole,
-    changes : { [field] : value },
-    lastActiveChanges : { [field] : oldValue },
+    customerId: appContext.customerId,
+    journeyType: appContext.journeyType,
+    customerType: type === "guarantor" ? "GUARANTOR" : "BORROWER",
+    requestorRole: appContext.requestorRole,
+    changes: { [field]: value },
+    lastActiveChanges: { [field]: oldValue },
     requestId,
-    otpReferenceId : uiState.pendingUpdate.otpReferenceId,
-  }
+    otpReferenceId: uiState.pendingUpdate.otpReferenceId,
+  };
 
-  const entity = type === "guarantor" ? uiState.guarantorData[uiState.selectedGuarantorIndex] : null;
-  
-  if(entity?.uidNum) {
+  const entity =
+    type === "guarantor" ? uiState.guarantorData[uiState.selectedGuarantorIndex] : null;
+
+  if (entity?.uidNum) {
     payload.aadharNumber = entity.uidNum;
   }
 
   const result = await submitChangeRequest(payload);
 
-  if(!result.success){
-    window.parent.postMessage({
-      type : MESSAGE_TYPES.COMM_CHANGE_ERROR,
-      payload : { code : "SUBMIT_FAILED" , message: result.message }
-    }, "*");
+  if (!result.success) {
+    window.parent.postMessage(
+      {
+        type: MESSAGE_TYPES.COMM_CHANGE_ERROR,
+        payload: { code: "SUBMIT_FAILED", message: result.message },
+      },
+      "*"
+    );
     return;
   }
 
@@ -179,10 +183,15 @@ async function applyUpdate() {
 
   closeSheet();
 
-  window.parent.postMessage({ type: MESSAGE_TYPES.COMM_CHANGE_SUCCESS, payload : {
-    entityId : appContext.customerId,
-    updatedFields : [field],
-    requestId: result.requestId
-  }
- }, "*");
+  window.parent.postMessage(
+    {
+      type: MESSAGE_TYPES.COMM_CHANGE_SUCCESS,
+      payload: {
+        entityId: appContext.customerId,
+        updatedFields: [field],
+        requestId: result.requestId,
+      },
+    },
+    "*"
+  );
 }

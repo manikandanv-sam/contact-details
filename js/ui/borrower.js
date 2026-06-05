@@ -9,7 +9,10 @@ export function applyBorrowerUI(borrower) {
       sourceTag.style.display = hasValue ? "" : "none";
     }
   };
-  const setPlain = (id, val) => { const el = document.getElementById(id); if (el) el.innerText = val; };
+  const setPlain = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.innerText = val;
+  };
   setPlain("borrower-name", borrower.name);
   setPlain("avatar", borrower.avatar);
   set("existing-mobile", borrower.mobile);
