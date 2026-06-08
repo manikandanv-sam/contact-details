@@ -50,6 +50,7 @@ function mapPanBorrower(data) {
     address: [c.address1, c.address2, c.address3, c.cityCode, c.stateCode, c.pinCode]
       .filter((v) => v && v.trim())
       .join(", "),
+    uidNum: c.uidNum ?? null,
   };
 }
 
@@ -94,7 +95,12 @@ async function loadByPan(pan) {
     data = await res.json();
   }
   uiState.borrowerMobile = data[0]?.customer1Phone1 ?? data[0]?.applicants?.[0]?.phone1 ?? null;
-  applyBorrowerUI(mapPanBorrower(data));
+  const borrower = mapPanBorrower(data);
+  appContext.uidNum = borrower.uidNum;
+  appContext.existingMobile = borrower.mobile;
+  appContext.existingEmail = borrower.email;
+  appContext.existingAddress = borrower.address;
+  applyBorrowerUI(borrower);
   uiState.guarantorData = mapPanGuarantors(data);
   if (uiState.guarantorData.length === 0) {
     console.log("[PAN] No guarantors in API response — falling back to mock data for visibility");

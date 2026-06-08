@@ -168,7 +168,7 @@ function setupSubmitModal() {
     const email = document.getElementById("input-contact-email").value.trim();
 
     const changes = {};
-    if (mobile) changes.mobile = mobile;
+    if (mobile) changes.mobile = Number(mobile);
     if (email) changes.email = email;
 
     const payload = {
@@ -176,7 +176,14 @@ function setupSubmitModal() {
       journeyType: appContext.journeyType,
       customerType: "BORROWER",
       requestorRole: appContext.requestorRole,
+      requestId: `REQ_${crypto.randomUUID()}`,
+      aadharNumber: appContext.uidNum ?? "",
       changes,
+      lastActiveChanges: {
+        mobile: appContext.existingMobile ? Number(appContext.existingMobile) : null,
+        email: appContext.existingEmail || null,
+        address: appContext.existingAddress || null,
+      },
       ...(uiState.uploadedAddressProofRefs.length > 0 && {
         B2BAddressProofRefId: uiState.uploadedAddressProofRefs.join(","),
       }),

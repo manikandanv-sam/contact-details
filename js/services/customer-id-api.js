@@ -43,6 +43,7 @@ function mapCustomerIdBorrower(data) {
     mobile: contact.phone1 ?? "",
     email: contact.email ?? "",
     address: resolveAddress(contact.address),
+    uidNum: data.customer?.uidNum ?? null,
   };
 }
 
@@ -119,7 +120,12 @@ export async function loadByCustomerId(customerId) {
     );
     const data = USE_MOCK ? CUSTOMER_ID_MOCK_RESPONSE : await fetchCustomerById(customerId);
 
-    applyBorrowerUI(mapCustomerIdBorrower(data));
+    const borrower = mapCustomerIdBorrower(data);
+    appContext.uidNum = borrower.uidNum;
+    appContext.existingMobile = borrower.mobile;
+    appContext.existingEmail = borrower.email;
+    appContext.existingAddress = borrower.address;
+    applyBorrowerUI(borrower);
     uiState.guarantorData = mapCustomerIdGuarantors(data);
     renderGuarantorCards();
   } catch (err) {
