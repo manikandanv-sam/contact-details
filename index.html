@@ -186,14 +186,7 @@
                       <span class="source-tag">(LMS)</span>
                     </td>
                     <td>
-                      <input
-                        type="text"
-                        class="input-field"
-                        placeholder="Enter new address"
-                        id="input-contact-address"
-                        data-testid="input-contact-address"
-                      />
-                      <div class="g-field-error" id="b-error-address"></div>
+                      <div id="addressProofStatus" style="font-size: 12px"></div>
                     </td>
                     <td>
                       <button
@@ -203,6 +196,14 @@
                       >
                         Attach COI / GSTR-3B
                       </button>
+
+                      <input
+                        type="file"
+                        id="addressProofInput"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        multiple
+                        style="display: none"
+                      />
                     </td>
                   </tr>
                 </tbody>

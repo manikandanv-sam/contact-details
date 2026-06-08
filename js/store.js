@@ -19,4 +19,5 @@ export const uiState = {
   currentType: null,
   aadhaarVerified: false,
   borrowerMobile: null,
+  uploadedAddressProofRefs: [],
 };

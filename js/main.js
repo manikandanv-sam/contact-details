@@ -6,10 +6,12 @@ import {
   setupGuarantorUpdateTable,
 } from "./ui/guarantor.js";
 import { openSheet, closeSheet } from "./ui/sheet.js";
-import { clearError, clearGlobalError } from "./ui/notifications.js";
-import { appContext } from "./store.js";
+import { clearError, clearGlobalError, showGlobalError } from "./ui/notifications.js";
+import { appContext, uiState } from "./store.js";
 import { MESSAGE_TYPES } from "./constants/message-types.js";
 import { validateInput, setFieldError } from "./utils/validators.js";
+import { uploadAddressProof } from "./services/document-hub-api.js";
+import { submitChangeRequest } from "./services/change-request-api.js";
 
 // ── Parent ↔ IFRAME postMessage contract ────────────────────────────────────────
 //
@@ -67,6 +69,7 @@ setupChangeButtons();
 setupSubmitModal();
 setupAadhaarScreen();
 setupGuarantorUpdateTable();
+setupAddressProofUpload();
 
 // ── Tab switching ─────────────────────────────────────────────────────────────
 
@@ -110,7 +113,6 @@ function setupSubmitModal() {
   const fields = [
     { inputId: "input-contact-number", errorId: "b-error-mobile", field: "mobile" },
     { inputId: "input-contact-email", errorId: "b-error-email", field: "email" },
-    { inputId: "input-contact-address", errorId: "b-error-address", field: "address" },
   ];
 
   function clearAllFieldErrors() {
@@ -126,9 +128,8 @@ function setupSubmitModal() {
 
     const mobile = document.getElementById("input-contact-number").value.trim();
     const email = document.getElementById("input-contact-email").value.trim();
-    const address = document.getElementById("input-contact-address").value.trim();
 
-    if (!mobile && !email && !address) {
+    if (!mobile && !email && !uiState.uploadedAddressProofRefs.length) {
       formError.textContent = "Please fill in at least one contact detail to update.";
       formError.hidden = false;
       return false;
@@ -155,14 +156,40 @@ function setupSubmitModal() {
       );
   });
 
-  function openModal() {
-    if (!validateForm()) return;
-    modalOverlay.hidden = false;
-  }
-
   function closeModal() {
     modalOverlay.hidden = true;
     submitBtn.focus();
+  }
+
+  async function openModal() {
+    if (!validateForm()) return;
+
+    const mobile = document.getElementById("input-contact-number").value.trim();
+    const email = document.getElementById("input-contact-email").value.trim();
+
+    const changes = {};
+    if (mobile) changes.mobile = mobile;
+    if (email) changes.email = email;
+
+    const payload = {
+      customerId: appContext.customerId,
+      journeyType: appContext.journeyType,
+      customerType: "BORROWER",
+      requestorRole: appContext.requestorRole,
+      changes,
+      ...(uiState.uploadedAddressProofRefs.length > 0 && {
+        B2BAddressProofRefId: uiState.uploadedAddressProofRefs.join(","),
+      }),
+    };
+
+    const result = await submitChangeRequest(payload);
+
+    if (result.success) {
+      modalOverlay.hidden = false;
+    } else {
+      formError.textContent = result.message || "Submission failed. Please try again.";
+      formError.hidden = false;
+    }
   }
 
   submitBtn.addEventListener("click", openModal);
@@ -181,5 +208,62 @@ function setupSubmitModal() {
 function setupChangeButtons() {
   document.querySelectorAll(".change-btn[data-type='borrower']").forEach((btn) => {
     btn.addEventListener("click", () => openSheet(btn.dataset.field, "borrower"));
+  });
+}
+
+function setupAddressProofUpload() {
+  const btn = document.getElementById("attachAddressDoc");
+  const input = document.getElementById("addressProofInput");
+  const statusEl = document.getElementById("addressProofStatus");
+  let localFiles = [];
+
+  btn.addEventListener("click", () => {
+    input.value = "";
+    input.click();
+  });
+
+  // Chip click → preview the locally-stored File object in a new tab
+  statusEl.addEventListener("click", (e) => {
+    const chip = e.target.closest("[data-file-index]");
+    if (!chip) return;
+    const file = localFiles[parseInt(chip.dataset.fileIndex, 10)];
+    if (file) window.open(URL.createObjectURL(file));
+  });
+
+  input.addEventListener("change", async () => {
+    if (!input.files.length) return;
+    localFiles = Array.from(input.files);
+
+    btn.textContent = "Uploading...";
+    btn.disabled = true;
+    statusEl.innerHTML = "";
+
+    try {
+      const result = await uploadAddressProof(input.files);
+
+      if (result.success) {
+        uiState.uploadedAddressProofRefs = result.uploadedFiles;
+        btn.textContent = `✓ ${result.uploadedFiles.length} file(s) attached`;
+        statusEl.innerHTML = result.uploadedFiles
+          .map(
+            (f, i) =>
+              `<span data-file-index="${i}" style="display:inline-flex;align-items:center;gap:4px;background:#f0fdf4;border:1px solid #bbf7d0;border-radius:4px;padding:2px 8px;font-size:11px;color:#15803d;margin-top:4px;cursor:pointer" title="Click to preview">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/></svg>
+                ${f}
+              </span>`
+          )
+          .join("");
+      } else {
+        btn.textContent = "Attach COI / GSTR-3B";
+        statusEl.style.color = "#dc2626";
+        statusEl.textContent = result.message;
+      }
+    } catch (e) {
+      btn.textContent = "Attach COI / GSTR-3B";
+      statusEl.style.color = "#dc2626";
+      statusEl.textContent = "Upload failed. Please try again.";
+    } finally {
+      btn.disabled = false;
+    }
   });
 }
